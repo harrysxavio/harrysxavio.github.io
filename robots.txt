@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+# A Sitemap directive is intentionally omitted until the production site origin is configured.
