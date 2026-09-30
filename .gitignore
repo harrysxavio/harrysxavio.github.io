@@ -1,2 +1,8 @@
 # Local Pi runtime state
 .atl/
+
+# Generated site preview and Python bytecode
+dist/
+.playwright-mcp/
+__pycache__/
+*.py[cod]
