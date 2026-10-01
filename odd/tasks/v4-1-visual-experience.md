@@ -39,7 +39,7 @@ Route: delegated direct single writer (as assigned by parent); implementation to
 - [x] V41-4 — Redesign four project case visuals/content rhythm and featured/secondary composition without changing facts. Evidence: all four case pages and both secondary Home visuals have distinct named SVGs; exact copy and route verifier passed.
 - [x] V41-5 — Apply responsive design and typography across public routes; preserve metadata and route behavior. Evidence: no overflow at 1440×900, 1024×768, 390×844, or 360×800; all 8 routes build/verify.
 - [x] V41-6 — Run required build, verifier, JS syntax, diff checks, and available browser viewport/interaction checks. Evidence: `python tools/build_site.py`, `python tools/verify_site.py`, `node --check script.js`, `git diff --check`, and Playwright assertions all passed; browser errors=0. Screenshots saved outside the repo under `%TEMP%\v41-final-*.png`.
-- [ ] V41-7 — Commit coherent tested work units; record commit IDs; leave push/merge/deploy and native review to parent. Initial tracker commit: `6f3f5e7`; source work commit pending.
+- [x] V41-7 — Commit coherent tested work units; leave push/merge/deploy and native review to parent. Evidence: `6f3f5e7 docs: track v4.1 visual experience`; `76bc86c feat: refine v4.1 visual experience`.
 
 ## Acceptance Criteria
 1. All 8 routes remain buildable and retain their route-specific canonical/social/JSON-LD content and factual professional content.
@@ -60,12 +60,13 @@ Route: delegated direct single writer (as assigned by parent); implementation to
 - `tools/build_site.py` and `tools/verify_site.py` support multipage route discovery and SEO checks; build invocation is `python tools/build_site.py`, verifier invocation `python tools/verify_site.py`.
 - Original V4 case content and professional facts remain the source of truth; the supplied V4.1 execution brief supersedes any visual implementation assumptions.
 - Tracker work unit commit: `6f3f5e7 docs: track v4.1 visual experience`.
+- Verified implementation commit: `76bc86c feat: refine v4.1 visual experience` (11 in-scope files; unrelated untracked files excluded).
 - Verification passed: build created 8 HTML pages; verifier passed required routes, semantics, links, resources, SEO/social metadata, structured data, robots/sitemap, and output allowlist; Node syntax check passed; diff check passed with only expected Windows LF→CRLF notices.
 - Browser assertions passed for desktop tabs/click/End, connected-node state, desktop-to-mobile focus/selection preservation, mobile full-width primary CTA, no-JavaScript details fallback, all 8 route responses, the four case diagram accessible names/descriptions, and no horizontal overflow at 1440×900, 1024×768, 390×844, and 360×800; page errors: 0.
 - Screenshots: `%TEMP%\v41-final-1440x900.png`, `%TEMP%\v41-final-1024x768.png`, `%TEMP%\v41-final-390x844.png`, `%TEMP%\v41-final-360x800.png`, `%TEMP%\v41-final-brazil-mobile.png`.
 
 ## Next Step
-Commit the verified source/documentation work unit, record its commit identity, and hand off for parent IAB visual review and independent verification. No push/merge/PR/deploy.
+Hand off for parent IAB visual review and independent verification. No push/merge/PR/deploy.
 
 ## Relevant Files
 - `index.html` — five-act homepage and signature detail content.
