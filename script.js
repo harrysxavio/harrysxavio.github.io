@@ -88,6 +88,7 @@ function setupProjectFilters() {
 }
 
 function updateSignatureRoute(index) {
+  if (tabList) tabList.style.setProperty("--signature-progress", `${(index / Math.max(1, signatureSteps.length - 1)) * 80}%`);
   if (!signatureRoute) return;
   signatureRoute.dataset.activeIndex = String(index);
   signatureRoute.querySelectorAll("[data-node]").forEach((node, nodeIndex) => {
@@ -137,7 +138,12 @@ function createTabList() {
     button.setAttribute("aria-selected", "false");
     button.tabIndex = -1;
     const title = summary.querySelector(".signature-step__title") || summary.querySelector("span:last-child");
-    button.innerHTML = `<span class="step-number">${String(index + 1).padStart(2, "0")}</span><span>${title.textContent}</span>`;
+    const numberLabel = document.createElement("span");
+    numberLabel.className = "step-number";
+    numberLabel.textContent = String(index + 1).padStart(2, "0");
+    const titleLabel = document.createElement("span");
+    titleLabel.textContent = title.textContent;
+    button.append(numberLabel, titleLabel);
     button.addEventListener("click", () => setSelected(index));
     button.addEventListener("keydown", (event) => {
       let nextIndex = index;
@@ -166,11 +172,13 @@ function updateSignatureMode() {
   if (shouldUseTabs && !desktopTabs) {
     if (!tabList) createTabList();
     desktopTabs = true;
+    signature.classList.add("signature--tabs");
     signatureSteps.forEach((step) => { step.querySelector("summary").tabIndex = -1; });
     setSelected(selectedIndex);
     if (focusedSummaryIndex >= 0) tabButtons[focusedSummaryIndex].focus();
   } else if (!shouldUseTabs && desktopTabs) {
     desktopTabs = false;
+    signature.classList.remove("signature--tabs");
     signatureSteps.forEach((step) => {
       step.hidden = false;
       step.querySelector("summary").removeAttribute("tabindex");

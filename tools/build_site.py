@@ -20,6 +20,12 @@ DEFAULT_SITE_URL = "https://harrysxavio.github.io"
 PUBLIC_ROOT_FILES = ("index.html", "404.html", "styles.css", "script.js", "favicon.svg", "robots.txt")
 PUBLIC_DIRECTORIES = ("assets", "projects", "cv")
 CONTENT_FILE = ROOT / "content" / "site.json"
+PROJECT_MARKS = {
+    "inventory-reconciliation": '<svg viewBox="0 0 64 64"><path d="m12 22 20-11 20 11v22L32 55 12 44V22Z"/><path d="m12 22 20 11 20-11M32 33v22M22 17l20 11"/></svg>',
+    "brazil-chile-data-migration": '<svg viewBox="0 0 64 64"><circle cx="14" cy="32" r="6"/><circle cx="50" cy="17" r="6"/><circle cx="50" cy="47" r="6"/><path d="M20 32h11c8 0 8-15 16-15M31 32c8 0 8 15 16 15"/></svg>',
+    "patient-transport-optimization": '<svg viewBox="0 0 64 64"><path d="M8 22h31v24H8zM39 30h10l8 9v7H39zM44 30v9h13"/><circle cx="19" cy="48" r="4"/><circle cx="48" cy="48" r="4"/><path d="M22 30h12M28 24v12"/></svg>',
+    "picking-line-balancing": '<svg viewBox="0 0 64 64"><path d="M10 18h44M10 32h44M10 46h44"/><circle cx="19" cy="18" r="4"/><circle cx="43" cy="32" r="4"/><circle cx="29" cy="46" r="4"/><path d="M23 18h10M39 32H25M33 46h9"/></svg>',
+}
 REQUIRED_GENERATED_ROUTES = {
     "index.html", "404.html", "projects/index.html", "cv/index.html",
     "projects/inventory-reconciliation/index.html",
@@ -134,6 +140,11 @@ def _load_content() -> dict[str, object]:
     }
     if project_routes != expected_project_routes:
         raise ValueError("content/site.json: project route assignments must preserve the four existing case routes")
+    featured_projects = [project for project in projects if project["featured"]]
+    if len(featured_projects) != 4:
+        raise ValueError("content/site.json: exactly four projects must remain featured")
+    if featured_projects[0]["id"] != "inventory-reconciliation":
+        raise ValueError("content/site.json: inventory reconciliation must lead the featured projects")
     if not isinstance(data.get("career"), list) or not data["career"]:
         raise ValueError("content/site.json: career must be a non-empty array")
     for index, employer in enumerate(data["career"]):
@@ -319,7 +330,7 @@ def _render_home(data: dict[str, object]) -> str:
     home = data["home"]
     hero = home["hero"]
     hero_copy = _copy_p(hero["thesis"]) + _copy_p(hero["introduction"]) + _copy_p(hero["positioning"])
-    hero_actions = "".join(_semantic_link(link) for link in hero["actions"])
+    hero_actions = "".join(_semantic_link(link, "button" if index == 0 else "text-link text-link--secondary") for index, link in enumerate(hero["actions"]))
     hero_main = f'<div class="hero-copy"><h1 id="hero-title">{_copy(hero["name"])}</h1><p class="hero-thesis">{_copy(hero["thesis"])}</p>{_copy_p(hero["introduction"], "hero-introduction")}{_copy_p(hero["positioning"], "hero-positioning")}<div class="hero-actions">{hero_actions}</div></div>'
     hero_markup = f'<section class="hero" aria-labelledby="hero-title"><div class="hero-art"><div class="hero-art__shape"></div><figure class="hero-portrait">{_semantic_image(hero["image"])}</figure><span class="hero-art__spark" aria-hidden="true">✳</span></div>{hero_main}</section>'
 
@@ -331,8 +342,7 @@ def _render_home(data: dict[str, object]) -> str:
         f'</details>' for index, stage in enumerate(signature["stages"])
     )
     route_nodes = "".join(f'<span class="signature-route__node" data-node="{index}" aria-hidden="true"></span>{"<span class=\"signature-route__connection\" data-connection=\"" + str(index) + "\" aria-hidden=\"true\"></span>" if index < len(signature["stages"]) - 1 else ""}' for index, _ in enumerate(signature["stages"]))
-    signature_body = f'<div class="section-heading"><p class="section-kicker">{_copy(signature["kicker"])}</p><h2 id="signature-title">{_copy(signature["title"])}</h2><p>{_copy(signature["introduction"])}</p></div>'
-    signature_body += f'<div class="signature-layout"><div class="signature-steps"><div class="signature-route" data-active-index="0" aria-hidden="true">{route_nodes}</div>{stage_markup}</div><div class="signature-illustration">{_semantic_image(signature["image"])}</div></div>'
+    signature_body = f'<div class="signature-layout"><div class="section-heading"><p class="section-kicker">{_copy(signature["kicker"])}</p><h2 id="signature-title">{_copy(signature["title"])}</h2><p>{_copy(signature["introduction"])}</p></div><div class="signature-steps"><div class="signature-route" data-active-index="0" aria-hidden="true">{route_nodes}</div>{stage_markup}</div></div>'
     signature_markup = f'<section id="como-trabajo" class="signature-section" data-signature aria-labelledby="signature-title">{signature_body}</section>'
 
     selected = home["selectedWork"]
@@ -341,8 +351,9 @@ def _render_home(data: dict[str, object]) -> str:
     for project_id in selected["projectIds"]:
         project=projects_by_id[project_id]; card=project["homeCard"]
         labels=(("Situación","situation"),("Tarea","task"),("Acción","contribution"),("Resultado","result"))
-        facts="".join(f'<div class="selected-project__fact"><dt>{label}</dt><dd>{_copy(card[field])}</dd></div>' for label,field in labels)
-        cards.append(f'<article class="selected-project"><div class="selected-project__emblem" aria-hidden="true"><span>{str(len(cards) + 1).zfill(2)}</span><svg viewBox="0 0 64 64"><path d="M13 45 25 33l8 8 18-21M39 20h12v12"/></svg></div><h3><a href="{_attr(project["route"])}">{_copy(card["title"])} <span aria-hidden="true">↗</span></a></h3><dl>{facts}</dl><a class="text-link" href="{_attr(project["route"])}">Ver el caso <span aria-hidden="true">→</span></a></article>')
+        facts="".join(f'<div class="selected-project__fact selected-project__fact--{field}"><dt>{label}</dt><dd>{_copy(card[field])}</dd></div>' for label,field in labels)
+        emblem = PROJECT_MARKS[project_id]
+        cards.append(f'<article class="selected-project"><div class="selected-project__emblem" aria-hidden="true"><span>{str(len(cards) + 1).zfill(2)}</span>{emblem}</div><h3><a href="{_attr(project["route"])}">{_copy(card["title"])} <span aria-hidden="true">↗</span></a></h3><dl>{facts}</dl><a class="text-link" href="{_attr(project["route"])}">Ver cómo lo abordamos →</a></article>')
     selected_body=f'<div class="section-heading section-heading--row"><div><p class="section-kicker">{_copy(selected["kicker"])}</p><h2 id="transformations-title">{_copy(selected["title"])}</h2></div>{_semantic_link(selected["moreLink"], "button button--quiet")}</div><div class="selected-projects">{"".join(cards)}</div>'
     selected_markup=f'<section class="selected-work" aria-labelledby="transformations-title">{selected_body}</section>'
 
@@ -350,11 +361,11 @@ def _render_home(data: dict[str, object]) -> str:
     milestones="".join(f'<li class="career-milestone"><span class="career-milestone__phase">{_copy(item["phase"])}</span><h3>{_copy(item["employer"])}</h3><p>{_copy(item["description"])}</p></li>' for item in story["milestones"])
     notes="".join(f'<article class="career-note"><span aria-hidden="true">✳</span><h3>{_copy(item["title"])}</h3><p>{_copy(item["body"])}</p></article>' for item in story["notes"])
     explore=story["exploration"]
-    story_body=f'<div class="section-heading"><p class="section-kicker">{_copy(explore["kicker"])}</p><h2 id="career-title">{_copy(story["heading"])}</h2><p>{_copy(story["introduction"])}</p></div><ol class="career-timeline">{milestones}</ol><div class="career-notes">{notes}</div><div class="career-exploration"><h3>{_copy(explore["title"])}</h3><p>{_copy(explore["description"])}</p></div>'
+    story_body=f'<div class="section-heading"><p class="section-kicker">Cómo llegué hasta aquí</p><h2 id="career-title">{_copy(story["heading"])}</h2><p>{_copy(story["introduction"])}</p></div><ol class="career-timeline">{milestones}</ol><div class="career-notes">{notes}</div><div class="career-exploration"><div><p class="section-kicker">{_copy(explore["kicker"])}</p><h3>{_copy(explore["title"])}</h3></div><p>{_copy(explore["description"])}</p></div>'
     story_markup=f'<section id="trayectoria" class="career-section" aria-labelledby="career-title">{story_body}</section>'
 
     contact=home["contact"]
-    contact_markup=f'<section id="contacto" class="contact-section" aria-labelledby="contact-title"><div><p class="section-kicker">{_copy(contact["eyebrow"])}</p><h2 id="contact-title">{_copy(contact["title"])}</h2><p>{_copy(contact["introduction"])}</p></div><nav aria-label="Más información y contacto" class="contact-links">{"".join(_semantic_link(link, "button button--contact") for link in contact["links"])}</nav></section>'
+    contact_markup=f'<section id="contacto" class="contact-section" aria-labelledby="contact-title"><div><p class="section-kicker">{_copy(contact["eyebrow"])}</p><h2 id="contact-title">{_copy(contact["title"])}</h2><p class="contact-introduction">{_copy(contact["introduction"])}</p></div><nav aria-label="Más información y contacto" class="contact-links">{"".join(_semantic_link(link, "button button--contact") for link in contact["links"])}</nav></section>'
     footer=home["footer"]
     return hero_markup+signature_markup+selected_markup+story_markup+contact_markup
 
@@ -363,8 +374,8 @@ def _render_case(project: dict[str, object], all_projects: list[dict[str, object
     case=project["caseDetails"]; nav=case["navigation"]
     breadcrumb=f'<nav aria-label="Ruta de navegación" class="case-breadcrumb"><a href="/">Inicio</a><span aria-hidden="true">/</span><a href="/projects/">Proyectos</a><span aria-hidden="true">/</span><span aria-current="page">{_copy(nav["breadcrumbTitle"])}</span></nav>'
     hero=case["hero"]
-    hero_markup=f'<header class="case-hero"><p class="section-kicker">{_copy(hero["eyebrow"])}</p>{_heading(hero["title"],1)}{_copy_p(hero["summary"])}</header>'
-    metric_items="".join(f'<div class="case-metric"><span>{_copy(item["value"])}</span><span>{_copy(item["label"])}</span></div>' for item in case["metrics"])
+    hero_markup=f'<header class="case-hero"><p class="section-kicker">{_copy(hero["eyebrow"])}</p>{_heading(hero["title"],1)}{_copy_p(hero["summary"],"case-summary")}</header>'
+    metric_items="".join(f'<div class="case-metric"><span class="case-metric__value">{_copy(item["value"])}</span><span class="case-metric__label">{_copy(item["label"])}</span></div>' for item in case["metrics"])
     metrics=f'<div class="case-metrics" aria-label="Resultados destacados">{metric_items}</div>'
     diagram=case["diagram"]; image=diagram["image"]
     diagram_markup=f'<figure class="case-flow"><div class="case-flow__image">{_semantic_image(image)}</div><figcaption><p class="section-kicker">{_copy(diagram["kicker"])}</p>{_heading(diagram["title"],2)}{_copy_p(diagram["description"])}</figcaption><ol class="case-flow__steps">{"".join(f"<li>{_copy(step)}</li>" for step in diagram["steps"])}</ol></figure>'
@@ -436,11 +447,15 @@ def _cv_group(content: str) -> str:
 
 
 def _cv_section(label: str, title: str, anchor: str, content: str) -> str:
-    heading = _cv_group(
+    heading = (
+        '<div class="cv-heading">'
         f'<p class="content-copy">{_cv_copy(label)}</p>'
         f'<h2 id="{html.escape(anchor, quote=True)}" class="content-heading content-heading--2">{_cv_copy(title)}</h2>'
+        '</div>'
     )
-    return f'<section id="{html.escape(anchor.removesuffix("-title"), quote=True)}" aria-labelledby="{html.escape(anchor, quote=True)}" class="content-block content-block--contentSection">{heading}{_cv_group(content)}</section>'
+    semantic_name = anchor.removesuffix("-title")
+    section_class = "capabilities" if semantic_name == "skills" else semantic_name
+    return f'<section id="{html.escape(semantic_name, quote=True)}" aria-labelledby="{html.escape(anchor, quote=True)}" class="cv-section cv-section--{html.escape(section_class, quote=True)}">{heading}<div class="cv-section__content">{content}</div></section>'
 
 
 def _render_cv_career(career: list[dict[str, object]]) -> str:
@@ -462,8 +477,8 @@ def _render_cv_career(career: list[dict[str, object]]) -> str:
                     f'<a href="{html.escape(project["href"], quote=True)}">{_cv_copy(project["title"])}</a>'
                     for project in role["projects"]
                 ) + "</p>")
-            pieces.append(_cv_group("".join(role_parts)))
-        employers.append(f'<article class="content-block content-block--contentItem">{"".join(pieces)}</article>')
+            pieces.append(f'<section class="experience-role">{"".join(role_parts)}</section>')
+        employers.append(f'<article class="experience-entry">{"".join(pieces)}</article>')
     return _cv_section("TRAYECTORIA", "Experiencia profesional", "experience-title", "".join(employers))
 
 
@@ -474,7 +489,7 @@ def _render_cv_skills(skills: list[dict[str, object]], profile: dict[str, object
         pieces.append(f'<p class="content-copy">{_cv_copy(" · ".join(skill["skills"]))}</p>')
         if skill["tools"]:
             pieces.append(f'<p class="content-copy">{_cv_copy(" · ".join(skill["tools"]))}</p>')
-        items.append(f'<article class="content-block content-block--contentItem">{"".join(pieces)}</article>')
+        items.append(f'<article class="capability-group">{"".join(pieces)}</article>')
     return _cv_section("HERRAMIENTAS", "Capacidades y herramientas", "skills-title", "".join(items))
 
 
@@ -482,7 +497,7 @@ def _render_cv_value_areas(skills: list[dict[str, object]], profile: dict[str, o
     descriptions = [skill["description"] for skill in skills if skill.get("description")]
     names = [skills[0]["area"], skills[1]["area"], "Datos y automatización"]
     items = "".join(
-        f'<article class="content-block content-block--contentItem"><h3 class="content-heading content-heading--3">{_cv_copy(name)}</h3><p class="content-copy">{_cv_copy(description)}</p></article>'
+        f'<article class="cv-impact"><h3 class="content-heading content-heading--3">{_cv_copy(name)}</h3><p class="content-copy">{_cv_copy(description)}</p></article>'
         for name, description in zip(names, descriptions)
     )
     items += f'<p class="content-copy"><strong>Cómo trabajo</strong> {_cv_copy(profile["workflow"])}</p>'
@@ -506,30 +521,31 @@ def _render_cv_education(data: dict[str, object]) -> str:
         ("IDIOMAS", "Idiomas", language_content),
         ("UBICACIÓN", "Base", location_content),
     ):
-        panels.append(_cv_group(f'<p class="content-copy">{label}</p><h2 class="content-heading content-heading--2">{title}</h2>{content}'))
-    heading = _cv_group('<h2 class="content-heading content-heading--2">Formación y datos complementarios</h2>')
-    return f'<section aria-label="Formación y datos complementarios" class="content-block content-block--contentSection">{heading}{"".join(panels)}</section>'
+        panels.append(f'<article class="cv-education__item"><p class="section-kicker">{label}</p><h3 class="content-heading content-heading--3">{title}</h3>{content}</article>')
+    heading = '<div class="cv-heading"><h2 class="content-heading content-heading--2">Formación y datos complementarios</h2></div>'
+    return f'<section aria-label="Formación y datos complementarios" class="cv-section cv-section--education">{heading}<div class="cv-section__content cv-education">{"".join(panels)}</div></section>'
 
 
 def _render_cv(data: dict[str, object], site_url: str) -> str:
     profile = data["profile"]
     intro = (
-        f'<p class="content-copy">PERFIL PROFESIONAL</p>'
+        f'<p class="section-kicker">Perfil profesional</p>'
         f'<h1 class="content-heading content-heading--1">{_cv_copy(data["site"]["name"])}</h1>'
-        f'<p class="content-copy">{_cv_copy(profile["positioning"])}</p>'
+        f'<p class="cv-positioning">{_cv_copy(profile["positioning"])}</p>'
         f'<p class="content-copy"><strong>{_cv_copy(profile["profession"])}.</strong> {_cv_copy(profile["summary"])}</p>'
     )
     actions = (
-        f'<a class="content-link" href="{html.escape(profile["cvPdfUrl"], quote=True)}" download>Descargar CV PDF ↓</a>'
-        '<button type="button" data-action="print" class="content-block content-block--actionButton">Imprimir</button>'
+        f'<a class="button" href="{html.escape(profile["cvPdfUrl"], quote=True)}" download>Descargar CV PDF ↓</a>'
+        '<button type="button" data-action="print" class="button button--quiet">Imprimir</button>'
     )
-    opening = f'{_cv_group(intro)}{_cv_group(actions)}'
+    opening = f'<header class="cv-hero">{intro}<div class="cv-actions">{actions}</div></header>'
     lead = _render_cv_career(data["career"])
     return (
-        '<nav aria-label="Ruta de navegación" class="content-block content-block--linkGroup"><a href="/">Inicio</a><span aria-hidden="true"> / </span><span>CV</span></nav>'
+        '<nav aria-label="Ruta de navegación" class="case-breadcrumb"><a href="/">Inicio</a><span aria-hidden="true">/</span><span aria-current="page">CV</span></nav>'
         + opening + _render_cv_value_areas(data["skills"], profile) + lead
         + _render_cv_skills(data["skills"], profile)
         + _render_cv_education(data)
+        + '<section class="cv-project-cta"><h2>Proyectos en contexto</h2><p>Explora los casos y resultados que acompañan esta trayectoria.</p><a class="button" href="/projects/">Ver proyectos <span aria-hidden="true">→</span></a></section>'
     )
 
 
@@ -543,16 +559,22 @@ def _render_project_card(project: dict[str, object], labels: dict[str, str], fea
         action = f'<a class="project-card__action" href="{html.escape(str(project["route"]), quote=True)}">Ver cómo lo abordamos <span aria-hidden="true">→</span></a>'
     else:
         action = f'<a class="project-card__action" href="#{detail_id}">Ver cómo lo abordamos <span aria-hidden="true">↓</span></a>'
+    mark = f'<span class="project-card__mark" aria-hidden="true">{PROJECT_MARKS[project["id"]]}</span>' if featured else ""
+    identity = (
+        f'<div class="project-card__identity"><p class="project-card__category">{html.escape(str(project.get("group", " · ".join(tag_labels))))}</p>'
+        f'<h3>{html.escape(project["title"])}</h3><p class="project-card__summary">{html.escape(project["summary"])}</p></div>'
+    )
+    evidence = (
+        f'<div class="project-card__evidence" id="{html.escape(detail_id, quote=True)}">'
+        f'<p><strong>Situación</strong><span>{html.escape(project["situation"])}</span></p>'
+        f'<p><strong>Aporte</strong><span>{html.escape(project["contribution"])}</span></p>'
+        f'<p class="project-card__result"><strong>Resultado</strong><span>{html.escape(project["result"])}</span></p></div>'
+    )
     return (
-        f'<li class="project-card project-card--{"featured" if featured else "secondary"}" id="{anchor}" '
+        f'<li class="project-card project-card--{"lead" if featured and project["id"] == "inventory-reconciliation" else "featured" if featured else "secondary"}" id="{anchor}" '
         f'data-project-id="{html.escape(project["id"], quote=True)}" data-project-tags="{html.escape(" ".join(tag_ids), quote=True)}">'
-        '<article class="project-card__inner"><div class="project-card__body">'
-        f'<p class="project-card__category">{html.escape(str(project.get("group", " · ".join(tag_labels))))}</p>'
-        f'<h3>{html.escape(project["title"])}</h3><p class="project-card__summary">{html.escape(project["summary"])}</p>'
-        f'<ul class="project-tags" aria-label="Temas del proyecto">{tags}</ul>'
-        f'<div class="project-card__detail" id="{html.escape(detail_id, quote=True)}">'
-        f'<p>{html.escape(project["situation"])}</p><p>{html.escape(project["contribution"])}</p>'
-        f'<p class="project-card__result">{html.escape(project["result"])}</p></div></div>'
+        f'<article class="project-card__inner"><div class="project-card__body">{mark}{identity}'
+        f'<ul class="project-tags" aria-label="Temas del proyecto">{tags}</ul></div>{evidence}'
         f'<div class="project-card__actions">{action}</div></article></li>'
     )
 
@@ -621,11 +643,10 @@ def _generate_source_pages(data: dict[str, object], site_url: str) -> list[Path]
             f'<!doctype html><html lang="{html.escape(data["site"]["language"], quote=True)}"><head>{head}</head><body>'
             '<a class="skip-link" href="#main">Saltar al contenido</a><div class="page-shell">'
             f'<header class="site-header" id="top"><a class="wordmark" href="/" aria-label="{html.escape(data["site"]["name"], quote=True)}, inicio">{html.escape(data["site"]["name"])}</a>'
-            '<nav class="top-nav" aria-label="Navegación principal"><a href="/projects/">Proyectos</a><a href="/cv/">CV</a>'
-            f'<a href="{html.escape(data["site"]["sameAs"][0], quote=True)}" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a></nav></header>'
+            '<nav class="top-nav" aria-label="Navegación principal"><a href="/projects/">Proyectos</a><a href="/cv/">CV</a></nav></header>'
             f'<main id="main" class="page-main page-main--{html.escape(page["id"], quote=True)}">{main}</main>'
             '<footer class="site-footer simple-footer">'
-            f'<span>{html.escape(data["site"]["name"])}</span><a href="/projects/">Proyectos</a><a href="/">Inicio</a>'
+            f'<span class="footer-name">{html.escape(data["site"]["name"])}</span><a href="/projects/">Proyectos</a><a href="/">Inicio</a>'
             f'<a href="{html.escape(data["site"]["sameAs"][0], quote=True)}" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></footer>'
             '</div><script src="/script.js" defer></script></body></html>'
         )

@@ -1278,10 +1278,10 @@
       "title": "Gestión y resolución de anomalías de transporte",
       "route": null,
       "featured": false,
-      "summary": "El portafolio presenta la iniciativa como una mejora/automatización del proceso.",
+      "summary": "Mejora y automatización del proceso de resolución de anomalías de transporte.",
       "situation": "Resolver anomalías de transporte podía tomar cerca de dos días.",
       "task": "Reducir el tiempo de resolución operacional.",
-      "contribution": "El portafolio lo presenta como iniciativa de mejora/automatización; no atribuir una implementación personal más específica que el CV vigente.",
+      "contribution": "Iniciativa de mejora y automatización del proceso de resolución.",
       "result": "El tiempo de resolución pasó de aproximadamente dos días a cuatro horas.",
       "evidence": "Resultado publicado; proyecto distinto del Control Tower.",
       "tags": [
@@ -1301,8 +1301,8 @@
       "summary": "Un modelo para ordenar el seguimiento y clarificar el control de inventario.",
       "situation": "El seguimiento de inventario requería mayor orden y claridad.",
       "task": "Estructurar su seguimiento en la operación.",
-      "contribution": "No hay atribución más específica en el contenido vigente.",
-      "result": "Modelo descrito como una forma de ordenar el seguimiento y clarificar el control; sin métrica.",
+      "contribution": "Estructura para dar seguimiento al control de inventario.",
+      "result": "El modelo organiza el seguimiento y clarifica el control de inventario.",
       "evidence": "Resumen publicado.",
       "tags": [
         "inventory",
@@ -1321,7 +1321,7 @@
       "situation": "Proyectos industriales e infraestructura requerían coordinación, planificación y calidad.",
       "task": "Apoyar la entrega de proyectos HVAC, PLC e infraestructura.",
       "contribution": "Coordinación de equipos, planificación y calidad, según el CV vigente.",
-      "result": "Sin métrica publicada.",
+      "result": "Entrega de proyectos con coordinación, planificación y foco en calidad.",
       "evidence": "Resumen publicado.",
       "tags": [
         "engineering",
@@ -1340,7 +1340,7 @@
       "situation": "El seguimiento requería revisar estados de transportistas, métricas e indicadores de transporte, medidas de foco del trabajo, tareas de Customer Service y costos.",
       "task": "Ordenar la información operativa y el trabajo asociado.",
       "contribution": "La solución automatizó la captura de estados y organizó métricas/indicadores, medidas de foco, tareas de Customer Service y control de costos.",
-      "result": "El trabajo quedó más organizado y se liberaron horas significativas; no hay cifra exacta.",
+      "result": "El trabajo quedó más organizado y se liberaron horas significativas.",
       "evidence": "Afirmación nueva del usuario para esta actualización. Mantener separado de anomalías; no inventar cantidad o atribución.",
       "tags": [
         "operations",
@@ -1486,7 +1486,7 @@
   "home": {
     "hero": {
       "name": "Harrys Yusti",
-      "thesis": "Veo un proceso y me pregunto: ¿por qué lo hacemos así?",
+      "thesis": "Entender lo complejo. Hacerlo funcionar mejor.",
       "introduction": "Me gusta entender qué frena el trabajo, ordenar lo complejo y llevar mejoras concretas a la operación. La tecnología me interesa cuando libera tiempo y ayuda a decidir mejor.",
       "positioning": "Proyectos y transformación · Supply Chain · Operaciones",
       "image": {
@@ -1512,8 +1512,8 @@
     },
     "signature": {
       "kicker": "De fricción a una mejor forma de trabajar",
-      "title": "No empiezo por la herramienta. Primero quiero entender qué está frenando el trabajo.",
-      "introduction": "Productividad es diseñar mejores formas de trabajar, con el equipo y con evidencia.",
+      "title": "Entender antes de cambiar.",
+      "introduction": "No empiezo por la herramienta: primero entiendo qué frena el trabajo. Después, diseñamos una mejor forma de hacerlo, con el equipo y con evidencia.",
       "image": {
         "src": "/assets/signature-route.svg",
         "alt": "",
@@ -1565,7 +1565,7 @@
     },
     "selectedWork": {
       "kicker": "Experiencia puesta en práctica",
-      "title": "Tres proyectos. Una misma intención: que el trabajo avance mejor.",
+      "title": "Cambios concretos, en contexto.",
       "projectIds": [
         "inventory-reconciliation",
         "brazil-chile-data-migration",
@@ -1577,7 +1577,7 @@
       }
     },
     "careerStory": {
-      "heading": "He ido sumando herramientas para hacer que el trabajo funcione mejor.",
+      "heading": "No dejé áreas atrás. Fui sumándolas.",
       "introduction": "Empecé en ingeniería de campo, pasé por proyectos e inventario, después asumí una operación real y terminé más cerca de Supply Chain, datos y tecnología. La pregunta de fondo sigue siendo la misma: ¿cómo hacemos que un sistema funcione mejor?",
       "milestones": [
         {

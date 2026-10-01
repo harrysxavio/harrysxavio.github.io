@@ -10,7 +10,7 @@ The semantic v3 renderer dropped component hooks required by the client interact
 - Preserve `content/site.json` as the canonical semantic source and the existing static build architecture.
 - Use the supplied portrait only; do not invent personal claims, metrics, dates, or experience.
 - No dependencies, frameworks, image generation, remote operations, PR, or RDD review. TDD is off; run ordinary checks.
-- Keep protected untracked `.codegraph/`, `.codex-remote-attachments/`, `odd/tasks/personal-brand-v4.md`, and `output/` untouched.
+- Keep protected untracked `.codegraph/`, `.codex-remote-attachments/`, and `odd/tasks/personal-brand-v4.md` untouched. Preserve all pre-existing `output/` content; create screenshots only under the previously absent `output/qa-visual-recovery/` requested for QA.
 - Code/comments in English; public copy and editing guide in neutral professional Spanish.
 - Branch: `codex/visual-recovery-content-editor`; delivery exception is authorized, so no PR/chain selection.
 
@@ -21,7 +21,7 @@ The semantic v3 renderer dropped component hooks required by the client interact
 - Expected authored changes: more than 400 lines; no PR is authorized or planned.
 
 ## Checklist
-- [ ] T1 — Restore modern semantic portfolio compositions and client component contracts across home, projects, CV, and case pages.
+- [x] T1 — Restore and refine modern semantic portfolio compositions and client component contracts across home, projects, CV, and case pages. Follow-up visual review fixed the editable Projects H1, removed internal editorial notes from public cards, added four distinct TOP4 marks in a balanced 2x2 layout, and aligned secondary project rows into a full-width ledger.
 - [ ] T2 — Add a loopback-only Spanish form editor that validates and safely rebuilds the canonical content; document launch and preview/publication distinction.
 - [ ] T3 — Add regression coverage, strengthen generated-site verification, run functional/browser/visual QA, and record evidence.
 
@@ -39,14 +39,16 @@ The semantic v3 renderer dropped component hooks required by the client interact
 - `python -m py_compile tools/build_site.py tools/verify_site.py tools/content_editor.py`
 - `python -m unittest discover -s tests -v`
 - `git diff --check`
-- Browser: Home/Projects/CV at 1440x900, 1024x768, 390x844, light/dark; tabs, keyboard, mobile disclosure, filters, theme, reduced motion, overflow/errors/links/print.
+- Browser: Home/Projects/CV at 1440x900, 1280x800, 1024x768, 768x1024, 430x932, 390x844, 360x800, light/dark; tabs, keyboard, mobile disclosure, filters, theme, reduced motion, overflow/errors/links/print. Use installed shell Playwright for exact viewport sizing if the in-app browser ignores requested dimensions.
 
 ## Progress and evidence
-- T1: in progress.
-- T2: pending.
+- T1: original commit `001c3b9` (`fix(site): restore modern semantic portfolio compositions`); visual follow-up pending commit. Restored system-sans/blue composition, real-portrait hero and CTA hierarchy, semantic five-stage tab/disclosure hooks, featured project cards, career timeline/notes, case narratives and footer de-duplication. Follow-up corrected Projects content/layout and project-specific marks.
+- T1 checks: `python -m py_compile tools/build_site.py tools/verify_site.py tools/content_editor.py` PASS; `node --check script.js` PASS; `node --check tools/content-editor/app.js` PASS; `python tools/build_site.py` PASS (8 pages); `python tools/verify_site.py` PASS (canonical Projects H1, four featured projects/marks, no internal editorial notes); `python -m unittest discover -s tests -v` PASS (3 tests); `git diff --check` PASS (Git reports LF-to-CRLF warnings only).
+- Parent design feedback preserved: concise headline; five-step component on the same horizontal band as its explanation; compact evidence with meaningful project-specific visual marks; CV has its own hierarchy. Compatible external audit guidance: semantic component hooks, no positional nth-child styling, consolidated tokens/components, readable seven-width review. Keep existing dark mode, search, applied-AI note, and compact STAR.
+- T2: implementation complete, commit pending; editor launch and rollback tests pass.
 - T3: pending.
 - Commits: pending.
 - Screenshot evidence: `output/qa-visual-recovery/` (protected output directory; do not alter pre-existing contents).
 
 ## Next step
-Implement T1, validate the rendering contracts, then commit the cohesive visual recovery before proceeding to the editor.
+Commit the T1 visual follow-up, then commit T2 editor/docs and T3 verification/QA evidence separately; mirror the completed task state to Engram.
