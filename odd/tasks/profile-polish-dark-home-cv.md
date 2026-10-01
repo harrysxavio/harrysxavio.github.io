@@ -43,17 +43,17 @@ Local source files and assets needed for the requested changes, this feature tra
 - PPC-3 evidence: replaced Projects listing with exact requested headline/story, four #TOP4 cases and five extra entries in three type groups; compact reference-inspired icons, details teasers, exact CTA text; Tower remains distinct from anomaly project. Static verifier checks new count/grouping and 9 icons. Commit `30dc1db` (`feat(projects): group nine portfolio case studies`).
 - PPC-5 discovery/fix: final full-page Home readback exposed contact links/body copy inheriting `--ink`, yielding low contrast against the light-theme navy contact panel. Changed those descendants to inherit the panel’s contextual color so contrast is correct in both light and dark themes. Rebuilt, reran verifier, rechecked screenshots and all local paths afterward.
 - Browser QA: rendered Home at 1024×768 dark and 390×844; Projects at 1024×768 light, 1440×900 dark, and 390×844 dark; CV at 1024×768 light and 390×844 dark. Confirmed no horizontal overflow, theme persists across route/reload, Space toggles theme and updates `aria-pressed`/label, and no console errors.
-- PDF: real A4 PDF generated from current CV with installed Chrome via existing Playwright package; 2 pages, A4 media box 594.96×841.92 pt, 93,647 bytes, 3,526 extracted text chars; browser downloadMedia saved it as `C:\Users\harry\Downloads\harrys-yusti-cv.pdf`.
+- PDF: real A4 PDF generated from current CV with installed Chrome via existing Playwright package; 2 pages, A4 media box 594.96×841.92 pt, 93,647 bytes, 3,526 extracted text chars; browser downloadMedia saved it as `harrys-yusti-cv.pdf`.
 - Build: `python tools/build_site.py` passed (8 HTML pages plus public assets).
 - Verifier: `python tools/verify_site.py` passed (all routes/semantic checks; SEO/sitemap/robots/allowlist; four #TOP4 and five categorized projects).
 - `node --check script.js`: passed.
 - `git diff --check`: passed (only normal Git LF→CRLF warnings).
 - PPC-4 evidence: revised professional profile, 3 Natura roles grouped under one employer progression with source year ranges, role contributions/results distinguished, relevant project links, three value areas and workflow. Generated and verified genuine downloadable A4 PDF with system Chrome and preinstalled Playwright, no package installation. Commit `0543a69` (`feat(cv): add downloadable A4 profile`).
 - PPC-5 local validation: final `python tools/build_site.py`, `python tools/verify_site.py`, `node --check script.js`, and `git diff --check` passed. Build produced 8 HTML pages plus assets; all 9 public URL checks (home, projects, CV, four case routes, 404.html, PDF) returned HTTP 200; PDF served as `application/pdf`. Canonical/social metadata, JSON-LD, sitemap, robots, local resources, semantic/heading checks, and optimized image dimensions passed verifier. Browser confirmed home default light on fresh origin; persistent dark mode, accessible keyboard Space, no horizontal overflow at requested breakpoints, disclosures keyboard-operable, and no console errors.
-- Work-unit commits: PPC-1 `bcd999b`; PPC-2 `120336f`; PPC-3 `30dc1db`; PPC-4 `0543a69`; PPC-5 tracker/final contrast fix close commit pending.
+- Work-unit commits: PPC-1 `bcd999b`; PPC-2 `120336f`; PPC-3 `30dc1db`; PPC-4 `0543a69`; PPC-5 `78190c5` (`fix(profile): restore contrast in contact panel`).
 
 ## Next Step
-Implementation and requested checks are complete. Record the PPC-5 close commit identity and keep local delivery only.
+Implementation, requested checks, and local commits are complete. No remote delivery was authorized.
 
 ## Relevant Files
 - `odd/tasks/profile-polish-dark-home-cv.md` — recovery ledger for this feature.
