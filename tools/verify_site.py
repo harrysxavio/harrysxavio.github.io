@@ -234,6 +234,19 @@ def check_project_visuals(base: Path) -> None:
     require(set(expected_case_links) <= set(parsed_portfolio.links), "projects/index.html: each case record needs a working case link")
     require('id="control-tower"' in portfolio and 'id="transport-anomalies"' in portfolio,
             "projects/index.html: Control Tower and anomaly projects must remain distinct")
+    require('data-project-filters hidden' in portfolio and 'for="project-search"' in portfolio
+            and 'type="search"' in portfolio, "projects/index.html: labeled search controls must be hidden until enhanced")
+    require('<fieldset class="project-filter-tags"><legend>Filtrar por temas</legend>' in portfolio
+            and 'type="checkbox"' in portfolio, "projects/index.html: tag filters must use a native labeled fieldset")
+    require('data-project-results role="status" aria-live="polite"' in portfolio
+            and 'data-project-empty hidden' in portfolio, "projects/index.html: accessible result and empty states are required")
+    require('type="reset"' in portfolio and 'data-project-clear' in portfolio,
+            "projects/index.html: a native clear/reset action is required")
+    js = (base / "script.js").read_text(encoding="utf-8")
+    require("setupProjectFilters" in js and "selectedTags.size === 0 || [...selectedTags].some" in js,
+            "script.js: text search and OR semantics across selected tags are required")
+    require("textMatches && tagMatches" in js and "normalize(card.textContent).includes(query)" in js,
+            "script.js: search must include card titles, copy, and visible tag labels, combined with filters")
     for relative, asset_name in CASE_VISUALS.items():
         page = base / relative
         _, parsed = parse_page(page)
