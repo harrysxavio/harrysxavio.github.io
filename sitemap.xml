@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://harrysxavio.github.io/</loc>
-  </url>
+  <url><loc>https://harrysxavio.github.io/</loc></url>
+  <url><loc>https://harrysxavio.github.io/projects/</loc></url>
+  <url><loc>https://harrysxavio.github.io/cv/</loc></url>
+  <url><loc>https://harrysxavio.github.io/projects/inventory-reconciliation/</loc></url>
+  <url><loc>https://harrysxavio.github.io/projects/brazil-chile-data-migration/</loc></url>
+  <url><loc>https://harrysxavio.github.io/projects/patient-transport-optimization/</loc></url>
+  <url><loc>https://harrysxavio.github.io/projects/picking-line-balancing/</loc></url>
 </urlset>

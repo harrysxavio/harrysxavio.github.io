@@ -1,39 +1,30 @@
-# Harrys Yusti — Professional Profile
+# Harrys Yusti — Personal Website
 
-A static, Spanish-language executive profile highlighting projects, operational transformation, Supply Chain, productivity, and technology.
+Professional profile connecting projects, operational transformation, Supply Chain, and technology applied to business problems.
 
-## Stack
+## Stack and preview
 
-Semantic HTML, responsive CSS, and a small Python standard-library builder/verifier. No runtime framework or JavaScript dependency.
+Semantic HTML, CSS, minimal JavaScript, and Python's standard library for the local builder and verifier. No framework or package installation is required. Open `index.html` or serve this directory with a static HTTP server.
 
-## Local preview and checks
-
-Open `index.html` directly or serve the repository root with any local static HTTP server. Check the page with:
-
-```powershell
+```sh
+python tools/build_site.py
 python tools/verify_site.py
 ```
 
-Build the safe public-file preview into `dist/`:
-
-```powershell
-python tools/build_site.py
-```
-
-For a project site with a path prefix, pass its HTTPS base URL with `--site-url`.
-
 ## Deployment
 
-The production site is [https://harrysxavio.github.io/](https://harrysxavio.github.io/). GitHub Pages is configured to publish the `main` branch from the repository root. The root `index.html`, stylesheet, favicon, robots file, and sitemap are therefore the deployed source; `dist/` is only a local packaging check and is not the Pages source.
+Production: [https://harrysxavio.github.io/](https://harrysxavio.github.io/). GitHub Pages publishes `main` from the repository root. `dist/` is a local allowlisted build, not the configured Pages source.
 
 ## Structure
 
-- `index.html` — profile content, social metadata, and structured data.
-- `styles.css` — responsive editorial visual system.
-- `assets/` — supplied illustration and optimized social preview.
-- `tools/` — standard-library static-site builder and structural verifier.
-- `DESIGN.md` — design direction and responsive principles.
+- `/` — five-act professional profile.
+- `/projects/` — selected work and four case studies.
+- `/cv/` — print-ready professional CV.
+- `/404.html` — helpful not-found page.
+- `assets/`, `styles.css`, `script.js` — visuals and presentation.
+- `tools/` — static build and verification.
+- `DESIGN.md`, `docs/PHOTO_BRIEF.md` — design system and future portrait brief.
 
 ## Design and SEO
 
-The profile uses warm paper, navy ink, restrained red accents, serif headings, sans-serif body copy, whitespace, and fine rules. Production canonical, Open Graph, Twitter, and JSON-LD URLs use the account-root domain. The builder validates and renders optional base-path URLs without copying private project files into `dist/`.
+Editorial Executive Profile: warm paper, navy ink, a restrained red accent, serif display type, sans-serif reading text, open layouts, and fine rules. Each indexable page has route-specific canonical/social metadata and structured data; `robots.txt` points to the generated route sitemap.

@@ -1,34 +1,34 @@
 # Design system — Editorial Executive Profile
 
-## Intent
+## Position
 
-Present Harrys Yusti as a business-minded mechanical engineer whose work connects projects, operational transformation, Supply Chain, productivity, and technology. The page should read like a polished professional profile: direct, human, evidence-led, and easy to scan. It is not a field guide, product dashboard, or conventional boxed résumé.
+The site presents Harrys Yusti as a mechanical engineer working across projects, operations, Supply Chain, productivity, and operational transformation. Technology, data, automation, and AI are enablers—not the primary professional identity. The visual personality supports clarity and evidence rather than turning the profile into a field guide or a product dashboard.
 
 ## Visual language
 
-- **Canvas and ink:** warm paper (`#f4f0e7`), deep navy (`#172d45`), soft ink (`#4d5d69`), and a restrained signal red (`#a33d34`).
-- **Typography:** Georgia/Times serif for display headings; Arial/Helvetica sans serif for reading and navigation; Courier New for small editorial labels. System fonts avoid external requests.
-- **Structure:** fine rules, open ledger rows, calm whitespace, fluid type, and a centered reading measure. Impact figures are typographic highlights, not KPI cards.
-- **Imagery:** no portrait or project-photo claims. The existing operations illustration is a social-preview asset, not a fabricated depiction of Harrys or a case study.
+- **Canvas:** warm paper `#f4f0e7`, navy ink, soft secondary ink, and restrained editorial red.
+- **Type:** system serif display headings, sans-serif reading/navigation, small monospaced section labels; no external font requests.
+- **Composition:** fine rules, whitespace, open ledger rows, restrained numbering, and typographic impact measures rather than KPI cards.
+- **Images:** the existing WebP illustration is decorative and explicitly not a portrait or project photograph. No personal portrait exists yet.
 
-## Page sequence
+## Home — five acts
 
-1. Simple name and section navigation.
-2. Text-first hero identifying Harrys, professional domains, and value proposition.
-3. Compact professional snapshot and selected impact.
-4. Chronological experience ledger and concise project rows.
-5. Capabilities and grouped tools, with business outcomes before technology.
-6. Brief About section, then clearly labeled AI exploration.
-7. Direct contact invitation with supplied public profile links only.
+1. **Identity:** name, engineering background, experience, domains, and a concise value proposition.
+2. **How I work:** understand friction, simplify, connect teams/data, automate with controls, and measure.
+3. **Selected transformations:** three short, evidence-led examples with contribution separated from initiative outcome.
+4. **Career and person:** professional evolution, a concise human perspective, and current AI/automation exploration.
+5. **Continue the conversation:** clear recruiter-facing invitation and supplied LinkedIn/GitHub links.
 
-## Responsive behavior and accessibility
+Projects and the detailed CV live on their own routes so the Home remains scannable.
 
-Use CSS grid/flex reflow rather than a separate mobile page. Navigation may wrap, the snapshot and impact lists reduce columns, timeline/project rows stack, and skills become single-column reading rows. Preserve semantic landmarks, a single H1, descriptive links, visible keyboard focus, a skip link, sufficient contrast, and reduced-motion support. Avoid horizontal overflow at narrow widths.
+## Responsive and accessible behavior
+
+Use one semantic document per route with a skip link, landmarks, one H1, clear heading order, visible keyboard focus, descriptive link names, and intrinsic image dimensions. Layouts collapse to one-column reading on narrow screens without horizontal scrolling. Motion is minimal and respects `prefers-reduced-motion`. The CV has a dedicated A4 print stylesheet. These implementation choices are not a claim of independently certified WCAG conformance.
 
 ## Content and evidence
 
-Use only supplied profile facts, roles, dates, tools, education, languages, and project outcomes. Keep each result attached to its confirmed context. No invented current title, employer, client, testimonial, photo, contact detail, or additional metric. AI is applied exploration, not a claimed specialty.
+Use only facts and outcomes confirmed in the V4 Master Plan. State the project outcome separately from Harrys's contribution; do not assign collective results to him individually. Do not invent current title, contact details, client names, testimonials, tools used on a particular project, or photography. Label AI as current exploration.
 
 ## SEO and publishing
 
-The account-root production URL is `https://harrysxavio.github.io/`. Keep one canonical URL and one set of Open Graph/Twitter tags, plus `ProfilePage` and `Person` JSON-LD that use the supplied LinkedIn and GitHub links. The root directory is the current Pages publishing source; the Python builder creates an allowlisted local `dist/` package and can also render a path-prefixed URL for local verification.
+Production base URL: `https://harrysxavio.github.io/`. Each page has a route-specific canonical and social URL. Home structured data identifies the Person and ProfilePage; other indexable pages use their page and breadcrumb entities. Sitemap contains all indexable routes and excludes the noindex 404. GitHub Pages continues to publish `main` from repository root; `tools/build_site.py` creates a local allowlisted artifact only.
