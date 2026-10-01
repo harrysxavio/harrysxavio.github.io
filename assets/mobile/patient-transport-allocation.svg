@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 340" role="img" aria-labelledby="title desc">
+  <title id="title">Asignación de transporte de pacientes</title><desc id="desc">La demanda de traslados y la capacidad disponible orientan la asignación, las rutas y el servicio para pacientes.</desc>
+  <style>text{font-family:Arial,sans-serif;fill:#182b43;font-size:16px;font-weight:600}.muted{fill:#526173;font-size:14px;font-weight:400}.node{fill:#fbf8f1;stroke:#9ca9b5;stroke-width:1.5}.accent{fill:#f5e9e6;stroke:#a8463b}</style>
+  <rect width="360" height="340" rx="12" fill="#f4f0e7"/>
+  <rect class="node" x="18" y="24" width="150" height="72" rx="8"/><text x="32" y="53">Demanda</text><text class="muted" x="32" y="77">de traslados</text>
+  <rect class="node" x="192" y="24" width="150" height="72" rx="8"/><text x="206" y="53">Capacidad</text><text class="muted" x="206" y="77">disponible</text>
+  <path d="M93 98v25h87M267 98v25h-87v21" fill="none" stroke="#a8463b" stroke-width="2"/><path d="m173 139 7 7 7-7" fill="none" stroke="#a8463b" stroke-width="2"/>
+  <rect class="node" x="54" y="152" width="252" height="65" rx="8"/><text x="180" y="181" text-anchor="middle">Asignación de flota</text><text class="muted" x="180" y="203" text-anchor="middle">según demanda y capacidad</text>
+  <path d="M180 217v28" fill="none" stroke="#a8463b" stroke-width="2"/><path d="m173 239 7 7 7-7" fill="none" stroke="#a8463b" stroke-width="2"/>
+  <rect class="accent" x="54" y="253" width="252" height="65" rx="8"/><text x="180" y="280" text-anchor="middle">Rutas y servicio</text><text class="muted" x="180" y="302" text-anchor="middle">para pacientes</text>
+</svg>

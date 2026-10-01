@@ -49,34 +49,41 @@
           <h1>Proyectos</h1>
           <p>Una selección de problemas de operaciones, Supply Chain, datos e ingeniería. En cada caso me interesa mostrar el contexto, mi contribución y qué cambió después, no solo la herramienta utilizada.</p>
         </header>
-        <ol class="portfolio-list">
-          <li class="portfolio-item portfolio-item--featured portfolio-item--case">
+        <section class="portfolio-group" aria-labelledby="featured-projects-title">
+          <h2 class="portfolio-group-title" id="featured-projects-title">Casos destacados</h2>
+          <ol class="portfolio-list portfolio-list--featured">
+          <li class="portfolio-item portfolio-item--featured portfolio-item--case portfolio-item--primary">
             <div class="portfolio-meta"><span>01</span><span>Supply Chain · Inventario · Automatización</span></div>
-            <figure class="portfolio-visual"><img src="/assets/inventory-reconciliation-flow.svg" alt="Existencias de operación y registros de sistemas llegan a una conciliación; las excepciones quedan visibles para revisión y seguimiento." width="680" height="260"></figure>
+            <figure class="portfolio-visual workflow-visual"><picture><source media="(max-width: 600px)" type="image/svg+xml" srcset="/assets/mobile/inventory-reconciliation-flow.svg"><img src="/assets/inventory-reconciliation-flow.svg" alt="Existencias de operación y registros de sistemas llegan a una conciliación; las excepciones quedan visibles para revisión y seguimiento." width="680" height="260"></picture></figure>
             <div class="portfolio-copy"><h2><a href="/projects/inventory-reconciliation/">Rediseño y automatización de conciliación de inventario</a></h2><p><strong>Problema:</strong> conciliar manualmente la información operacional y de sistemas consumía tiempo y elevaba el costo del soporte.</p><p><strong>Mi contribución:</strong> coordiné rediseño de proceso, validaciones y automatización.</p><p><strong>Resultado de la iniciativa:</strong> −30% de tiempo de gestión y −40% de costos asociados al soporte.</p></div>
             <a class="case-link" href="/projects/inventory-reconciliation/">Leer caso <span aria-hidden="true">→</span></a>
           </li>
-          <li class="portfolio-item portfolio-item--compact">
-            <div class="portfolio-meta"><span>02</span><span>Supply Chain · Planificación · Datos</span></div>
-            <div class="portfolio-copy"><h2>Modelo predictivo de abastecimiento y riesgo de suministro</h2><p><strong>Mi contribución:</strong> coordiné el modelo predictivo de planificación de abastecimiento.</p><p><strong>Resultado reportado:</strong> mejora aproximada de 35% en precisión logística.</p></div>
-          </li>
-          <li class="portfolio-item portfolio-item--featured portfolio-item--case">
-            <div class="portfolio-meta"><span>03</span><span>Datos · ERP · Transformación regional</span></div>
-            <figure class="portfolio-visual"><img src="/assets/brazil-chile-data-flow.svg" alt="Datos maestros de Brasil pasan por validación y mapeo antes de estabilizarse en Chile; el alcance coordinado fue de aproximadamente 120.000 registros." width="680" height="260"></figure>
+          <li class="portfolio-item portfolio-item--featured portfolio-item--case portfolio-item--secondary">
+            <div class="portfolio-meta"><span>02</span><span>Datos · ERP · Transformación regional</span></div>
+            <figure class="portfolio-visual workflow-visual"><picture><source media="(max-width: 600px)" type="image/svg+xml" srcset="/assets/mobile/brazil-chile-data-flow.svg"><img src="/assets/brazil-chile-data-flow.svg" alt="Datos maestros de Brasil pasan por validación y mapeo antes de estabilizarse en Chile; el alcance coordinado fue de aproximadamente 120.000 registros." width="680" height="260"></picture></figure>
             <div class="portfolio-copy"><h2><a href="/projects/brazil-chile-data-migration/">Migración y estabilización de datos Brasil–Chile</a></h2><p><strong>Problema:</strong> la migración requería validar y estabilizar un volumen alto de datos maestros para sostener la operación local.</p><p><strong>Mi contribución:</strong> coordiné validación operacional y de datos entre equipos regionales y técnicos.</p><p><strong>Escala y resultado del proyecto:</strong> cerca de 120.000 registros maestros; ~90% del alcance aprobado quedó estabilizado.</p></div>
             <a class="case-link" href="/projects/brazil-chile-data-migration/">Leer caso <span aria-hidden="true">→</span></a>
           </li>
-          <li class="portfolio-item portfolio-item--featured portfolio-item--case">
-            <div class="portfolio-meta"><span>04</span><span>Operaciones · Planificación · Transporte de pacientes</span></div>
-            <figure class="portfolio-visual"><img src="/assets/patient-transport-allocation.svg" alt="Demanda de traslados y capacidad disponible orientan asignación de flota, rutas y servicio para pacientes." width="720" height="280"></figure>
+          <li class="portfolio-item portfolio-item--featured portfolio-item--case portfolio-item--secondary">
+            <div class="portfolio-meta"><span>03</span><span>Operaciones · Planificación · Transporte de pacientes</span></div>
+            <figure class="portfolio-visual workflow-visual"><picture><source media="(max-width: 600px)" type="image/svg+xml" srcset="/assets/mobile/patient-transport-allocation.svg"><img src="/assets/patient-transport-allocation.svg" alt="Demanda de traslados y capacidad disponible orientan asignación de flota, rutas y servicio para pacientes." width="720" height="280"></picture></figure>
             <div class="portfolio-copy"><h2><a href="/projects/patient-transport-optimization/">Optimización de transporte de pacientes</a></h2><p><strong>Problema:</strong> asignar capacidad y flota a una operación territorial con demanda variable de traslados de pacientes.</p><p><strong>Mi contribución:</strong> diseñé un modelo de asignación de flota según demanda histórica y coordiné su uso operacional.</p><p><strong>Resultado asociado:</strong> ~15% menos uso de transportes en la Región Metropolitana.</p></div>
             <a class="case-link" href="/projects/patient-transport-optimization/">Leer caso <span aria-hidden="true">→</span></a>
           </li>
-          <li class="portfolio-item portfolio-item--featured portfolio-item--case">
-            <div class="portfolio-meta"><span>05</span><span>Centro de distribución · Picking · Productividad</span></div>
-            <figure class="portfolio-visual"><img src="/assets/picking-workload-balance.svg" alt="Los pedidos se distribuyen entre zonas de picking y se balancea la carga de trabajo para prepararlos en el centro de distribución." width="680" height="260"></figure>
+          <li class="portfolio-item portfolio-item--featured portfolio-item--case portfolio-item--secondary">
+            <div class="portfolio-meta"><span>04</span><span>Centro de distribución · Picking · Productividad</span></div>
+            <figure class="portfolio-visual workflow-visual"><picture><source media="(max-width: 600px)" type="image/svg+xml" srcset="/assets/mobile/picking-workload-balance.svg"><img src="/assets/picking-workload-balance.svg" alt="Los pedidos se distribuyen entre zonas de picking y se balancea la carga de trabajo para prepararlos en el centro de distribución." width="680" height="260"></picture></figure>
             <div class="portfolio-copy"><h2><a href="/projects/picking-line-balancing/">Balanceo de línea de picking</a></h2><p><strong>Problema:</strong> la preparación de pedidos requería equilibrar la carga operacional entre zonas del centro de distribución.</p><p><strong>Mi contribución:</strong> trabajé en balanceo operacional, business case, testing, go-live y adopción.</p><p><strong>Resultado de adopción:</strong> aproximadamente 95% post go-live.</p></div>
             <a class="case-link" href="/projects/picking-line-balancing/">Leer caso <span aria-hidden="true">→</span></a>
+          </li>
+          </ol>
+        </section>
+        <section class="portfolio-group portfolio-group--other" aria-labelledby="other-projects-title">
+          <h2 class="portfolio-group-title" id="other-projects-title">Otros proyectos</h2>
+          <ol class="portfolio-list portfolio-list--other">
+          <li class="portfolio-item portfolio-item--compact">
+            <div class="portfolio-meta"><span>05</span><span>Supply Chain · Planificación · Datos</span></div>
+            <div class="portfolio-copy"><h2>Modelo predictivo de abastecimiento y riesgo de suministro</h2><p><strong>Mi contribución:</strong> coordiné el modelo predictivo de planificación de abastecimiento.</p><p><strong>Resultado reportado:</strong> mejora aproximada de 35% en precisión logística.</p></div>
           </li>
           <li class="portfolio-item portfolio-item--compact">
             <div class="portfolio-meta"><span>06</span><span>Operaciones · Logística · Automatización</span></div>
@@ -84,13 +91,14 @@
           </li>
           <li class="portfolio-item portfolio-item--compact">
             <div class="portfolio-meta"><span>07</span><span>Inventario · Control operacional</span></div>
-            <div class="portfolio-copy"><h2>Modelo de control de inventario</h2><p>Modelo para ordenar el seguimiento y control operacional del inventario, con una mejora cualitativa del proceso confirmada.</p></div>
+            <div class="portfolio-copy"><h2>Modelo de control de inventario</h2><p>Un modelo para ordenar el seguimiento del inventario y hacer más claro su control en la operación.</p></div>
           </li>
           <li class="portfolio-item portfolio-item--compact">
             <div class="portfolio-meta"><span>08</span><span>Ingeniería · HVAC · PLC</span></div>
             <div class="portfolio-copy"><h2>Entrega de proyectos industriales</h2><p>Proyectos de HVAC, PLC e infraestructura con coordinación de equipos, calidad y planificación.</p></div>
           </li>
-        </ol>
+          </ol>
+        </section>
 
       </main>
       <footer class="site-footer simple-footer"><span>Harrys Yusti</span><a href="/cv/">CV</a><a href="/">Inicio</a><a href="https://www.linkedin.com/in/h-yusti/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></footer>

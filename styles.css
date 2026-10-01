@@ -578,3 +578,32 @@ h3 { font-size: clamp(1.2rem, 1.7vw, 1.5rem); line-height: 1.18; }
 @media (prefers-reduced-motion: reduce) {
   .signature-step[role="tabpanel"] { animation: none; }
 }
+
+/* Portfolio hierarchy: one lead case, three supporting cases, then compact work. */
+.portfolio-group { margin-top: clamp(2.5rem, 6vw, 4.5rem); }
+.portfolio-group-title { margin: 0 0 1.25rem; padding-bottom: .7rem; border-bottom: 1px solid var(--rule-dark); font-size: clamp(1.45rem, 2.5vw, 2rem); }
+.portfolio-list--featured { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.15rem; border: 0; }
+.portfolio-list--featured .portfolio-item { min-width: 0; padding: 1rem; border: 1px solid var(--rule); background: #fbf8f1; }
+.portfolio-list--featured .portfolio-item--primary { grid-column: 1 / -1; grid-template-columns: minmax(15rem, .8fr) minmax(0, 1.2fr); grid-template-areas: "meta meta" "visual copy" "action action"; gap: .7rem clamp(1rem, 3vw, 2.5rem); padding: clamp(1rem, 2.4vw, 2rem); background: #ece6da; }
+.portfolio-list--featured .portfolio-item--secondary { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-areas: "meta" "visual" "copy" "action"; align-content: start; gap: .7rem; }
+.portfolio-list--featured .portfolio-item--secondary .portfolio-visual { align-self: center; }
+.portfolio-list--featured .portfolio-item--secondary .case-link { grid-area: action; justify-self: start; }
+.portfolio-list--featured .portfolio-item--primary .case-link { grid-area: action; justify-self: start; }
+.portfolio-list--featured .portfolio-copy p { line-height: 1.55; }
+.portfolio-list--other { border-top: 1px solid var(--rule); }
+.portfolio-list--other .portfolio-item { grid-template-columns: minmax(10rem, .36fr) minmax(0, 1fr); padding-block: 1.15rem; }
+.workflow-visual { display: block; min-width: 0; margin: 0; }
+.workflow-visual img { display: block; width: 100%; height: auto; }
+@media (max-width: 850px) {
+  .portfolio-list--featured { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .portfolio-list--featured .portfolio-item--primary { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+@media (max-width: 600px) {
+  .portfolio-group { margin-top: 2.4rem; }
+  .portfolio-list--featured { grid-template-columns: minmax(0, 1fr); gap: .75rem; }
+  .portfolio-list--featured .portfolio-item--primary,
+  .portfolio-list--featured .portfolio-item--secondary { grid-column: auto; grid-template-columns: minmax(0, 1fr); grid-template-areas: "meta" "visual" "copy" "action"; gap: .6rem; padding: 1rem; }
+  .portfolio-list--other .portfolio-item { grid-template-columns: minmax(0, 1fr); grid-template-areas: "meta" "copy"; gap: .45rem; }
+  .workflow-visual img { max-width: 25rem; margin-inline: auto; }
+  .case-visual .workflow-visual img { max-height: none; }
+}
