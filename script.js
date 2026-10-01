@@ -9,6 +9,84 @@ let tabButtons = [];
 let selectedIndex = Math.max(0, signatureSteps.findIndex((step) => step.open));
 let desktopTabs = false;
 
+function setupThemeToggle() {
+  const navigation = document.querySelector(".top-nav");
+  if (!navigation || navigation.querySelector("[data-theme-toggle]")) return;
+
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "theme-toggle";
+  button.dataset.themeToggle = "";
+  button.innerHTML = '<svg class="theme-toggle__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.2 15.2A8.5 8.5 0 0 1 8.8 3.8 8.5 8.5 0 1 0 20.2 15.2Z"/></svg><span data-theme-label></span>';
+  navigation.append(button);
+
+  const label = button.querySelector("[data-theme-label]");
+  const themeColor = document.querySelector('meta[name="theme-color"]');
+  const applyTheme = (theme, persist = false) => {
+    const isDark = theme === "dark";
+    document.documentElement.dataset.theme = isDark ? "dark" : "light";
+    button.setAttribute("aria-pressed", String(isDark));
+    button.setAttribute("aria-label", isDark ? "Activar tema claro" : "Activar tema oscuro");
+    label.textContent = isDark ? "Claro" : "Oscuro";
+    if (themeColor) themeColor.content = isDark ? "#101822" : "#135eef";
+    if (persist) {
+      try {
+        localStorage.setItem("harrys-site-theme", isDark ? "dark" : "light");
+      } catch {
+        // The selected theme remains active until navigation when storage is unavailable.
+      }
+    }
+  };
+
+  applyTheme(document.documentElement.dataset.theme === "dark" ? "dark" : "light");
+  button.addEventListener("click", () => {
+    applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark", true);
+  });
+}
+
+function setupProjectFilters() {
+  const form = document.querySelector("[data-project-filters]");
+  if (!form) return;
+
+  const cards = [...document.querySelectorAll("[data-project-id]")];
+  const search = form.querySelector("[data-project-search]");
+  const tagInputs = [...form.querySelectorAll("[data-project-tag]")];
+  const results = document.querySelector("[data-project-results]");
+  const emptyState = document.querySelector("[data-project-empty]");
+  if (!search || !results || !emptyState || cards.length === 0) return;
+
+  const normalize = (value) => value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLocaleLowerCase("es");
+
+  const update = () => {
+    const query = normalize(search.value.trim());
+    const selectedTags = new Set(tagInputs.filter((input) => input.checked).map((input) => input.value));
+    let visible = 0;
+
+    cards.forEach((card) => {
+      const textMatches = !query || normalize(card.textContent).includes(query);
+      const cardTags = new Set((card.dataset.projectTags || "").split(/\s+/).filter(Boolean));
+      const tagMatches = selectedTags.size === 0 || [...selectedTags].some((tag) => cardTags.has(tag));
+      const matches = textMatches && tagMatches;
+      card.hidden = !matches;
+      if (matches) visible += 1;
+    });
+
+    results.textContent = `${visible} de ${cards.length} proyectos`;
+    emptyState.hidden = visible !== 0;
+  };
+
+  form.hidden = false;
+  results.hidden = false;
+  form.addEventListener("input", update);
+  form.addEventListener("change", update);
+  form.addEventListener("reset", () => window.setTimeout(update, 0));
+  form.addEventListener("submit", (event) => event.preventDefault());
+  update();
+}
+
 function updateSignatureRoute(index) {
   if (!signatureRoute) return;
   signatureRoute.dataset.activeIndex = String(index);
@@ -102,6 +180,8 @@ function updateSignatureMode() {
 }
 
 try {
+  setupThemeToggle();
+  setupProjectFilters();
   if (signatureSteps.length === 5) {
     signatureSteps.forEach((step, index) => {
       if (!step.id) step.id = `signature-panel-${index + 1}`;

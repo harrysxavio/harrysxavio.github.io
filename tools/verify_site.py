@@ -58,6 +58,7 @@ class Parser(HTMLParser):
         self.current_heading: int | None = None
         self.lang = ""
         self.doctype = False
+        self.text: list[str] = []
 
     def handle_decl(self, decl: str) -> None:
         self.doctype = decl.casefold() == "doctype html"
@@ -95,6 +96,7 @@ class Parser(HTMLParser):
         if opening != tag: self.errors.append(f"</{tag}> closes <{opening}>")
 
     def handle_data(self, data: str) -> None:
+        self.text.append(data)
         if self.in_title: self.title += data
         if self.in_jsonld: self.jsonld[-1] += data
         if self.current_heading is not None:
@@ -202,26 +204,51 @@ def check_sitemap(base: Path, site_url: str) -> None:
 
 def check_project_visuals(base: Path) -> None:
     portfolio = (base / "projects" / "index.html").read_text(encoding="utf-8")
-    groups = re.findall(r'<section class="portfolio-group[^\"]*"[^>]*>(.*?)</section>', portfolio, flags=re.I | re.S)
-    require(len(groups) == 2, "projects/index.html: expected separate featured and other-project groups")
-    require("Casos destacados" in groups[0] and "Otros proyectos" in groups[1], "projects/index.html: portfolio group headings/order must be explicit")
-    featured_rows = re.findall(r"<li\b([^>]*)>(.*?)</li>", groups[0], flags=re.I | re.S)
-    other_rows = re.findall(r"<li\b([^>]*)>(.*?)</li>", groups[1], flags=re.I | re.S)
-    featured = [body for attrs, body in featured_rows if "portfolio-item--featured" in attrs]
-    compact = [body for attrs, body in other_rows if "portfolio-item--compact" in attrs]
-    require(len(featured) == 4 and len(compact) == 4, "projects/index.html: expected four featured cases followed by four compact projects")
-    require("portfolio-item--primary" in featured_rows[0][0] and "portfolio-item--secondary" not in featured_rows[0][0], "projects/index.html: inventory must lead as the primary case")
-    require(sum("portfolio-item--secondary" in attrs for attrs, _ in featured_rows) == 3, "projects/index.html: three supporting cases must follow inventory")
-    require("Rediseño y automatización de conciliación de inventario" in featured[0], "projects/index.html: inventory must be the lead featured case")
+    content_path = ROOT / "content" / "site.json"
+    try:
+        content = json.loads(content_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        fail(f"content/site.json: invalid project master data: {exc}")
+    projects = content.get("projects", [])
+    tags = {tag.get("id"): tag.get("label") for tag in content.get("taxonomy", {}).get("tags", [])}
+    require(len(projects) == 9, "content/site.json: exactly nine project records are required")
+    require(len(tags) == len(content.get("taxonomy", {}).get("tags", [])), "content/site.json: taxonomy IDs must be unique")
+    require(sum(bool(project.get("featured")) for project in projects) == 4, "content/site.json: four featured case records are required")
+    require(sum(project.get("route") is None for project in projects) == 5, "content/site.json: five teaser-only project records are required")
+    require(projects[0].get("id") == "inventory-reconciliation", "content/site.json: inventory must lead the featured projects")
+    card_matches = re.findall(r'<li\b(?=[^>]*class="project-card\b)([^>]*)>(.*?)</article></li>', portfolio, flags=re.I | re.S)
+    require(len(card_matches) == 9, "projects/index.html: all nine project records must render as cards")
+    for project in projects:
+        require(len(project.get("tags", [])) >= 2, f"content/site.json project {project.get('id')}: assign multiple taxonomy tags")
+        require(set(project.get("tags", [])) <= set(tags), f"content/site.json project {project.get('id')}: unknown taxonomy tag")
+        require(project.get("title", "") in portfolio, f"projects/index.html: project title missing from generated page: {project.get('id')}")
+        card = next((attrs for attrs, _ in card_matches if f'data-project-id="{project["id"]}"' in attrs), None)
+        require(card is not None, f"projects/index.html: missing card identity for {project['id']}")
+        rendered_tags = re.search(r'data-project-tags="([^"]+)"', card or "")
+        require(rendered_tags is not None and set(rendered_tags.group(1).split()) == set(project["tags"]),
+                f"projects/index.html: taxonomy assignment differs for {project['id']}")
+        for tag_id in project["tags"]:
+            require(tags[tag_id] in next(body for attrs, body in card_matches if attrs == card),
+                    f"projects/index.html: visible tag label missing for {project['id']} / {tag_id}")
     require("mejora cualitativa del proceso confirmada" not in portfolio.casefold(), "projects/index.html: remove internal confirmation language")
-    featured_assets = [re.search(r"<img\b[^>]*src=[\"']([^\"']+)[\"']", row, flags=re.I) for row in featured]
-    expected_featured = ["/assets/inventory-reconciliation-flow.svg", "/assets/brazil-chile-data-flow.svg", "/assets/patient-transport-allocation.svg", "/assets/picking-workload-balance.svg"]
-    require(all(match is not None for match in featured_assets), "projects/index.html: each featured case must have a visual asset")
-    require([match.group(1) for match in featured_assets if match] == expected_featured, "projects/index.html: featured visual assets must match the four case subjects in order")
-    for row in featured:
-        require(re.search(r"<img\b[^>]*\balt=[\"'][^\"']+", row, flags=re.I) is not None, "projects/index.html: featured project diagram needs descriptive alt text")
-        mobile = re.search(r'<source\b[^>]*srcset=["\']([^"\']+)["\']', row, flags=re.I)
-        require(mobile is not None and "/assets/mobile/" in mobile.group(1), "projects/index.html: featured diagram needs its responsive mobile SVG")
+    expected_case_links = [project["route"] for project in projects if project.get("route")]
+    _, parsed_portfolio = parse_page(base / "projects" / "index.html")
+    require(set(expected_case_links) <= set(parsed_portfolio.links), "projects/index.html: each case record needs a working case link")
+    require('id="control-tower"' in portfolio and 'id="transport-anomalies"' in portfolio,
+            "projects/index.html: Control Tower and anomaly projects must remain distinct")
+    require('data-project-filters hidden' in portfolio and 'for="project-search"' in portfolio
+            and 'type="search"' in portfolio, "projects/index.html: labeled search controls must be hidden until enhanced")
+    require('<fieldset class="project-filter-tags"><legend>Filtrar por temas</legend>' in portfolio
+            and 'type="checkbox"' in portfolio, "projects/index.html: tag filters must use a native labeled fieldset")
+    require('data-project-results role="status" aria-live="polite"' in portfolio
+            and 'data-project-empty hidden' in portfolio, "projects/index.html: accessible result and empty states are required")
+    require('type="reset"' in portfolio and 'data-project-clear' in portfolio,
+            "projects/index.html: a native clear/reset action is required")
+    js = (base / "script.js").read_text(encoding="utf-8")
+    require("setupProjectFilters" in js and "selectedTags.size === 0 || [...selectedTags].some" in js,
+            "script.js: text search and OR semantics across selected tags are required")
+    require("textMatches && tagMatches" in js and "normalize(card.textContent).includes(query)" in js,
+            "script.js: search must include card titles, copy, and visible tag labels, combined with filters")
     for relative, asset_name in CASE_VISUALS.items():
         page = base / relative
         _, parsed = parse_page(page)
@@ -265,6 +292,79 @@ def check_output(base: Path, site_url: str) -> None:
         if page.is_file(): check_page(page, base, site_url)
     check_sitemap(base, site_url)
     check_project_visuals(base)
+    home = (base / "index.html").read_text(encoding="utf-8")
+    require('src="/assets/harrys-yusti-portrait.webp"' in home and 'alt="Retrato de Harrys Yusti"' in home,
+            "index.html: the supplied transparent portrait must be the accessible hero image")
+    require("hero-eyebrow" not in home and len(re.findall(r"<h1\b", home, flags=re.I)) == 1,
+            "index.html: remove the experience eyebrow and preserve a single home heading")
+    require(len(re.findall(r"<h1\b", home, flags=re.I)) == 1, "index.html: Home must have exactly one h1")
+    cv = (base / "cv" / "index.html").read_text(encoding="utf-8")
+    cv_parser = Parser()
+    cv_parser.feed(cv)
+    cv_text = " ".join(cv_parser.text)
+    source = json.loads((ROOT / "content" / "site.json").read_text(encoding="utf-8"))
+    def assert_semantic(value: object, location: str) -> None:
+        forbidden = {"type", "blocks", "runs", "attrs", "level", "element", "contentGroup", "html", "fragment"}
+        if isinstance(value, dict):
+            for key, item in value.items():
+                require(key not in forbidden, f"{location}.{key}: presentation/HTML AST fields are not authorable content")
+                assert_semantic(item, f"{location}.{key}")
+        elif isinstance(value, list):
+            for index, item in enumerate(value):
+                assert_semantic(item, f"{location}[{index}]")
+        elif isinstance(value, str):
+            require(re.search(r"<\/?[a-z][^>]*>", value, flags=re.I) is None,
+                    f"{location}: content fields must be plain text, not HTML fragments")
+
+    require(source.get("schemaVersion") == 3, "content/site.json: semantic schema version 3 is required")
+    assert_semantic(source["home"], "home")
+    assert_semantic(source["projectsPage"], "projectsPage")
+    assert_semantic(source["notFound"], "notFound")
+    for project in source["projects"]:
+        if project.get("homeCard"):
+            assert_semantic(project["homeCard"], f"project {project['id']}.homeCard")
+        if project.get("caseDetails"):
+            assert_semantic(project["caseDetails"], f"project {project['id']}.caseDetails")
+    pdf_href = re.escape(source["profile"]["cvPdfUrl"])
+    require(re.search(r'<a\b(?=[^>]*href="' + pdf_href + r'")(?=[^>]*\bdownload(?:[=\s]|>))[^>]*>', cv, flags=re.I) is not None,
+            "cv/index.html: a real downloadable CV PDF is required")
+    profile = source["profile"]
+    cv_values = [source["site"]["name"], *[profile[field] for field in ("profession", "location", "positioning", "summary", "workflow")],
+                 source["education"]["degree"], source["education"]["institution"], source["education"]["year"]]
+    cv_values.extend(item[key] for item in source["languages"] for key in ("language", "level"))
+    cv_values.extend(employer["employer"] for employer in source["career"])
+    cv_values.extend(role[key] for employer in source["career"] for role in employer["roles"] for key in ("period", "title"))
+    cv_values.extend(bullet for employer in source["career"] for role in employer["roles"] for bullet in role["bullets"])
+    cv_values.extend(project["title"] for employer in source["career"] for role in employer["roles"] for project in role.get("projects", []))
+    cv_values.extend(skill["area"] for skill in source["skills"])
+    cv_values.extend(label for skill in source["skills"] for label in skill["skills"] + skill["tools"])
+    cv_values.extend(skill["description"] for skill in source["skills"] if skill.get("description"))
+    missing_cv_values = [value for value in cv_values if value not in cv_text]
+    require(not missing_cv_values, f"cv/index.html: semantic CV source fields are not rendered: {missing_cv_values}")
+    require("Áreas donde aporto valor" in cv and "Entender" in cv and "medir" in cv,
+            "cv/index.html: value areas and workflow are required")
+    home_parser = Parser()
+    home_parser.feed(home)
+    home_text = " ".join(home_parser.text)
+    home_values = [source["home"]["hero"]["name"], source["home"]["hero"]["thesis"],
+                   source["home"]["careerStory"]["introduction"],
+                   source["home"]["careerStory"]["milestones"][0]["employer"],
+                   source["home"]["careerStory"]["milestones"][0]["description"]]
+    missing_home = [value for value in home_values if value not in home_text]
+    require(not missing_home, f"index.html: semantic Home and career story fields are not rendered: {missing_home}")
+    inventory = next(item for item in source["projects"] if item["id"] == "inventory-reconciliation")
+    case_parser = Parser()
+    case_parser.feed((base / "projects" / "inventory-reconciliation" / "index.html").read_text(encoding="utf-8"))
+    case_text = " ".join(case_parser.text)
+    case = inventory["caseDetails"]
+    case_values = [case["hero"]["title"], case["role"]["body"], case["approach"]["decisions"][0], case["outcome"]["body"]]
+    missing_case = [value for value in case_values if value not in case_text]
+    require(not missing_case, f"inventory case: semantic hero/role/decision/outcome fields are not rendered: {missing_case}")
+    for page in pages:
+        if page.is_file() and page.name != "sitemap.xml":
+            source = page.read_text(encoding="utf-8")
+            require("harrys-site-theme" in source and 'src="/script.js"' in source,
+                    f"{page.relative_to(base).as_posix()}: persistent global theme startup and controller are required")
 
 
 def check_dist(site_url: str) -> None:
@@ -273,7 +373,7 @@ def check_dist(site_url: str) -> None:
     source = {p.relative_to(ROOT).as_posix() for p in (ROOT / name for name in PUBLIC_ROOT_FILES) if p.is_file()}
     for folder in PUBLIC_DIRECTORIES:
         directory = ROOT / folder
-        if directory.is_dir(): source.update(p.relative_to(ROOT).as_posix() for p in directory.rglob("*") if p.is_file() and p.suffix.lower() in {".html", ".svg", ".webp", ".avif", ".jpg", ".jpeg", ".png"})
+        if directory.is_dir(): source.update(p.relative_to(ROOT).as_posix() for p in directory.rglob("*") if p.is_file() and p.suffix.lower() in {".html", ".svg", ".webp", ".avif", ".jpg", ".jpeg", ".png", ".pdf"})
     expected = source | {"sitemap.xml"}
     actual = {p.relative_to(dist).as_posix() for p in dist.rglob("*") if p.is_file()}
     require(actual == expected, f"dist output differs from public allowlist: {sorted(actual ^ expected)}")
@@ -288,7 +388,7 @@ def main() -> None:
     check_dist(site_url)
     print("PASS: all required routes, semantic HTML, headings, links, local resources, and image dimensions")
     print("PASS: canonical URLs, social metadata, structured data, robots.txt, sitemap, and public output allowlist")
-    print("PASS: grouped featured/other portfolio, primary inventory lead, responsive readable mobile diagrams")
+    print("PASS: four #TOP4 cases, five type-grouped project teasers, consistent icons, and preserved detail diagrams")
 
 
 if __name__ == "__main__": main()
