@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import shutil
 import stat
 import sys
 import tempfile
@@ -49,21 +50,106 @@ def _atomic_write(path: Path, content: bytes, mode: int | None = None) -> None:
             pass
 
 
+def _verified_generated_target(path: Path, root: Path, allow_leaf_link: bool = False) -> Path:
+    root = root.resolve()
+    target = path.absolute()
+    if not target.is_relative_to(root) or target == root:
+        raise ValueError("La ruta generada debe permanecer dentro del repositorio.")
+    cursor = target
+    while cursor != root:
+        is_link = cursor.is_symlink() or (hasattr(cursor, "is_junction") and cursor.is_junction())
+        if is_link and not (allow_leaf_link and cursor == target):
+            raise ValueError("No se pueden guardar cambios si una ruta generada es un enlace.")
+        cursor = cursor.parent
+    is_leaf_link = target.is_symlink() or (hasattr(target, "is_junction") and target.is_junction())
+    if not (allow_leaf_link and is_leaf_link) and not target.resolve(strict=False).is_relative_to(root):
+        raise ValueError("La ruta generada resuelve fuera del repositorio.")
+    return target
+
+
+def _snapshot_generated_outputs(dist_snapshot: Path) -> tuple[dict[str, tuple[bytes, int] | None], bool]:
+    root = build_site.ROOT.resolve()
+    source_pages: dict[str, tuple[bytes, int] | None] = {}
+    for route in sorted(build_site.REQUIRED_GENERATED_ROUTES):
+        relative = Path(route)
+        if relative.is_absolute() or ".." in relative.parts:
+            raise ValueError("La lista de páginas generadas contiene una ruta insegura.")
+        target = _verified_generated_target(root / relative, root)
+        if target.exists():
+            if not target.is_file():
+                raise ValueError(f"La página generada no es un archivo regular: {route}")
+            source_pages[route] = (target.read_bytes(), target.stat().st_mode)
+        else:
+            source_pages[route] = None
+
+    dist = _verified_generated_target(build_site.DIST, root)
+    if dist != root / "dist":
+        raise ValueError("La salida dist debe ser el directorio generado del repositorio.")
+    if not dist.exists():
+        return source_pages, False
+    if not dist.is_dir():
+        raise ValueError("La salida dist debe ser un directorio regular.")
+    for child in dist.rglob("*"):
+        if child.is_symlink() or (hasattr(child, "is_junction") and child.is_junction()):
+            raise ValueError("No se puede guardar si dist contiene enlaces de directorio o archivo.")
+        if not child.resolve(strict=False).is_relative_to(root):
+            raise ValueError("Una ruta de dist resuelve fuera del repositorio.")
+    shutil.copytree(dist, dist_snapshot, copy_function=shutil.copy2)
+    return source_pages, True
+
+
+def _restore_generated_outputs(
+    source_pages: dict[str, tuple[bytes, int] | None],
+    dist_snapshot: Path,
+    dist_existed: bool,
+) -> None:
+    root = build_site.ROOT.resolve()
+    for route, snapshot in source_pages.items():
+        target = _verified_generated_target(root / route, root, allow_leaf_link=True)
+        if snapshot is None:
+            if target.is_symlink() or (hasattr(target, "is_junction") and target.is_junction()):
+                target.unlink()
+            elif target.exists():
+                if not target.is_file():
+                    raise ValueError(f"No se puede retirar una salida inesperada: {route}")
+                target.unlink()
+        else:
+            _atomic_write(target, snapshot[0], snapshot[1])
+
+    dist = _verified_generated_target(build_site.DIST, root, allow_leaf_link=True)
+    if dist != root / "dist":
+        raise ValueError("La salida dist dejó de ser una ruta generada segura.")
+    if dist.is_symlink() or (hasattr(dist, "is_junction") and dist.is_junction()):
+        dist.unlink()
+    elif dist.exists():
+        if dist.is_dir():
+            shutil.rmtree(dist)
+        else:
+            dist.unlink()
+    if dist_existed:
+        shutil.copytree(dist_snapshot, dist, copy_function=shutil.copy2)
+
+
 def save_content(payload: object, build_fn=build_site.build) -> None:
-    """Validate, atomically save, and rebuild; restore canonical source on failure."""
+    """Validate, save, and rebuild; restore source and generated outputs on failure."""
     if not isinstance(payload, dict):
         raise ValueError("El contenido debe ser un objeto JSON.")
     serialized = (json.dumps(payload, ensure_ascii=False, indent=2, allow_nan=False) + "\n").encode("utf-8")
+    build_site._validate_rendered_urls(payload)
     with SAVE_LOCK:
         original = CONTENT_FILE.read_bytes()
         source_mode = CONTENT_FILE.stat().st_mode
-        try:
-            _atomic_write(CONTENT_FILE, serialized, source_mode)
-            build_site._load_content()
-            build_fn()
-        except Exception:
-            _atomic_write(CONTENT_FILE, original, source_mode)
-            raise
+        with tempfile.TemporaryDirectory(prefix="portfolio-editor-") as temporary_directory:
+            dist_snapshot = Path(temporary_directory) / "dist-snapshot"
+            generated_snapshot, dist_existed = _snapshot_generated_outputs(dist_snapshot)
+            try:
+                _atomic_write(CONTENT_FILE, serialized, source_mode)
+                build_site._load_content()
+                build_fn()
+            except Exception:
+                _restore_generated_outputs(generated_snapshot, dist_snapshot, dist_existed)
+                _atomic_write(CONTENT_FILE, original, source_mode)
+                raise
 
 
 class EditorHandler(BaseHTTPRequestHandler):

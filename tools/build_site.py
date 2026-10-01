@@ -10,9 +10,10 @@ import os
 import re
 import shutil
 import stat
+import unicodedata
 import xml.etree.ElementTree as ET
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / "dist"
@@ -44,6 +45,71 @@ def valid_site_url(value: str) -> str:
             or any(part in {".", ".."} for part in path.split("/") if part)):
         raise argparse.ArgumentTypeError("site URL must be HTTPS without credentials, query, or fragment")
     return f"https://{parsed.netloc.lower()}{path}"
+
+
+def validate_link_url(value: object, location: str) -> None:
+    """Allow only same-site paths/anchors or HTTPS links in rendered URL fields."""
+    if not isinstance(value, str) or not value or value != value.strip():
+        raise ValueError(f"{location} must be a non-empty safe URL")
+    if any(unicodedata.category(char) == "Cc" or char.isspace() for char in value) or "\\" in value:
+        raise ValueError(f"{location} contains unsafe whitespace or control characters")
+    if value.startswith("//"):
+        raise ValueError(f"{location} must not be protocol-relative")
+    try:
+        parsed = urlsplit(value)
+    except ValueError as exc:
+        raise ValueError(f"{location} is not a valid URL") from exc
+    if parsed.scheme:
+        if (parsed.scheme.lower() != "https" or not parsed.netloc or parsed.username or parsed.password
+                or not parsed.hostname):
+            raise ValueError(f"{location} must use HTTPS without credentials")
+        return
+    if parsed.netloc or parsed.query or value.startswith("?"):
+        raise ValueError(f"{location} must be a same-site path or anchor")
+    if value.startswith("#"):
+        if not parsed.fragment:
+            raise ValueError(f"{location} must contain a non-empty anchor")
+        return
+    if not value.startswith("/") or parsed.path.startswith("//"):
+        raise ValueError(f"{location} must be a same-site slash path, anchor, or HTTPS URL")
+    decoded_parts = [part for part in unquote(parsed.path).split("/") if part]
+    if any(part in {".", ".."} for part in decoded_parts):
+        raise ValueError(f"{location} must not contain traversal segments")
+
+
+def _validate_rendered_urls(data: dict[str, object]) -> None:
+    url_keys = {"href", "src", "mobileSrc", "url", "@id", "sameAs", "siteUrl", "cvPdfUrl"}
+
+    def visit(value: object, path: str = "content/site.json") -> None:
+        if isinstance(value, dict):
+            for key, item in value.items():
+                item_path = f"{path}.{key}"
+                if key in url_keys:
+                    if isinstance(item, list):
+                        for index, entry in enumerate(item):
+                            validate_link_url(entry, f"{item_path}[{index}]")
+                    elif key == "siteUrl":
+                        validate_link_url(item, item_path)
+                        try:
+                            valid_site_url(item)
+                        except (argparse.ArgumentTypeError, TypeError) as exc:
+                            raise ValueError(f"{item_path} must be a valid HTTPS site URL") from exc
+                    else:
+                        validate_link_url(item, item_path)
+                elif key == "content" and isinstance(item, str):
+                    # Open Graph/Twitter URL metadata is emitted as a content attribute.
+                    parent_key = str(value.get("property", value.get("name", ""))).lower()
+                    if parent_key in {"og:url", "og:image", "twitter:image", "twitter:player", "twitter:player:stream"}:
+                        validate_link_url(item, item_path)
+                    else:
+                        visit(item, item_path)
+                else:
+                    visit(item, item_path)
+        elif isinstance(value, list):
+            for index, item in enumerate(value):
+                visit(item, f"{path}[{index}]")
+
+    visit(data)
 
 
 def _remove_readonly(function: object, path: str, error: object) -> None:
@@ -228,6 +294,7 @@ def _load_content() -> dict[str, object]:
         missing = sorted(REQUIRED_GENERATED_ROUTES - set(routes))
         extra = sorted(set(routes) - REQUIRED_GENERATED_ROUTES)
         raise ValueError(f"content/site.json: route inventory mismatch; missing={missing}, extra={extra}")
+    _validate_rendered_urls(data)
     return data
 
 
