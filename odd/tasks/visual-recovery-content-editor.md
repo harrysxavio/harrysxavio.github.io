@@ -55,4 +55,8 @@ The semantic v3 renderer dropped component hooks required by the client interact
 - Final structural readback found Home's global footer was hidden by CSS while `home.footer` was loaded but not rendered. Commit `4ed8ab7` (`fix(home): restore source-driven footer`) removes the hide rule, renders the single global Home footer from its canonical editable fields, and strengthens `verify_site.py` to assert those fields and footer uniqueness. `python tools/build_site.py`, `python tools/verify_site.py`, `python -m py_compile tools/build_site.py tools/verify_site.py`, and `git diff --check` passed. Browser checks at 1440x900 and 390x844 confirmed one visible footer, canonical copy and `#top` link, no page errors; inspected screenshots saved outside the repository under the system temp directory.
 
 ## Next step
-Parent performs independent verification and handles publication; refresh the mirror if task evidence changes.
+Independent targeted verification is complete. Parent publishes via the already authorized local Git session, then verifies the public deployment; publication is not yet claimed.
+
+## Independent closure
+- Targeted independent retest on 3577dfe PASS: all three reproduced blockers resolved; valid edits still rebuild. Five unit tests, site verifier and JS syntax checks pass. Browser resize 1440 to 390 to 1440 preserves selection/focus and renders tabs only on desktop. Editor starts at scrollY=0. Three A4 PDF pages parsed/raster-inspected; printed skip-link is a remaining cosmetic issue.
+- Parent spot-check on 67c0a54: site verifier and git diff --check PASS. Final Home footer desktop/mobile screenshots inspected and visibly coherent. Lighthouse has not yet been rerun on this candidate; internal perception checks are not recruiter research or formal accessibility certification.
