@@ -202,26 +202,35 @@ def check_sitemap(base: Path, site_url: str) -> None:
 
 def check_project_visuals(base: Path) -> None:
     portfolio = (base / "projects" / "index.html").read_text(encoding="utf-8")
-    groups = re.findall(r'<section class="portfolio-group[^\"]*"[^>]*>(.*?)</section>', portfolio, flags=re.I | re.S)
-    require(len(groups) == 2, "projects/index.html: expected separate featured and other-project groups")
-    require("Casos destacados" in groups[0] and "Otros proyectos" in groups[1], "projects/index.html: portfolio group headings/order must be explicit")
-    featured_rows = re.findall(r"<li\b([^>]*)>(.*?)</li>", groups[0], flags=re.I | re.S)
-    other_rows = re.findall(r"<li\b([^>]*)>(.*?)</li>", groups[1], flags=re.I | re.S)
+    featured_match = re.search(r'<section class="portfolio-group portfolio-group--featured"[^>]*>(.*?)</section>', portfolio, flags=re.I | re.S)
+    other_match = re.search(r'<section class="portfolio-group portfolio-group--other"[^>]*>(.*)</main>', portfolio, flags=re.I | re.S)
+    require(featured_match is not None and other_match is not None, "projects/index.html: featured and categorized portfolio groups are required")
+    featured_source = featured_match.group(1)
+    other_source = other_match.group(1)
+    featured_rows = re.findall(r'<li\b([^>]*)>(.*?)</li>', featured_source, flags=re.I | re.S)
     featured = [body for attrs, body in featured_rows if "portfolio-item--featured" in attrs]
-    compact = [body for attrs, body in other_rows if "portfolio-item--compact" in attrs]
-    require(len(featured) == 4 and len(compact) == 4, "projects/index.html: expected four featured cases followed by four compact projects")
-    require("portfolio-item--primary" in featured_rows[0][0] and "portfolio-item--secondary" not in featured_rows[0][0], "projects/index.html: inventory must lead as the primary case")
-    require(sum("portfolio-item--secondary" in attrs for attrs, _ in featured_rows) == 3, "projects/index.html: three supporting cases must follow inventory")
-    require("Rediseño y automatización de conciliación de inventario" in featured[0], "projects/index.html: inventory must be the lead featured case")
+    teasers = re.findall(r'<details class="project-teaser[^\"]*"[^>]*>(.*?)</details>', other_source, flags=re.I | re.S)
+    require("#TOP4" in featured_source and len(featured) == 4 and len(teasers) == 5,
+            "projects/index.html: expected four #TOP4 featured cases and five additional project teasers")
+    require("portfolio-item--primary" in featured_rows[0][0], "projects/index.html: inventory must lead the featured cases")
+    require("Conciliación y automatización de inventario" in featured[0], "projects/index.html: inventory must be the lead featured case")
     require("mejora cualitativa del proceso confirmada" not in portfolio.casefold(), "projects/index.html: remove internal confirmation language")
-    featured_assets = [re.search(r"<img\b[^>]*src=[\"']([^\"']+)[\"']", row, flags=re.I) for row in featured]
-    expected_featured = ["/assets/inventory-reconciliation-flow.svg", "/assets/brazil-chile-data-flow.svg", "/assets/patient-transport-allocation.svg", "/assets/picking-workload-balance.svg"]
-    require(all(match is not None for match in featured_assets), "projects/index.html: each featured case must have a visual asset")
-    require([match.group(1) for match in featured_assets if match] == expected_featured, "projects/index.html: featured visual assets must match the four case subjects in order")
-    for row in featured:
-        require(re.search(r"<img\b[^>]*\balt=[\"'][^\"']+", row, flags=re.I) is not None, "projects/index.html: featured project diagram needs descriptive alt text")
-        mobile = re.search(r'<source\b[^>]*srcset=["\']([^"\']+)["\']', row, flags=re.I)
-        require(mobile is not None and "/assets/mobile/" in mobile.group(1), "projects/index.html: featured diagram needs its responsive mobile SVG")
+    expected_case_links = [
+        "/projects/inventory-reconciliation/",
+        "/projects/brazil-chile-data-migration/",
+        "/projects/patient-transport-optimization/",
+        "/projects/picking-line-balancing/",
+    ]
+    featured_links = [re.search(r'<a class="case-link" href=["\']([^"\']+)', row, flags=re.I) for row in featured]
+    require(all(link is not None for link in featured_links), "projects/index.html: each featured case needs a working case link")
+    require([link.group(1) for link in featured_links if link] == expected_case_links, "projects/index.html: featured case links/order changed")
+    require(portfolio.count("Ver cómo lo abordamos") == 9, "projects/index.html: all nine projects need the requested exact CTA")
+    require(portfolio.count('class="project-visual-icon"') == 4 and portfolio.count('class="project-teaser__icon"') == 5,
+            "projects/index.html: all nine projects need a compact subject icon")
+    for category in ("Planificación y datos", "Transporte y automatización", "Control e ingeniería"):
+        require(category in other_source, f"projects/index.html: missing project category {category}")
+    require('id="control-tower"' in other_source and 'id="transport-anomalies"' in other_source,
+            "projects/index.html: Control Tower and anomaly projects must remain distinct")
     for relative, asset_name in CASE_VISUALS.items():
         page = base / relative
         _, parsed = parse_page(page)
@@ -265,6 +274,21 @@ def check_output(base: Path, site_url: str) -> None:
         if page.is_file(): check_page(page, base, site_url)
     check_sitemap(base, site_url)
     check_project_visuals(base)
+    home = (base / "index.html").read_text(encoding="utf-8")
+    require('src="/assets/harrys-yusti-portrait.webp"' in home and 'alt="Retrato de Harrys Yusti"' in home,
+            "index.html: the supplied transparent portrait must be the accessible hero image")
+    require("hero-eyebrow" not in home and len(re.findall(r"<h1\b", home, flags=re.I)) == 1,
+            "index.html: remove the experience eyebrow and preserve a single home heading")
+    require(home.count('class="home-project"') == 3, "index.html: home must feature exactly three emblematic projects")
+    cv = (base / "cv" / "index.html").read_text(encoding="utf-8")
+    require('href="/cv/harrys-yusti-cv.pdf" download' in cv, "cv/index.html: a real downloadable CV PDF is required")
+    require("Áreas donde aporto valor" in cv and "Entender" in cv and "medir" in cv,
+            "cv/index.html: value areas and workflow are required")
+    for page in pages:
+        if page.is_file() and page.name != "sitemap.xml":
+            source = page.read_text(encoding="utf-8")
+            require("harrys-site-theme" in source and 'src="/script.js"' in source,
+                    f"{page.relative_to(base).as_posix()}: persistent global theme startup and controller are required")
 
 
 def check_dist(site_url: str) -> None:
@@ -273,7 +297,7 @@ def check_dist(site_url: str) -> None:
     source = {p.relative_to(ROOT).as_posix() for p in (ROOT / name for name in PUBLIC_ROOT_FILES) if p.is_file()}
     for folder in PUBLIC_DIRECTORIES:
         directory = ROOT / folder
-        if directory.is_dir(): source.update(p.relative_to(ROOT).as_posix() for p in directory.rglob("*") if p.is_file() and p.suffix.lower() in {".html", ".svg", ".webp", ".avif", ".jpg", ".jpeg", ".png"})
+        if directory.is_dir(): source.update(p.relative_to(ROOT).as_posix() for p in directory.rglob("*") if p.is_file() and p.suffix.lower() in {".html", ".svg", ".webp", ".avif", ".jpg", ".jpeg", ".png", ".pdf"})
     expected = source | {"sitemap.xml"}
     actual = {p.relative_to(dist).as_posix() for p in dist.rglob("*") if p.is_file()}
     require(actual == expected, f"dist output differs from public allowlist: {sorted(actual ^ expected)}")
@@ -288,7 +312,7 @@ def main() -> None:
     check_dist(site_url)
     print("PASS: all required routes, semantic HTML, headings, links, local resources, and image dimensions")
     print("PASS: canonical URLs, social metadata, structured data, robots.txt, sitemap, and public output allowlist")
-    print("PASS: grouped featured/other portfolio, primary inventory lead, responsive readable mobile diagrams")
+    print("PASS: four #TOP4 cases, five type-grouped project teasers, consistent icons, and preserved detail diagrams")
 
 
 if __name__ == "__main__": main()
