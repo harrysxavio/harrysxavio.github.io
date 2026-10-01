@@ -97,11 +97,25 @@ class ContentEditorSaveTests(unittest.TestCase):
         case = next(project for project in self.source["projects"] if project.get("route"))
         case["route"] = "/projects/new-route/"
 
-        with self.assertRaisesRegex(ValueError, "preserve the four existing case routes"):
+        with self.assertRaisesRegex(ValueError, "uniquely preserve the existing case routes"):
             content_editor.save_content(self.source, build_fn=unittest.mock.Mock())
 
         self.assertEqual(self.content_path.read_bytes(), self.original)
         self.assertEqual(len(original_route_set), 4)
+
+    def test_duplicate_case_route_on_new_project_is_rejected_before_writes(self):
+        duplicate = copy.deepcopy(next(project for project in self.source["projects"] if project.get("route")))
+        duplicate.update({"id": "duplicate-case-route", "title": "Duplicated case route", "featured": False})
+        self.source["projects"].append(duplicate)
+        rebuild = unittest.mock.Mock()
+
+        with self.assertRaisesRegex(ValueError, "exactly four project records must uniquely preserve"):
+            content_editor.save_content(self.source, build_fn=rebuild)
+
+        self.assertEqual(self.content_path.read_bytes(), self.original)
+        self.assertEqual(self.root_home.read_bytes(), b"original root home")
+        self.assertEqual(self.dist_home.read_bytes(), b"original dist home")
+        rebuild.assert_not_called()
 
     def test_valid_content_is_written_and_rebuilt(self):
         self.source["home"]["hero"]["thesis"] = "Entender lo complejo. Hacerlo funcionar mejor."

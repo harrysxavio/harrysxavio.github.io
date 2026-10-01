@@ -214,6 +214,10 @@ def check_project_visuals(base: Path) -> None:
     require(len(projects) >= 4, "content/site.json: the four existing case records are required")
     require(len(tags) == len(content.get("taxonomy", {}).get("tags", [])), "content/site.json: taxonomy IDs must be unique")
     require(sum(bool(project.get("featured")) for project in projects) == 4, "content/site.json: four featured case records are required")
+    routed_projects = [project for project in projects if project.get("route")]
+    routed_urls = [project["route"] for project in routed_projects]
+    require(len(routed_projects) == 4 and len(set(routed_urls)) == 4,
+            "content/site.json: exactly four project records must have unique case routes")
     require(sum(project.get("route") is None for project in projects) == len(projects) - 4,
             "content/site.json: all additional project records must remain secondary to the four routed cases")
     require(projects[0].get("id") == "inventory-reconciliation", "content/site.json: inventory must lead the featured projects")
