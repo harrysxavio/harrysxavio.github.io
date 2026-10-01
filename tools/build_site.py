@@ -168,8 +168,8 @@ def _load_content() -> dict[str, object]:
             raise ValueError(f"{field}.label is required")
         tag_ids.add(tag["id"])
     projects = data.get("projects")
-    if not isinstance(projects, list) or len(projects) != 9:
-        raise ValueError("content/site.json: projects must contain exactly nine records")
+    if not isinstance(projects, list) or len(projects) < 4:
+        raise ValueError("content/site.json: projects must include the four existing case records")
     project_ids: set[str] = set()
     for index, project in enumerate(projects):
         if not isinstance(project, dict) or not isinstance(project.get("id"), str):

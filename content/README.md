@@ -18,7 +18,7 @@ Guardar **no publica** el sitio. La publicación requiere revisar los archivos g
 
 - Escribe hechos y resultados que puedas respaldar. No agregues cifras, fechas, cargos, empresas o tecnologías sin confirmarlos.
 - Mantén los identificadores de página, las rutas y los identificadores estables de proyectos.
-- Cada proyecto debe conservar al menos dos temas existentes. Para reemplazar un registro secundario, elimina el anterior y agrega el nuevo antes de guardar; el esquema actual mantiene nueve proyectos, cuatro casos con ruta y cuatro destacados.
+- Cada proyecto debe conservar al menos un tema existente. Puedes agregar proyectos secundarios o quitar los que no tengan ruta ni estén seleccionados en Inicio; conserva los cuatro casos con ruta y las cuatro prioridades destacadas.
 - Edita los textos del relato de Inicio aparte de los registros laborales del CV; cumplen propósitos distintos.
 - El contenido son datos y texto plano, no HTML ni instrucciones de presentación. El builder se encarga de la estructura, el escape y la navegación.
 
@@ -29,7 +29,7 @@ Guardar **no publica** el sitio. La publicación requiere revisar los archivos g
 | `site` | Nombre común, URL canónica, idioma y perfiles públicos. |
 | `profile` | Profesión, ubicación, presentación del CV, forma de trabajo y enlace al PDF. |
 | `taxonomy.tags[]` | Temas compartidos por los proyectos; cada identificador es un slug estable. |
-| `projects[]` | Nueve registros con situación, tarea, contribución, resultado, evidencia, temas y prioridad; cuatro incluyen `caseDetails`. |
+| `projects[]` | Registros variables con situación, tarea, contribución, resultado, evidencia, temas y prioridad; los cuatro casos existentes incluyen `caseDetails`. |
 | `home` | Presentación, cinco etapas de trabajo, tres proyectos, relato profesional, notas y contacto. |
 | `projectsPage`, `notFound` | Textos de la portada de Proyectos y la página 404. |
 | `career[]` | Organizaciones, períodos, cargos, aportes y enlaces relacionados del CV. |

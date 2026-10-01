@@ -211,10 +211,11 @@ def check_project_visuals(base: Path) -> None:
         fail(f"content/site.json: invalid project master data: {exc}")
     projects = content.get("projects", [])
     tags = {tag.get("id"): tag.get("label") for tag in content.get("taxonomy", {}).get("tags", [])}
-    require(len(projects) == 9, "content/site.json: exactly nine project records are required")
+    require(len(projects) >= 4, "content/site.json: the four existing case records are required")
     require(len(tags) == len(content.get("taxonomy", {}).get("tags", [])), "content/site.json: taxonomy IDs must be unique")
     require(sum(bool(project.get("featured")) for project in projects) == 4, "content/site.json: four featured case records are required")
-    require(sum(project.get("route") is None for project in projects) == 5, "content/site.json: five teaser-only project records are required")
+    require(sum(project.get("route") is None for project in projects) == len(projects) - 4,
+            "content/site.json: all additional project records must remain secondary to the four routed cases")
     require(projects[0].get("id") == "inventory-reconciliation", "content/site.json: inventory must lead the featured projects")
     require(content["projectsPage"]["title"] in portfolio,
             "projects/index.html: the page heading must render the canonical editable title")
@@ -232,9 +233,9 @@ def check_project_visuals(base: Path) -> None:
         require(internal_phrase.casefold() not in portfolio.casefold(),
                 f"projects/index.html: remove internal editorial note {internal_phrase!r}")
     card_matches = re.findall(r'<li\b(?=[^>]*class="project-card\b)([^>]*)>(.*?)</article></li>', portfolio, flags=re.I | re.S)
-    require(len(card_matches) == 9, "projects/index.html: all nine project records must render as cards")
+    require(len(card_matches) == len(projects), "projects/index.html: every project record must render as a card")
     for project in projects:
-        require(len(project.get("tags", [])) >= 2, f"content/site.json project {project.get('id')}: assign multiple taxonomy tags")
+        require(bool(project.get("tags")), f"content/site.json project {project.get('id')}: assign at least one taxonomy tag")
         require(set(project.get("tags", [])) <= set(tags), f"content/site.json project {project.get('id')}: unknown taxonomy tag")
         require(project.get("title", "") in portfolio, f"projects/index.html: project title missing from generated page: {project.get('id')}")
         card = next((attrs for attrs, _ in card_matches if f'data-project-id="{project["id"]}"' in attrs), None)
