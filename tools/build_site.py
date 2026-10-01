@@ -39,7 +39,7 @@ def _public_files() -> list[Path]:
     for directory in PUBLIC_DIRECTORIES:
         base = ROOT / directory
         if base.is_dir():
-            files.extend(path for path in base.rglob("*") if path.is_file() and path.suffix.lower() in {".html", ".svg", ".webp", ".avif", ".jpg", ".jpeg", ".png"})
+            files.extend(path for path in base.rglob("*") if path.is_file() and path.suffix.lower() in {".html", ".svg", ".webp", ".avif", ".jpg", ".jpeg", ".png", ".pdf"})
     return sorted(set(files), key=lambda path: path.relative_to(ROOT).as_posix())
 
 
