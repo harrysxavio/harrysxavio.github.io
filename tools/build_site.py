@@ -320,19 +320,20 @@ def _render_home(data: dict[str, object]) -> str:
     hero = home["hero"]
     hero_copy = _copy_p(hero["thesis"]) + _copy_p(hero["introduction"]) + _copy_p(hero["positioning"])
     hero_actions = "".join(_semantic_link(link) for link in hero["actions"])
-    hero_main = f'<div class="content-block content-block--contentGroup">{_heading(hero["name"], 1, "hero-title")}{hero_copy}<div class="content-block content-block--contentGroup">{hero_actions}</div></div>'
-    hero_markup = _semantic_section(hero_main + f'<figure class="content-block content-block--media">{_semantic_image(hero["image"])}</figure>', labelled_by="hero-title")
+    hero_main = f'<div class="hero-copy"><h1 id="hero-title">{_copy(hero["name"])}</h1><p class="hero-thesis">{_copy(hero["thesis"])}</p>{_copy_p(hero["introduction"], "hero-introduction")}{_copy_p(hero["positioning"], "hero-positioning")}<div class="hero-actions">{hero_actions}</div></div>'
+    hero_markup = f'<section class="hero" aria-labelledby="hero-title"><div class="hero-art"><div class="hero-art__shape"></div><figure class="hero-portrait">{_semantic_image(hero["image"])}</figure><span class="hero-art__spark" aria-hidden="true">✳</span></div>{hero_main}</section>'
 
     signature = home["signature"]
     stage_markup = "".join(
-        f'<details id="{_attr(stage["id"])}" class="content-block content-block--expandable"{" open" if index == 0 else ""}>'
-        f'<summary>{_copy(stage["number"])} {_copy(stage["title"])}</summary>'
-        f'{_copy_p(stage["description"])}{_copy_p(stage["evidenceLabel"] + ": " + stage["evidence"])}'
+        f'<details id="{_attr(stage["id"])}" class="signature-step"{" open" if index == 0 else ""}>'
+        f'<summary><span class="signature-step__number">{_copy(stage["number"])}</span><span class="signature-step__title">{_copy(stage["title"])}</span></summary>'
+        f'<div class="signature-step__content"><p>{_copy(stage["description"])}</p><p class="signature-evidence"><strong>{_copy(stage["evidenceLabel"])}</strong> {_copy(stage["evidence"])}</p></div>'
         f'</details>' for index, stage in enumerate(signature["stages"])
     )
-    signature_body = f'<div class="content-block content-block--contentGroup">{_copy_p(signature["kicker"])}{_heading(signature["title"],2,"signature-title")}{_copy_p(signature["introduction"])}</div>'
-    signature_body += f'<div class="content-block content-block--contentGroup"><div class="content-block content-block--contentGroup">{_semantic_image(signature["image"])}</div>{stage_markup}</div>'
-    signature_markup = _semantic_section(signature_body, "como-trabajo", "signature-title")
+    route_nodes = "".join(f'<span class="signature-route__node" data-node="{index}" aria-hidden="true"></span>{"<span class=\"signature-route__connection\" data-connection=\"" + str(index) + "\" aria-hidden=\"true\"></span>" if index < len(signature["stages"]) - 1 else ""}' for index, _ in enumerate(signature["stages"]))
+    signature_body = f'<div class="section-heading"><p class="section-kicker">{_copy(signature["kicker"])}</p><h2 id="signature-title">{_copy(signature["title"])}</h2><p>{_copy(signature["introduction"])}</p></div>'
+    signature_body += f'<div class="signature-layout"><div class="signature-steps"><div class="signature-route" data-active-index="0" aria-hidden="true">{route_nodes}</div>{stage_markup}</div><div class="signature-illustration">{_semantic_image(signature["image"])}</div></div>'
+    signature_markup = f'<section id="como-trabajo" class="signature-section" data-signature aria-labelledby="signature-title">{signature_body}</section>'
 
     selected = home["selectedWork"]
     projects_by_id = {item["id"]: item for item in data["projects"]}
@@ -340,42 +341,41 @@ def _render_home(data: dict[str, object]) -> str:
     for project_id in selected["projectIds"]:
         project=projects_by_id[project_id]; card=project["homeCard"]
         labels=(("Situación","situation"),("Tarea","task"),("Acción","contribution"),("Resultado","result"))
-        facts="".join(f'<div class="content-block content-block--contentGroup"><dt class="content-block content-block--factLabel">{label}</dt><dd class="content-block content-block--factValue">{_copy(card[field])}</dd></div>' for label,field in labels)
-        cards.append(f'<article class="content-block content-block--contentItem"><a class="content-link" href="{_attr(project["route"])}">{_copy(card["title"])}↗</a><dl class="content-block content-block--factGroup">{facts}</dl></article>')
-    selected_body=f'<div class="content-block content-block--contentGroup"><div class="content-block content-block--contentGroup">{_copy_p(selected["kicker"])}{_heading(selected["title"],2,"transformations-title")}</div>{_semantic_link(selected["moreLink"])}</div><div class="content-block content-block--contentGroup">{"".join(cards)}</div>'
-    selected_markup=_semantic_section(selected_body,labelled_by="transformations-title")
+        facts="".join(f'<div class="selected-project__fact"><dt>{label}</dt><dd>{_copy(card[field])}</dd></div>' for label,field in labels)
+        cards.append(f'<article class="selected-project"><div class="selected-project__emblem" aria-hidden="true"><span>{str(len(cards) + 1).zfill(2)}</span><svg viewBox="0 0 64 64"><path d="M13 45 25 33l8 8 18-21M39 20h12v12"/></svg></div><h3><a href="{_attr(project["route"])}">{_copy(card["title"])} <span aria-hidden="true">↗</span></a></h3><dl>{facts}</dl><a class="text-link" href="{_attr(project["route"])}">Ver el caso <span aria-hidden="true">→</span></a></article>')
+    selected_body=f'<div class="section-heading section-heading--row"><div><p class="section-kicker">{_copy(selected["kicker"])}</p><h2 id="transformations-title">{_copy(selected["title"])}</h2></div>{_semantic_link(selected["moreLink"], "button button--quiet")}</div><div class="selected-projects">{"".join(cards)}</div>'
+    selected_markup=f'<section class="selected-work" aria-labelledby="transformations-title">{selected_body}</section>'
 
     story=home["careerStory"]
-    milestones="".join(f'<li class="content-block content-block--contentItem"><span class="content-copy">{_copy(item["phase"])}</span>{_heading(item["employer"],3)}{_copy_p(item["description"])}</li>' for item in story["milestones"])
-    notes="".join(f'<article class="content-block content-block--contentItem">{_heading(item["title"],3)}<blockquote class="content-block content-block--callout">{_copy_p(item["body"])}</blockquote></article>' for item in story["notes"])
+    milestones="".join(f'<li class="career-milestone"><span class="career-milestone__phase">{_copy(item["phase"])}</span><h3>{_copy(item["employer"])}</h3><p>{_copy(item["description"])}</p></li>' for item in story["milestones"])
+    notes="".join(f'<article class="career-note"><span aria-hidden="true">✳</span><h3>{_copy(item["title"])}</h3><p>{_copy(item["body"])}</p></article>' for item in story["notes"])
     explore=story["exploration"]
-    story_body=f'<div class="content-block content-block--contentGroup">{_heading(story["heading"],2,"career-title")}{_copy_p(story["introduction"])}</div><ol class="content-block content-block--contentGroup">{milestones}</ol><div class="content-block content-block--contentGroup">{notes}</div><div class="content-block content-block--contentGroup">{_copy_p(explore["kicker"])}{_heading(explore["title"],3)}{_copy_p(explore["description"])}</div>'
-    story_markup=_semantic_section(story_body,"trayectoria","career-title")
+    story_body=f'<div class="section-heading"><p class="section-kicker">{_copy(explore["kicker"])}</p><h2 id="career-title">{_copy(story["heading"])}</h2><p>{_copy(story["introduction"])}</p></div><ol class="career-timeline">{milestones}</ol><div class="career-notes">{notes}</div><div class="career-exploration"><h3>{_copy(explore["title"])}</h3><p>{_copy(explore["description"])}</p></div>'
+    story_markup=f'<section id="trayectoria" class="career-section" aria-labelledby="career-title">{story_body}</section>'
 
     contact=home["contact"]
-    contact_markup=_semantic_section(f'<div class="content-block content-block--contentGroup">{_copy_p(contact["eyebrow"])}{_heading(contact["title"],2,"contact-title")}{_copy_p(contact["introduction"])}</div><nav aria-label="Más información y contacto" class="content-block content-block--linkGroup">{"".join(_semantic_link(link) for link in contact["links"])}</nav>',"contacto","contact-title")
+    contact_markup=f'<section id="contacto" class="contact-section" aria-labelledby="contact-title"><div><p class="section-kicker">{_copy(contact["eyebrow"])}</p><h2 id="contact-title">{_copy(contact["title"])}</h2><p>{_copy(contact["introduction"])}</p></div><nav aria-label="Más información y contacto" class="contact-links">{"".join(_semantic_link(link, "button button--contact") for link in contact["links"])}</nav></section>'
     footer=home["footer"]
-    footer_markup=f'<div class="content-block content-block--contentGroup"><div class="content-block content-block--contentGroup">{_copy(footer["name"])}</div><div class="content-block content-block--contentGroup">{_copy(footer["tagline"])}</div>{_semantic_link(footer["backToTop"])}</div>'
-    return hero_markup+signature_markup+selected_markup+story_markup+contact_markup+footer_markup
+    return hero_markup+signature_markup+selected_markup+story_markup+contact_markup
 
 
 def _render_case(project: dict[str, object], all_projects: list[dict[str, object]]) -> str:
     case=project["caseDetails"]; nav=case["navigation"]
-    breadcrumb=f'<nav aria-label="Ruta de navegación" class="content-block content-block--linkGroup"><a class="content-link" href="/">Inicio</a><div class="content-block content-block--contentGroup">/</div><a class="content-link" href="/projects/">Proyectos</a><div class="content-block content-block--contentGroup">/</div><div class="content-block content-block--contentGroup">{_copy(nav["breadcrumbTitle"])}</div></nav>'
+    breadcrumb=f'<nav aria-label="Ruta de navegación" class="case-breadcrumb"><a href="/">Inicio</a><span aria-hidden="true">/</span><a href="/projects/">Proyectos</a><span aria-hidden="true">/</span><span aria-current="page">{_copy(nav["breadcrumbTitle"])}</span></nav>'
     hero=case["hero"]
-    hero_markup=f'<div class="content-block content-block--contentGroup">{_copy_p(hero["eyebrow"])}{_heading(hero["title"],1)}{_copy_p(hero["summary"])}</div>'
-    metric_items="".join(f'<div class="content-block content-block--contentGroup"><div class="content-block content-block--contentGroup">{_copy(item["value"])}</div><div class="content-block content-block--contentGroup">{_copy(item["label"])}</div></div>' for item in case["metrics"])
-    metrics=f'<div class="content-block content-block--contentGroup">{metric_items}</div>'
+    hero_markup=f'<header class="case-hero"><p class="section-kicker">{_copy(hero["eyebrow"])}</p>{_heading(hero["title"],1)}{_copy_p(hero["summary"])}</header>'
+    metric_items="".join(f'<div class="case-metric"><span>{_copy(item["value"])}</span><span>{_copy(item["label"])}</span></div>' for item in case["metrics"])
+    metrics=f'<div class="case-metrics" aria-label="Resultados destacados">{metric_items}</div>'
     diagram=case["diagram"]; image=diagram["image"]
-    diagram_markup=f'<figure class="content-block content-block--media"><div class="content-block content-block--contentGroup"><div class="content-block content-block--contentGroup"></div>{_semantic_image(image)}</div><div class="content-block content-block--contentGroup">{_copy_p(diagram["kicker"])}{_heading(diagram["title"],2)}{_copy_p(diagram["description"])}<ol>{"".join(f"<li>{_copy(step)}</li>" for step in diagram["steps"])}</ol></div></figure>'
+    diagram_markup=f'<figure class="case-flow"><div class="case-flow__image">{_semantic_image(image)}</div><figcaption><p class="section-kicker">{_copy(diagram["kicker"])}</p>{_heading(diagram["title"],2)}{_copy_p(diagram["description"])}</figcaption><ol class="case-flow__steps">{"".join(f"<li>{_copy(step)}</li>" for step in diagram["steps"])}</ol></figure>'
     sections=[]
     for item in (case["context"],case["problem"],case["role"]):
-        sections.append(_semantic_section(f'{_copy_p(item["kicker"])}{_heading(item["heading"],2)}{_copy_p(item["body"])}'))
+        sections.append(f'<section class="case-section"><p class="section-kicker">{_copy(item["kicker"])}</p>{_heading(item["heading"],2)}{_copy_p(item["body"])}</section>')
     approach=case["approach"]
-    sections.append(_semantic_section(f'{_copy_p(approach["kicker"])}{_heading(approach["heading"],2)}<ul>{"".join(f"<li>{_copy(decision)}</li>" for decision in approach["decisions"])}</ul>'))
+    sections.append(f'<section class="case-section"><p class="section-kicker">{_copy(approach["kicker"])}</p>{_heading(approach["heading"],2)}<ul>{"".join(f"<li>{_copy(decision)}</li>" for decision in approach["decisions"])}</ul></section>')
     outcome=case["outcome"]
-    sections.append(_semantic_section(f'{_copy_p(outcome["kicker"])}{_heading(outcome["heading"],2)}{_copy_p(outcome["body"])}'))
-    sections_markup=f'<div class="content-block content-block--contentGroup">{"".join(sections)}</div>'
+    sections.append(f'<section class="case-section case-section--outcome"><p class="section-kicker">{_copy(outcome["kicker"])}</p>{_heading(outcome["heading"],2)}{_copy_p(outcome["body"])}</section>')
+    sections_markup=f'<div class="case-sections">{"".join(sections)}</div>'
     projects_by_id = {item["id"]: item for item in all_projects}
     bottom=[]
     if nav.get("previousProjectId"):
@@ -390,14 +390,14 @@ def _render_case(project: dict[str, object], all_projects: list[dict[str, object
         bottom.append({'label':f'Siguiente caso: {label} →','href':following["route"]})
     else:
         bottom.append({'label':'Todos los proyectos →','href':'/projects/'})
-    bottom_markup=f'<nav aria-label="Navegación de proyectos" class="content-block content-block--linkGroup">{"".join(_semantic_link(item) for item in bottom)}</nav>'
+    bottom_markup=f'<nav aria-label="Navegación de proyectos" class="case-navigation">{"".join(_semantic_link(item, "button button--quiet") for item in bottom)}</nav>'
     return breadcrumb+hero_markup+metrics+diagram_markup+sections_markup+bottom_markup
 
 
 def _render_projects_page(data: dict[str, object]) -> str:
     page=data["projectsPage"]
-    content=f'<div class="content-block content-block--contentGroup">{_heading(page["title"],1)}{_copy_p(page["introduction"])}{_copy_p(page["context"])}</div>'
-    return _semantic_section(content)
+    content=f'<div class="section-heading"><p class="section-kicker">Proyectos seleccionados</p>{_heading(page["title"],1,"projects-title")}{_copy_p(page["introduction"])}{_copy_p(page["context"])}</div>'
+    return f'<section class="portfolio-intro" aria-labelledby="projects-title">{content}</section>'
 
 
 def _render_not_found(data: dict[str, object]) -> str:

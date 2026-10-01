@@ -136,7 +136,8 @@ function createTabList() {
     button.setAttribute("aria-controls", step.id);
     button.setAttribute("aria-selected", "false");
     button.tabIndex = -1;
-    button.innerHTML = `<span class="step-number">${String(index + 1).padStart(2, "0")}</span><span>${summary.querySelector("span:last-child").textContent}</span>`;
+    const title = summary.querySelector(".signature-step__title") || summary.querySelector("span:last-child");
+    button.innerHTML = `<span class="step-number">${String(index + 1).padStart(2, "0")}</span><span>${title.textContent}</span>`;
     button.addEventListener("click", () => setSelected(index));
     button.addEventListener("keydown", (event) => {
       let nextIndex = index;
