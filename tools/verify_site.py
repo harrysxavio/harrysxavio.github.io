@@ -216,6 +216,21 @@ def check_project_visuals(base: Path) -> None:
     require(sum(bool(project.get("featured")) for project in projects) == 4, "content/site.json: four featured case records are required")
     require(sum(project.get("route") is None for project in projects) == 5, "content/site.json: five teaser-only project records are required")
     require(projects[0].get("id") == "inventory-reconciliation", "content/site.json: inventory must lead the featured projects")
+    require(content["projectsPage"]["title"] in portfolio,
+            "projects/index.html: the page heading must render the canonical editable title")
+    top_four = re.search(r'<ul\b[^>]*class="project-grid project-grid--featured"', portfolio, flags=re.I)
+    require(top_four is not None, "projects/index.html: a semantic featured-project grid is required")
+    featured_section_end = portfolio.find("</section>", top_four.start())
+    featured_markup = portfolio[top_four.start():featured_section_end] if featured_section_end > top_four.start() else ""
+    featured_cards = re.findall(r'<li\b(?=[^>]*class="project-card project-card--(?:lead|featured)")',
+                                featured_markup, flags=re.I)
+    require(len(featured_cards) == 4, "projects/index.html: all four featured projects must form one grid")
+    require(featured_markup.count('class="project-card__mark"') == 4,
+            "projects/index.html: each featured project needs its own meaningful visual mark")
+    for internal_phrase in ("El portafolio presenta", "no atribuir", "no hay cifra exacta",
+                            "No hay atribución", "Sin métrica publicada"):
+        require(internal_phrase.casefold() not in portfolio.casefold(),
+                f"projects/index.html: remove internal editorial note {internal_phrase!r}")
     card_matches = re.findall(r'<li\b(?=[^>]*class="project-card\b)([^>]*)>(.*?)</article></li>', portfolio, flags=re.I | re.S)
     require(len(card_matches) == 9, "projects/index.html: all nine project records must render as cards")
     for project in projects:
@@ -293,6 +308,27 @@ def check_output(base: Path, site_url: str) -> None:
     check_sitemap(base, site_url)
     check_project_visuals(base)
     home = (base / "index.html").read_text(encoding="utf-8")
+    stylesheet = (base / "styles.css").read_text(encoding="utf-8")
+    controller = (base / "script.js").read_text(encoding="utf-8")
+    require('data-signature' in home and len(re.findall(r'class="signature-step"', home)) == 5,
+            "index.html: the semantic five-step signature contract is missing")
+    require('class="selected-project"' in home and home.count('class="selected-project"') == 3,
+            "index.html: three featured project cards must use their semantic component")
+    require('class="career-timeline"' in home and 'class="career-milestone"' in home,
+            "index.html: the connected career timeline component is missing")
+    require('class="contact-section"' in home and 'class="site-footer simple-footer"' in home,
+            "index.html: contact and global footer components are required")
+    require('.signature-tabs [role="tab"]' in stylesheet and '.signature--tabs .signature-step > summary { display: none; }' in stylesheet,
+            "styles.css: intentional desktop tabs and duplicate-summary suppression are required")
+    require('min-height: 4rem' in stylesheet and 'ArrowRight' in controller and 'event.key === "End"' in controller,
+            "signature tabs: minimum target size and keyboard navigation hooks are required")
+    for route, required_classes in {
+        "cv/index.html": ("cv-hero", "cv-section", "experience-entry", "cv-project-cta"),
+        "projects/inventory-reconciliation/index.html": ("case-hero", "case-metrics", "case-flow", "case-navigation"),
+    }.items():
+        source = (base / route).read_text(encoding="utf-8")
+        for class_name in required_classes:
+            require(f'class="{class_name}' in source, f"{route}: semantic component .{class_name} is missing")
     require('src="/assets/harrys-yusti-portrait.webp"' in home and 'alt="Retrato de Harrys Yusti"' in home,
             "index.html: the supplied transparent portrait must be the accessible hero image")
     require("hero-eyebrow" not in home and len(re.findall(r"<h1\b", home, flags=re.I)) == 1,
@@ -388,7 +424,7 @@ def main() -> None:
     check_dist(site_url)
     print("PASS: all required routes, semantic HTML, headings, links, local resources, and image dimensions")
     print("PASS: canonical URLs, social metadata, structured data, robots.txt, sitemap, and public output allowlist")
-    print("PASS: four #TOP4 cases, five type-grouped project teasers, consistent icons, and preserved detail diagrams")
+    print("PASS: canonical project heading, four visual #TOP4 cards, clean public copy, and preserved detail diagrams")
 
 
 if __name__ == "__main__": main()

@@ -23,7 +23,7 @@ The semantic v3 renderer dropped component hooks required by the client interact
 ## Checklist
 - [x] T1 — Restore and refine modern semantic portfolio compositions and client component contracts across home, projects, CV, and case pages. Follow-up visual review fixed the editable Projects H1, removed internal editorial notes from public cards, added four distinct TOP4 marks in a balanced 2x2 layout, and aligned secondary project rows into a full-width ledger.
 - [x] T2 — Add a loopback-only Spanish form editor that validates and safely rebuilds the canonical content; document launch and preview/publication distinction.
-- [ ] T3 — Add regression coverage, strengthen generated-site verification, run functional/browser/visual QA, and record evidence.
+- [x] T3 — Add regression coverage, strengthen generated-site verification, run functional/browser/visual QA, and record evidence.
 
 ## Acceptance criteria
 - Five signature steps/tabs are restored with accessible desktop tabs and mobile/no-JS disclosure.
@@ -45,10 +45,10 @@ The semantic v3 renderer dropped component hooks required by the client interact
 - T1: original commit `001c3b9` (`fix(site): restore modern semantic portfolio compositions`); visual follow-up `68e16e9` (`fix(site): polish featured project portfolio`). Restored system-sans/blue composition, real-portrait hero and CTA hierarchy, semantic five-stage tab/disclosure hooks, featured project cards, career timeline/notes, case narratives and footer de-duplication. Follow-up corrected Projects content/layout and project-specific marks.
 - T1 checks: `python -m py_compile tools/build_site.py tools/verify_site.py tools/content_editor.py` PASS; `node --check script.js` PASS; `node --check tools/content-editor/app.js` PASS; `python tools/build_site.py` PASS (8 pages); `python tools/verify_site.py` PASS (canonical Projects H1, four featured projects/marks, no internal editorial notes); `python -m unittest discover -s tests -v` PASS (3 tests); `git diff --check` PASS (Git reports LF-to-CRLF warnings only).
 - Parent design feedback preserved: concise headline; five-step component on the same horizontal band as its explanation; compact evidence with meaningful project-specific visual marks; CV has its own hierarchy. Compatible external audit guidance: semantic component hooks, no positional nth-child styling, consolidated tokens/components, readable seven-width review. Keep existing dark mode, search, applied-AI note, and compact STAR.
-- T2: complete — work-unit commit pending. Editor binds to loopback, limits preview to the public build, validates schema before build, and restores source if validation/build fails. Spanish launcher and workflow guide distinguish local preview/save from publication.
-- T3: pending.
-- Commits: pending.
-- Screenshot evidence: `output/qa-visual-recovery/` (protected output directory; do not alter pre-existing contents).
+- T2: complete — `7a5fae0` (`feat(editor): add local Spanish content editor`). Editor binds to loopback, limits preview to the public build, validates schema before build, and restores source if validation/build fails. Spanish launcher and workflow guide distinguish local preview/save from publication.
+- T3: complete — verification follow-up commit pending. Strengthened `verify_site.py` for canonical Projects H1, four TOP4 cards with distinct marks, and absence of internal editorial copy. `python tools/build_site.py`, `python tools/verify_site.py`, `node --check script.js`, `python -m py_compile tools/build_site.py tools/verify_site.py tools/content_editor.py`, `node --check tools/content-editor/app.js`, `python -m unittest discover -s tests -v` (3 pass), and `git diff --check` all passed. Browser checked Projects at 1440x900, 1024x768, 768x1024, 430x932, 390x844, and 360x800: no horizontal overflow, four featured cards, no internal copy. Earlier visual/browser matrix and interaction coverage are in `output/qa-visual-recovery/`; actual screenshot inspection used shell Playwright because IAB viewport requests were ignored.
+- Commits: `001c3b9` initial visual restoration; `68e16e9` visual follow-up; `461b1a8` follow-up evidence; `7a5fae0` editor/docs.
+- Screenshot evidence: `output/qa-visual-recovery/` (created for this task; refreshed final 1440x900 Projects image is `projects-1440-light.png`). Static CV PDF was not automatically regenerated and should be refreshed separately if its layout no longer matches.
 
 ## Next step
-Commit T2 editor/docs, then T3 verifier assertions and final QA evidence; mirror the task state to Engram.
+Record the T3 work-unit commit identity, sync the full task record to its Engram mirror, and hand off for parent independent verification/publication.
