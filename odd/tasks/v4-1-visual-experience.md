@@ -70,7 +70,7 @@ Route: delegated direct single writer (as assigned by parent); implementation to
 - Four standalone accessible SVG assets with `<title>` and `<desc>` are shared by Home, the Projects portfolio, and matching case pages. Brazil/patient Home entries now state the problem; the portfolio clearly separates four featured cases from four compact projects.
 - Targeted browser regression at 360×800, 390×844, 600×900, 1024×768, and 1440×900 measured featured copy widths at 283, 313, 503, 451, and 751 CSS px. Featured/compact text fits, images load, the document does not overflow, all four case flows load, and browser errors are zero.
 - `tools/verify_site.py` now asserts four featured/four compact entries, their four matching project assets, descriptive case-page alt text, SVG title/description references, and required flow labels.
-- Correction commit: pending final commit.
+- Correction work-unit commit: `e03b429 fix: restore responsive project portfolio layout`.
 - Correction screenshots: `%TEMP%\v41-portfolio-360.png`, `%TEMP%\v41-portfolio-390.png`, `%TEMP%\v41-portfolio-600.png`, `%TEMP%\v41-portfolio-1024.png`, `%TEMP%\v41-portfolio-1440.png`.
 
 ## Next Step
