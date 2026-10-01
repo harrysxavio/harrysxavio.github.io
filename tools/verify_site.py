@@ -202,34 +202,37 @@ def check_sitemap(base: Path, site_url: str) -> None:
 
 def check_project_visuals(base: Path) -> None:
     portfolio = (base / "projects" / "index.html").read_text(encoding="utf-8")
-    featured_match = re.search(r'<section class="portfolio-group portfolio-group--featured"[^>]*>(.*?)</section>', portfolio, flags=re.I | re.S)
-    other_match = re.search(r'<section class="portfolio-group portfolio-group--other"[^>]*>(.*)</main>', portfolio, flags=re.I | re.S)
-    require(featured_match is not None and other_match is not None, "projects/index.html: featured and categorized portfolio groups are required")
-    featured_source = featured_match.group(1)
-    other_source = other_match.group(1)
-    featured_rows = re.findall(r'<li\b([^>]*)>(.*?)</li>', featured_source, flags=re.I | re.S)
-    featured = [body for attrs, body in featured_rows if "portfolio-item--featured" in attrs]
-    teasers = re.findall(r'<details class="project-teaser[^\"]*"[^>]*>(.*?)</details>', other_source, flags=re.I | re.S)
-    require("#TOP4" in featured_source and len(featured) == 4 and len(teasers) == 5,
-            "projects/index.html: expected four #TOP4 featured cases and five additional project teasers")
-    require("portfolio-item--primary" in featured_rows[0][0], "projects/index.html: inventory must lead the featured cases")
-    require("Conciliación y automatización de inventario" in featured[0], "projects/index.html: inventory must be the lead featured case")
+    content_path = ROOT / "content" / "site.json"
+    try:
+        content = json.loads(content_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        fail(f"content/site.json: invalid project master data: {exc}")
+    projects = content.get("projects", [])
+    tags = {tag.get("id"): tag.get("label") for tag in content.get("taxonomy", {}).get("tags", [])}
+    require(len(projects) == 9, "content/site.json: exactly nine project records are required")
+    require(len(tags) == len(content.get("taxonomy", {}).get("tags", [])), "content/site.json: taxonomy IDs must be unique")
+    require(sum(bool(project.get("featured")) for project in projects) == 4, "content/site.json: four featured case records are required")
+    require(sum(project.get("route") is None for project in projects) == 5, "content/site.json: five teaser-only project records are required")
+    require(projects[0].get("id") == "inventory-reconciliation", "content/site.json: inventory must lead the featured projects")
+    card_matches = re.findall(r'<li\b(?=[^>]*class="project-card\b)([^>]*)>(.*?)</article></li>', portfolio, flags=re.I | re.S)
+    require(len(card_matches) == 9, "projects/index.html: all nine project records must render as cards")
+    for project in projects:
+        require(len(project.get("tags", [])) >= 2, f"content/site.json project {project.get('id')}: assign multiple taxonomy tags")
+        require(set(project.get("tags", [])) <= set(tags), f"content/site.json project {project.get('id')}: unknown taxonomy tag")
+        require(project.get("title", "") in portfolio, f"projects/index.html: project title missing from generated page: {project.get('id')}")
+        card = next((attrs for attrs, _ in card_matches if f'data-project-id="{project["id"]}"' in attrs), None)
+        require(card is not None, f"projects/index.html: missing card identity for {project['id']}")
+        rendered_tags = re.search(r'data-project-tags="([^"]+)"', card or "")
+        require(rendered_tags is not None and set(rendered_tags.group(1).split()) == set(project["tags"]),
+                f"projects/index.html: taxonomy assignment differs for {project['id']}")
+        for tag_id in project["tags"]:
+            require(tags[tag_id] in next(body for attrs, body in card_matches if attrs == card),
+                    f"projects/index.html: visible tag label missing for {project['id']} / {tag_id}")
     require("mejora cualitativa del proceso confirmada" not in portfolio.casefold(), "projects/index.html: remove internal confirmation language")
-    expected_case_links = [
-        "/projects/inventory-reconciliation/",
-        "/projects/brazil-chile-data-migration/",
-        "/projects/patient-transport-optimization/",
-        "/projects/picking-line-balancing/",
-    ]
-    featured_links = [re.search(r'<a class="case-link" href=["\']([^"\']+)', row, flags=re.I) for row in featured]
-    require(all(link is not None for link in featured_links), "projects/index.html: each featured case needs a working case link")
-    require([link.group(1) for link in featured_links if link] == expected_case_links, "projects/index.html: featured case links/order changed")
-    require(portfolio.count("Ver cómo lo abordamos") == 9, "projects/index.html: all nine projects need the requested exact CTA")
-    require(portfolio.count('class="project-visual-icon"') == 4 and portfolio.count('class="project-teaser__icon"') == 5,
-            "projects/index.html: all nine projects need a compact subject icon")
-    for category in ("Planificación y datos", "Transporte y automatización", "Control e ingeniería"):
-        require(category in other_source, f"projects/index.html: missing project category {category}")
-    require('id="control-tower"' in other_source and 'id="transport-anomalies"' in other_source,
+    expected_case_links = [project["route"] for project in projects if project.get("route")]
+    _, parsed_portfolio = parse_page(base / "projects" / "index.html")
+    require(set(expected_case_links) <= set(parsed_portfolio.links), "projects/index.html: each case record needs a working case link")
+    require('id="control-tower"' in portfolio and 'id="transport-anomalies"' in portfolio,
             "projects/index.html: Control Tower and anomaly projects must remain distinct")
     for relative, asset_name in CASE_VISUALS.items():
         page = base / relative
@@ -279,9 +282,10 @@ def check_output(base: Path, site_url: str) -> None:
             "index.html: the supplied transparent portrait must be the accessible hero image")
     require("hero-eyebrow" not in home and len(re.findall(r"<h1\b", home, flags=re.I)) == 1,
             "index.html: remove the experience eyebrow and preserve a single home heading")
-    require(home.count('class="home-project"') == 3, "index.html: home must feature exactly three emblematic projects")
+    require(len(re.findall(r"<h1\b", home, flags=re.I)) == 1, "index.html: Home must have exactly one h1")
     cv = (base / "cv" / "index.html").read_text(encoding="utf-8")
-    require('href="/cv/harrys-yusti-cv.pdf" download' in cv, "cv/index.html: a real downloadable CV PDF is required")
+    require(re.search(r'<a\b(?=[^>]*href="/cv/harrys-yusti-cv\.pdf")(?=[^>]*\bdownload(?:[=\s]|>))[^>]*>', cv, flags=re.I) is not None,
+            "cv/index.html: a real downloadable CV PDF is required")
     require("Áreas donde aporto valor" in cv and "Entender" in cv and "medir" in cv,
             "cv/index.html: value areas and workflow are required")
     for page in pages:

@@ -1,0 +1,5629 @@
+{
+  "schemaVersion": 2,
+  "site": {
+    "name": "Harrys Yusti",
+    "siteUrl": "https://harrysxavio.github.io",
+    "language": "es",
+    "sameAs": [
+      "https://www.linkedin.com/in/h-yusti/",
+      "https://github.com/harrysxavio"
+    ]
+  },
+  "taxonomy": {
+    "version": 1,
+    "tags": [
+      {
+        "id": "supply-chain",
+        "label": "Supply Chain"
+      },
+      {
+        "id": "inventory",
+        "label": "Inventario"
+      },
+      {
+        "id": "automation",
+        "label": "Automatización"
+      },
+      {
+        "id": "data",
+        "label": "Datos"
+      },
+      {
+        "id": "erp",
+        "label": "ERP"
+      },
+      {
+        "id": "regional-transformation",
+        "label": "Transformación regional"
+      },
+      {
+        "id": "operations",
+        "label": "Operaciones"
+      },
+      {
+        "id": "planning",
+        "label": "Planificación"
+      },
+      {
+        "id": "healthcare",
+        "label": "Salud"
+      },
+      {
+        "id": "distribution",
+        "label": "Centro de distribución"
+      },
+      {
+        "id": "productivity",
+        "label": "Productividad"
+      },
+      {
+        "id": "logistics",
+        "label": "Logística"
+      },
+      {
+        "id": "control",
+        "label": "Control operacional"
+      },
+      {
+        "id": "engineering",
+        "label": "Ingeniería"
+      },
+      {
+        "id": "hvac",
+        "label": "HVAC"
+      },
+      {
+        "id": "plc",
+        "label": "PLC"
+      },
+      {
+        "id": "transport",
+        "label": "Transporte"
+      }
+    ]
+  },
+  "pages": [
+    {
+      "route": "index.html",
+      "id": "home",
+      "seo": {
+        "title": "Harrys Yusti | Transformación, Proyectos y Supply Chain",
+        "description": "Soy Harrys Yusti. Conecto personas, procesos y tecnología para que las mejoras lleguen al trabajo diario.",
+        "meta": [
+          {
+            "name": "theme-color",
+            "content": "#135eef"
+          },
+          {
+            "property": "og:type",
+            "content": "profile"
+          },
+          {
+            "property": "og:title",
+            "content": "Harrys Yusti | Transformación, Proyectos y Supply Chain"
+          },
+          {
+            "property": "og:description",
+            "content": "Proyectos, transformación operacional, Supply Chain y mejora continua. Tecnología aplicada a problemas reales de operación."
+          },
+          {
+            "property": "og:locale",
+            "content": "es_CL"
+          },
+          {
+            "property": "og:url",
+            "content": "https://harrysxavio.github.io/"
+          },
+          {
+            "property": "og:image",
+            "content": "https://harrysxavio.github.io/assets/operations-transformation-illustration.webp"
+          },
+          {
+            "property": "og:image:alt",
+            "content": "Ilustración editorial de procesos y operaciones conectadas."
+          },
+          {
+            "property": "og:image:type",
+            "content": "image/webp"
+          },
+          {
+            "property": "og:image:width",
+            "content": "1536"
+          },
+          {
+            "property": "og:image:height",
+            "content": "1024"
+          },
+          {
+            "name": "twitter:card",
+            "content": "summary_large_image"
+          },
+          {
+            "name": "twitter:title",
+            "content": "Harrys Yusti | Transformación, Proyectos y Supply Chain"
+          },
+          {
+            "name": "twitter:description",
+            "content": "Conecto personas, procesos y tecnología para que las mejoras lleguen a la operación."
+          },
+          {
+            "name": "twitter:image",
+            "content": "https://harrysxavio.github.io/assets/operations-transformation-illustration.webp"
+          },
+          {
+            "name": "twitter:image:alt",
+            "content": "Ilustración editorial de procesos y operaciones conectadas."
+          }
+        ],
+        "jsonLd": {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://harrysxavio.github.io/#website",
+              "url": "https://harrysxavio.github.io/",
+              "name": "Harrys Yusti"
+            },
+            {
+              "@type": "ProfilePage",
+              "@id": "https://harrysxavio.github.io/#profile",
+              "url": "https://harrysxavio.github.io/",
+              "name": "Harrys Yusti | Perfil profesional",
+              "inLanguage": "es",
+              "mainEntity": {
+                "@id": "https://harrysxavio.github.io/#person"
+              }
+            },
+            {
+              "@type": "Person",
+              "@id": "https://harrysxavio.github.io/#person",
+              "url": "https://harrysxavio.github.io/",
+              "name": "Harrys Yusti",
+              "jobTitle": "Mechanical Engineer | Projects, Supply Chain & Operational Transformation",
+              "description": "Ingeniero Mecánico con experiencia entre proyectos, operaciones y Supply Chain.",
+              "sameAs": [
+                "https://www.linkedin.com/in/h-yusti/",
+                "https://github.com/harrysxavio"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "route": "404.html",
+      "id": "notFound",
+      "seo": {
+        "title": "Página no encontrada | Harrys Yusti",
+        "description": "La página que buscas no está disponible. Vuelve al perfil de Harrys Yusti o explora sus proyectos.",
+        "meta": [
+          {
+            "name": "theme-color",
+            "content": "#f4f0e7"
+          },
+          {
+            "name": "robots",
+            "content": "noindex, follow"
+          },
+          {
+            "property": "og:type",
+            "content": "website"
+          },
+          {
+            "property": "og:title",
+            "content": "Página no encontrada | Harrys Yusti"
+          },
+          {
+            "property": "og:description",
+            "content": "Vuelve al perfil profesional o consulta los proyectos seleccionados."
+          },
+          {
+            "property": "og:locale",
+            "content": "es_CL"
+          },
+          {
+            "property": "og:url",
+            "content": "https://harrysxavio.github.io/404.html"
+          },
+          {
+            "property": "og:image",
+            "content": "https://harrysxavio.github.io/assets/operations-transformation-illustration.webp"
+          },
+          {
+            "property": "og:image:alt",
+            "content": "Ilustración editorial de procesos y operaciones conectadas."
+          },
+          {
+            "name": "twitter:card",
+            "content": "summary_large_image"
+          },
+          {
+            "name": "twitter:title",
+            "content": "Página no encontrada | Harrys Yusti"
+          },
+          {
+            "name": "twitter:description",
+            "content": "Vuelve al perfil profesional o consulta los proyectos seleccionados."
+          },
+          {
+            "name": "twitter:image",
+            "content": "https://harrysxavio.github.io/assets/operations-transformation-illustration.webp"
+          },
+          {
+            "name": "twitter:image:alt",
+            "content": "Ilustración editorial de procesos y operaciones conectadas."
+          }
+        ],
+        "jsonLd": null
+      }
+    },
+    {
+      "route": "projects/index.html",
+      "id": "projectPortfolio",
+      "seo": {
+        "title": "Proyectos | Harrys Yusti",
+        "description": "Una selección de proyectos de operaciones, datos, transporte e ingeniería: contexto, enfoque y cambios que llegaron al trabajo diario.",
+        "meta": [
+          {
+            "name": "theme-color",
+            "content": "#135eef"
+          },
+          {
+            "property": "og:type",
+            "content": "website"
+          },
+          {
+            "property": "og:title",
+            "content": "Proyectos | Harrys Yusti"
+          },
+          {
+            "property": "og:description",
+            "content": "Problemas reales, soluciones que respondieron a la operación y cambios que llegaron al trabajo diario."
+          },
+          {
+            "property": "og:locale",
+            "content": "es_CL"
+          },
+          {
+            "property": "og:url",
+            "content": "https://harrysxavio.github.io/projects/"
+          },
+          {
+            "property": "og:image",
+            "content": "https://harrysxavio.github.io/assets/operations-transformation-illustration.webp"
+          },
+          {
+            "property": "og:image:alt",
+            "content": "Ilustración editorial de procesos y operaciones conectadas."
+          },
+          {
+            "name": "twitter:card",
+            "content": "summary_large_image"
+          },
+          {
+            "name": "twitter:title",
+            "content": "Proyectos | Harrys Yusti"
+          },
+          {
+            "name": "twitter:description",
+            "content": "Contexto, enfoque y cambios operacionales en proyectos de Supply Chain, transporte, datos e ingeniería."
+          },
+          {
+            "name": "twitter:image",
+            "content": "https://harrysxavio.github.io/assets/operations-transformation-illustration.webp"
+          },
+          {
+            "name": "twitter:image:alt",
+            "content": "Ilustración editorial de procesos y operaciones conectadas."
+          }
+        ],
+        "jsonLd": {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebPage",
+              "@id": "https://harrysxavio.github.io/projects/",
+              "url": "https://harrysxavio.github.io/projects/",
+              "name": "Proyectos | Harrys Yusti",
+              "inLanguage": "es",
+              "about": {
+                "@id": "https://harrysxavio.github.io/#person"
+              }
+            },
+            {
+              "@type": "Person",
+              "@id": "https://harrysxavio.github.io/#person",
+              "name": "Harrys Yusti",
+              "url": "https://harrysxavio.github.io/",
+              "sameAs": [
+                "https://www.linkedin.com/in/h-yusti/",
+                "https://github.com/harrysxavio"
+              ]
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Inicio",
+                  "item": "https://harrysxavio.github.io/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Proyectos",
+                  "item": "https://harrysxavio.github.io/projects/"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "route": "cv/index.html",
+      "id": "cvPage",
+      "seo": {
+        "title": "CV | Harrys Yusti — Proyectos, Operaciones y Supply Chain",
+        "description": "Perfil profesional de Harrys Yusti: proyectos, transformación, Supply Chain, operaciones, datos y tecnología aplicada.",
+        "meta": [
+          {
+            "name": "theme-color",
+            "content": "#135eef"
+          },
+          {
+            "property": "og:type",
+            "content": "profile"
+          },
+          {
+            "property": "og:title",
+            "content": "CV | Harrys Yusti — Proyectos, Operaciones y Supply Chain"
+          },
+          {
+            "property": "og:description",
+            "content": "Experiencia profesional, proyectos, capacidades, formación e idiomas de Harrys Yusti."
+          },
+          {
+            "property": "og:locale",
+            "content": "es_CL"
+          },
+          {
+            "property": "og:url",
+            "content": "https://harrysxavio.github.io/cv/"
+          },
+          {
+            "property": "og:image",
+            "content": "https://harrysxavio.github.io/assets/operations-transformation-illustration.webp"
+          },
+          {
+            "property": "og:image:alt",
+            "content": "Ilustración editorial de procesos y operaciones conectadas."
+          },
+          {
+            "name": "twitter:card",
+            "content": "summary_large_image"
+          },
+          {
+            "name": "twitter:title",
+            "content": "CV | Harrys Yusti — Proyectos, Operaciones y Supply Chain"
+          },
+          {
+            "name": "twitter:description",
+            "content": "Trayectoria en ingeniería, proyectos, operaciones y Supply Chain."
+          },
+          {
+            "name": "twitter:image",
+            "content": "https://harrysxavio.github.io/assets/operations-transformation-illustration.webp"
+          },
+          {
+            "name": "twitter:image:alt",
+            "content": "Ilustración editorial de procesos y operaciones conectadas."
+          }
+        ],
+        "jsonLd": {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebPage",
+              "@id": "https://harrysxavio.github.io/cv/",
+              "url": "https://harrysxavio.github.io/cv/",
+              "name": "CV | Harrys Yusti",
+              "inLanguage": "es",
+              "about": {
+                "@id": "https://harrysxavio.github.io/#person"
+              }
+            },
+            {
+              "@type": "Person",
+              "@id": "https://harrysxavio.github.io/#person",
+              "name": "Harrys Yusti",
+              "url": "https://harrysxavio.github.io/",
+              "sameAs": [
+                "https://www.linkedin.com/in/h-yusti/",
+                "https://github.com/harrysxavio"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "route": "projects/inventory-reconciliation/index.html",
+      "id": "inventory-reconciliation",
+      "seo": {
+        "title": "Rediseño de conciliación de inventario | Harrys Yusti",
+        "description": "Caso de rediseño y automatización de conciliación de inventario: contribución profesional y resultados de la iniciativa.",
+        "meta": [
+          {
+            "name": "theme-color",
+            "content": "#f4f0e7"
+          },
+          {
+            "property": "og:type",
+            "content": "article"
+          },
+          {
+            "property": "og:title",
+            "content": "Conciliación de inventario | Harrys Yusti"
+          },
+          {
+            "property": "og:description",
+            "content": "Rediseño de proceso, validaciones y automatización para una conciliación de inventario más eficiente."
+          },
+          {
+            "property": "og:locale",
+            "content": "es_CL"
+          },
+          {
+            "property": "og:url",
+            "content": "https://harrysxavio.github.io/projects/inventory-reconciliation/"
+          },
+          {
+            "property": "og:image",
+            "content": "https://harrysxavio.github.io/assets/operations-transformation-illustration.webp"
+          },
+          {
+            "property": "og:image:alt",
+            "content": "Ilustración editorial de procesos y operaciones conectadas."
+          },
+          {
+            "name": "twitter:card",
+            "content": "summary_large_image"
+          },
+          {
+            "name": "twitter:title",
+            "content": "Conciliación de inventario | Harrys Yusti"
+          },
+          {
+            "name": "twitter:description",
+            "content": "Rediseño y automatización en Supply Chain."
+          },
+          {
+            "name": "twitter:image",
+            "content": "https://harrysxavio.github.io/assets/operations-transformation-illustration.webp"
+          },
+          {
+            "name": "twitter:image:alt",
+            "content": "Ilustración editorial de procesos y operaciones conectadas."
+          }
+        ],
+        "jsonLd": {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebPage",
+              "@id": "https://harrysxavio.github.io/projects/inventory-reconciliation/",
+              "url": "https://harrysxavio.github.io/projects/inventory-reconciliation/",
+              "name": "Rediseño de conciliación de inventario | Harrys Yusti",
+              "inLanguage": "es",
+              "about": {
+                "@id": "https://harrysxavio.github.io/#person"
+              }
+            },
+            {
+              "@type": "Person",
+              "@id": "https://harrysxavio.github.io/#person",
+              "name": "Harrys Yusti",
+              "url": "https://harrysxavio.github.io/",
+              "sameAs": [
+                "https://www.linkedin.com/in/h-yusti/",
+                "https://github.com/harrysxavio"
+              ]
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Inicio",
+                  "item": "https://harrysxavio.github.io/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Proyectos",
+                  "item": "https://harrysxavio.github.io/projects/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "Conciliación de inventario",
+                  "item": "https://harrysxavio.github.io/projects/inventory-reconciliation/"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "route": "projects/brazil-chile-data-migration/index.html",
+      "id": "brazil-chile-data-migration",
+      "seo": {
+        "title": "Migración de datos Brasil–Chile | Harrys Yusti",
+        "description": "Migración regional de datos maestros Brasil–Chile: escala, contribución de coordinación y estabilización del alcance aprobado.",
+        "meta": [
+          {
+            "name": "theme-color",
+            "content": "#f4f0e7"
+          },
+          {
+            "property": "og:type",
+            "content": "article"
+          },
+          {
+            "property": "og:title",
+            "content": "Migración de datos Brasil–Chile | Harrys Yusti"
+          },
+          {
+            "property": "og:description",
+            "content": "Coordinación de validación y estabilización para cerca de 120.000 registros maestros."
+          },
+          {
+            "property": "og:locale",
+            "content": "es_CL"
+          },
+          {
+            "property": "og:url",
+            "content": "https://harrysxavio.github.io/projects/brazil-chile-data-migration/"
+          },
+          {
+            "property": "og:image",
+            "content": "https://harrysxavio.github.io/assets/operations-transformation-illustration.webp"
+          },
+          {
+            "property": "og:image:alt",
+            "content": "Ilustración editorial de procesos y operaciones conectadas."
+          },
+          {
+            "name": "twitter:card",
+            "content": "summary_large_image"
+          },
+          {
+            "name": "twitter:title",
+            "content": "Migración de datos Brasil–Chile | Harrys Yusti"
+          },
+          {
+            "name": "twitter:description",
+            "content": "Validación y estabilización de una migración regional de datos."
+          },
+          {
+            "name": "twitter:image",
+            "content": "https://harrysxavio.github.io/assets/operations-transformation-illustration.webp"
+          },
+          {
+            "name": "twitter:image:alt",
+            "content": "Ilustración editorial de procesos y operaciones conectadas."
+          }
+        ],
+        "jsonLd": {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebPage",
+              "@id": "https://harrysxavio.github.io/projects/brazil-chile-data-migration/",
+              "url": "https://harrysxavio.github.io/projects/brazil-chile-data-migration/",
+              "name": "Migración de datos Brasil–Chile | Harrys Yusti",
+              "inLanguage": "es",
+              "about": {
+                "@id": "https://harrysxavio.github.io/#person"
+              }
+            },
+            {
+              "@type": "Person",
+              "@id": "https://harrysxavio.github.io/#person",
+              "name": "Harrys Yusti",
+              "url": "https://harrysxavio.github.io/",
+              "sameAs": [
+                "https://www.linkedin.com/in/h-yusti/",
+                "https://github.com/harrysxavio"
+              ]
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Inicio",
+                  "item": "https://harrysxavio.github.io/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Proyectos",
+                  "item": "https://harrysxavio.github.io/projects/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "Migración de datos Brasil–Chile",
+                  "item": "https://harrysxavio.github.io/projects/brazil-chile-data-migration/"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "route": "projects/patient-transport-optimization/index.html",
+      "id": "patient-transport-optimization",
+      "seo": {
+        "title": "Optimización de transporte de pacientes | Harrys Yusti",
+        "description": "Optimización de una operación territorial de transporte de pacientes con planificación de demanda y asignación de flota.",
+        "meta": [
+          {
+            "name": "theme-color",
+            "content": "#f4f0e7"
+          },
+          {
+            "property": "og:type",
+            "content": "article"
+          },
+          {
+            "property": "og:title",
+            "content": "Transporte de pacientes | Harrys Yusti"
+          },
+          {
+            "property": "og:description",
+            "content": "Modelo de asignación basado en demanda histórica y ~15% menos uso de transportes en la Región Metropolitana."
+          },
+          {
+            "property": "og:locale",
+            "content": "es_CL"
+          },
+          {
+            "property": "og:url",
+            "content": "https://harrysxavio.github.io/projects/patient-transport-optimization/"
+          },
+          {
+            "property": "og:image",
+            "content": "https://harrysxavio.github.io/assets/operations-transformation-illustration.webp"
+          },
+          {
+            "property": "og:image:alt",
+            "content": "Ilustración editorial de procesos y operaciones conectadas."
+          },
+          {
+            "name": "twitter:card",
+            "content": "summary_large_image"
+          },
+          {
+            "name": "twitter:title",
+            "content": "Transporte de pacientes | Harrys Yusti"
+          },
+          {
+            "name": "twitter:description",
+            "content": "Planificación de demanda y asignación de flota en una operación de transporte de pacientes."
+          },
+          {
+            "name": "twitter:image",
+            "content": "https://harrysxavio.github.io/assets/operations-transformation-illustration.webp"
+          },
+          {
+            "name": "twitter:image:alt",
+            "content": "Ilustración editorial de procesos y operaciones conectadas."
+          }
+        ],
+        "jsonLd": {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebPage",
+              "@id": "https://harrysxavio.github.io/projects/patient-transport-optimization/",
+              "url": "https://harrysxavio.github.io/projects/patient-transport-optimization/",
+              "name": "Optimización de transporte de pacientes | Harrys Yusti",
+              "inLanguage": "es",
+              "about": {
+                "@id": "https://harrysxavio.github.io/#person"
+              }
+            },
+            {
+              "@type": "Person",
+              "@id": "https://harrysxavio.github.io/#person",
+              "name": "Harrys Yusti",
+              "url": "https://harrysxavio.github.io/",
+              "sameAs": [
+                "https://www.linkedin.com/in/h-yusti/",
+                "https://github.com/harrysxavio"
+              ]
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Inicio",
+                  "item": "https://harrysxavio.github.io/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Proyectos",
+                  "item": "https://harrysxavio.github.io/projects/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "Transporte de pacientes",
+                  "item": "https://harrysxavio.github.io/projects/patient-transport-optimization/"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "route": "projects/picking-line-balancing/index.html",
+      "id": "picking-line-balancing",
+      "seo": {
+        "title": "Balanceo de línea de picking | Harrys Yusti",
+        "description": "Balanceo de línea de picking de pedidos en un centro de distribución: productividad, testing, go-live y adopción.",
+        "meta": [
+          {
+            "name": "theme-color",
+            "content": "#f4f0e7"
+          },
+          {
+            "property": "og:type",
+            "content": "article"
+          },
+          {
+            "property": "og:title",
+            "content": "Balanceo de línea de picking | Harrys Yusti"
+          },
+          {
+            "property": "og:description",
+            "content": "Un proyecto de productividad en preparación de pedidos con aproximadamente 95% de adopción post go-live."
+          },
+          {
+            "property": "og:locale",
+            "content": "es_CL"
+          },
+          {
+            "property": "og:url",
+            "content": "https://harrysxavio.github.io/projects/picking-line-balancing/"
+          },
+          {
+            "property": "og:image",
+            "content": "https://harrysxavio.github.io/assets/operations-transformation-illustration.webp"
+          },
+          {
+            "property": "og:image:alt",
+            "content": "Ilustración editorial de procesos y operaciones conectadas."
+          },
+          {
+            "name": "twitter:card",
+            "content": "summary_large_image"
+          },
+          {
+            "name": "twitter:title",
+            "content": "Balanceo de línea de picking | Harrys Yusti"
+          },
+          {
+            "name": "twitter:description",
+            "content": "Productividad de picking de pedidos en centro de distribución."
+          },
+          {
+            "name": "twitter:image",
+            "content": "https://harrysxavio.github.io/assets/operations-transformation-illustration.webp"
+          },
+          {
+            "name": "twitter:image:alt",
+            "content": "Ilustración editorial de procesos y operaciones conectadas."
+          }
+        ],
+        "jsonLd": {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebPage",
+              "@id": "https://harrysxavio.github.io/projects/picking-line-balancing/",
+              "url": "https://harrysxavio.github.io/projects/picking-line-balancing/",
+              "name": "Balanceo de línea de picking | Harrys Yusti",
+              "inLanguage": "es",
+              "about": {
+                "@id": "https://harrysxavio.github.io/#person"
+              }
+            },
+            {
+              "@type": "Person",
+              "@id": "https://harrysxavio.github.io/#person",
+              "name": "Harrys Yusti",
+              "url": "https://harrysxavio.github.io/",
+              "sameAs": [
+                "https://www.linkedin.com/in/h-yusti/",
+                "https://github.com/harrysxavio"
+              ]
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Inicio",
+                  "item": "https://harrysxavio.github.io/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Proyectos",
+                  "item": "https://harrysxavio.github.io/projects/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "Balanceo de picking",
+                  "item": "https://harrysxavio.github.io/projects/picking-line-balancing/"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "projects": [
+    {
+      "id": "inventory-reconciliation",
+      "title": "Conciliación y automatización de inventario",
+      "route": "/projects/inventory-reconciliation/",
+      "featured": true,
+      "summary": "Coordiné el rediseño del proceso, sus validaciones y la automatización entre operación y tecnología.",
+      "situation": "Conciliar manualmente información operacional y de sistemas consumía tiempo y elevaba el costo del soporte.",
+      "task": "Hacer el proceso más confiable y controlable.",
+      "contribution": "Coordiné el rediseño del proceso, las validaciones y la automatización entre operación y tecnología.",
+      "result": "30% menos tiempo de gestión y 40% menos costos asociados al soporte.",
+      "evidence": "Resultado y alcance publicados en el caso existente.",
+      "tags": [
+        "supply-chain",
+        "inventory",
+        "automation",
+        "control"
+      ],
+      "caseDetails": [
+        {
+          "type": "linkGroup",
+          "blocks": [
+            {
+              "type": "link",
+              "href": "/",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Inicio"
+                }
+              ]
+            },
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "copyText",
+                  "text": "/"
+                }
+              ]
+            },
+            {
+              "type": "link",
+              "href": "/projects/",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Proyectos"
+                }
+              ]
+            },
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "copyText",
+                  "text": "/"
+                }
+              ]
+            },
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "copyText",
+                  "text": "Conciliación de inventario"
+                }
+              ]
+            }
+          ],
+          "label": "Ruta de navegación"
+        },
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "SUPPLY CHAIN · INVENTARIO · AUTOMATIZACIÓN"
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 1,
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Rediseño y automatización de conciliación de inventario"
+                }
+              ]
+            },
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Una iniciativa para reducir fricción en un proceso de conciliación entre información operacional y sistemas."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "copyText",
+                      "text": "−30%"
+                    }
+                  ]
+                },
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "copyText",
+                      "text": "tiempo de gestión"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "copyText",
+                      "text": "−40%"
+                    }
+                  ]
+                },
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "copyText",
+                      "text": "costos asociados al soporte"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "media",
+          "blocks": [
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "contentGroup",
+                  "blocks": []
+                },
+                {
+                  "type": "image",
+                  "src": "/assets/inventory-reconciliation-flow.svg",
+                  "alt": "Existencias de operación y registros de sistemas llegan a una conciliación; las excepciones quedan visibles para revisión y seguimiento.",
+                  "width": "680",
+                  "height": "260",
+                  "sources": [
+                    {
+                      "srcset": "/assets/mobile/inventory-reconciliation-flow.svg",
+                      "media": "(max-width: 42rem)"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Flujo de trabajo"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 2,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Hacer visibles las diferencias para resolverlas con control."
+                    }
+                  ],
+                  "anchor": "inventory-visual-title"
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Un esquema conceptual del proceso: fuentes, validación, excepciones y seguimiento."
+                    }
+                  ]
+                },
+                {
+                  "type": "list",
+                  "ordered": true,
+                  "items": [
+                    {
+                      "type": "listItem",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "Dos fuentes"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "Reglas de validación"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "Excepciones revisables"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "contentSection",
+              "blocks": [
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "01 · CONTEXTO"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 2,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Un proceso intensivo en gestión manual"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "La conciliación de inventario requería comparar información operacional y de sistemas, con esfuerzo manual y dependencia de soporte."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentSection",
+              "blocks": [
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "02 · POR QUÉ IMPORTABA"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 2,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "La fricción afectaba tiempo y soporte"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Un proceso difícil de conciliar consumía tiempo de gestión y aumentaba la carga asociada al soporte operacional."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentSection",
+              "blocks": [
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "03 · MI CONTRIBUCIÓN"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 2,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Conectar proceso, controles y tecnología"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Coordiné el rediseño del proceso, sus validaciones y la automatización, conectando la operación con los equipos técnicos."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentSection",
+              "blocks": [
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "04 · ENFOQUE"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 2,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Simplificar antes de automatizar"
+                    }
+                  ]
+                },
+                {
+                  "type": "list",
+                  "ordered": false,
+                  "items": [
+                    {
+                      "type": "listItem",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "Rediseño del proceso de conciliación."
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "Validaciones para reforzar el control."
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "Automatización de tareas repetitivas."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentSection",
+              "blocks": [
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "05 · RESULTADO"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 2,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Menos tiempo y menor costo de soporte"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "La iniciativa redujo "
+                    },
+                    {
+                      "type": "strong",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "30% el tiempo de gestión"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "text": " y "
+                    },
+                    {
+                      "type": "strong",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "40% los costos asociados al soporte"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "text": "."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "linkGroup",
+          "blocks": [
+            {
+              "type": "link",
+              "href": "/projects/",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "← Todos los proyectos"
+                }
+              ]
+            },
+            {
+              "type": "link",
+              "href": "/projects/brazil-chile-data-migration/",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Siguiente caso: datos Brasil–Chile →"
+                }
+              ]
+            }
+          ],
+          "label": "Navegación de proyectos"
+        }
+      ],
+      "anchor": "inventory-reconciliation"
+    },
+    {
+      "id": "brazil-chile-data-migration",
+      "title": "Migración y estabilización de datos Brasil–Chile",
+      "route": "/projects/brazil-chile-data-migration/",
+      "featured": true,
+      "summary": "Coordiné validación operacional y de datos entre equipos regionales y técnicos.",
+      "situation": "Migrar datos maestros entre Brasil y Chile requería coordinación y validación mientras la operación continuaba.",
+      "task": "Validar y estabilizar el volumen aprobado para sostener la operación local.",
+      "contribution": "Coordiné validación operacional y de datos entre equipos regionales y técnicos.",
+      "result": "Cerca de 120.000 registros maestros; aproximadamente 90% del alcance aprobado quedó estabilizado.",
+      "evidence": "Métricas del caso existente; continuidad operacional fue precisada para esta actualización.",
+      "tags": [
+        "data",
+        "erp",
+        "regional-transformation",
+        "operations"
+      ],
+      "caseDetails": [
+        {
+          "type": "linkGroup",
+          "blocks": [
+            {
+              "type": "link",
+              "href": "/",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Inicio"
+                }
+              ]
+            },
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "copyText",
+                  "text": "/"
+                }
+              ]
+            },
+            {
+              "type": "link",
+              "href": "/projects/",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Proyectos"
+                }
+              ]
+            },
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "copyText",
+                  "text": "/"
+                }
+              ]
+            },
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "copyText",
+                  "text": "Migración Brasil–Chile"
+                }
+              ]
+            }
+          ],
+          "label": "Ruta de navegación"
+        },
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "DATOS · ERP · TRANSFORMACIÓN REGIONAL"
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 1,
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Migración y estabilización de datos Brasil–Chile"
+                }
+              ]
+            },
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Una migración regional que exigía validar y estabilizar un volumen alto de información maestra."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "copyText",
+                      "text": "~120.000"
+                    }
+                  ]
+                },
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "copyText",
+                      "text": "registros maestros coordinados"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "copyText",
+                      "text": "~90%"
+                    }
+                  ]
+                },
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "copyText",
+                      "text": "del alcance aprobado estabilizado"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "media",
+          "blocks": [
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "contentGroup",
+                  "blocks": []
+                },
+                {
+                  "type": "image",
+                  "src": "/assets/brazil-chile-data-flow.svg",
+                  "alt": "Datos maestros de Brasil pasan por validación y mapeo antes de estabilizarse en Chile; el alcance coordinado fue de aproximadamente 120.000 registros.",
+                  "width": "680",
+                  "height": "260",
+                  "sources": [
+                    {
+                      "srcset": "/assets/mobile/brazil-chile-data-flow.svg",
+                      "media": "(max-width: 42rem)"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Flujo de datos"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 2,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Validar antes de dar por estable la migración."
+                    }
+                  ],
+                  "anchor": "migration-visual-title"
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "El trabajo conectó equipos locales, regionales y técnicos alrededor del alcance aprobado."
+                    }
+                  ]
+                },
+                {
+                  "type": "list",
+                  "ordered": true,
+                  "items": [
+                    {
+                      "type": "listItem",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "Origen Brasil"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "Mapeo y revisión"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "Destino Chile"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "contentSection",
+              "blocks": [
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "01 · CONTEXTO"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 2,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Datos regionales, operación local"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "La iniciativa conectó Brasil y Chile en la migración y estabilización de aproximadamente 120.000 registros maestros."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentSection",
+              "blocks": [
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "02 · POR QUÉ IMPORTABA"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 2,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "La calidad de datos sostenía la continuidad"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Validar y normalizar la información era necesario para estabilizar el alcance aprobado y apoyar la operación tras la migración."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentSection",
+              "blocks": [
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "03 · MI CONTRIBUCIÓN"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 2,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Coordinar validación entre equipos"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Coordiné trabajo de validación operacional y de datos entre equipos regionales y técnicos."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentSection",
+              "blocks": [
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "04 · ENFOQUE"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 2,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Validar, normalizar y estabilizar"
+                    }
+                  ]
+                },
+                {
+                  "type": "list",
+                  "ordered": false,
+                  "items": [
+                    {
+                      "type": "listItem",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "Coordinación transversal de equipos locales, regionales y técnicos."
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "Validación y normalización de datos maestros."
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "Seguimiento de la estabilización del alcance aprobado."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentSection",
+              "blocks": [
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "05 · RESULTADO"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 2,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Escala y estabilización"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Se coordinaron aproximadamente "
+                    },
+                    {
+                      "type": "strong",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "120.000 registros maestros"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "text": "; cerca de "
+                    },
+                    {
+                      "type": "strong",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "90% del universo aprobado quedó estabilizado"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "text": "."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "linkGroup",
+          "blocks": [
+            {
+              "type": "link",
+              "href": "/projects/inventory-reconciliation/",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "← Caso anterior: inventario"
+                }
+              ]
+            },
+            {
+              "type": "link",
+              "href": "/projects/patient-transport-optimization/",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Siguiente caso: transporte de pacientes →"
+                }
+              ]
+            }
+          ],
+          "label": "Navegación de proyectos"
+        }
+      ],
+      "anchor": "brazil-chile-data"
+    },
+    {
+      "id": "patient-transport-optimization",
+      "title": "Optimización de transporte de pacientes",
+      "route": "/projects/patient-transport-optimization/",
+      "featured": true,
+      "summary": "Diseñé un modelo de asignación de flota basado en demanda histórica y coordiné su uso operacional.",
+      "situation": "La operación territorial respondía a demanda variable de traslados de pacientes.",
+      "task": "Alinear capacidad, flota, rutas y servicio.",
+      "contribution": "Diseñé un modelo de asignación de flota basado en demanda histórica y coordiné su uso operacional.",
+      "result": "El modelo se asoció a aproximadamente 15% menos uso de transportes en la Región Metropolitana.",
+      "evidence": "Resultado y alcance publicados en el caso existente.",
+      "tags": [
+        "operations",
+        "planning",
+        "healthcare",
+        "transport"
+      ],
+      "caseDetails": [
+        {
+          "type": "linkGroup",
+          "blocks": [
+            {
+              "type": "link",
+              "href": "/",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Inicio"
+                }
+              ]
+            },
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "copyText",
+                  "text": "/"
+                }
+              ]
+            },
+            {
+              "type": "link",
+              "href": "/projects/",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Proyectos"
+                }
+              ]
+            },
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "copyText",
+                  "text": "/"
+                }
+              ]
+            },
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "copyText",
+                  "text": "Transporte de pacientes"
+                }
+              ]
+            }
+          ],
+          "label": "Ruta de navegación"
+        },
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "OPERACIONES · PLANIFICACIÓN · SALUD"
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 1,
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Optimización de transporte de pacientes"
+                }
+              ]
+            },
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Planificación territorial de flota y capacidad para una operación de transporte asistido de pacientes."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "copyText",
+                      "text": "~15%"
+                    }
+                  ]
+                },
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "copyText",
+                      "text": "menos uso de transportes en la Región Metropolitana"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "media",
+          "blocks": [
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "contentGroup",
+                  "blocks": []
+                },
+                {
+                  "type": "image",
+                  "src": "/assets/patient-transport-allocation.svg",
+                  "alt": "La demanda de traslados y la capacidad disponible orientan la asignación de flota, las rutas y el servicio para pacientes.",
+                  "width": "680",
+                  "height": "260",
+                  "sources": [
+                    {
+                      "srcset": "/assets/mobile/patient-transport-allocation.svg",
+                      "media": "(max-width: 42rem)"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Lógica operativa"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 2,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Ajustar capacidad y rutas a la demanda de pacientes."
+                    }
+                  ],
+                  "anchor": "patient-visual-title"
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "El modelo organizó una operación territorial de traslados asistidos, con foco en capacidad, servicio y continuidad."
+                    }
+                  ]
+                },
+                {
+                  "type": "list",
+                  "ordered": true,
+                  "items": [
+                    {
+                      "type": "listItem",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "Demanda"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "Flota y rutas"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "Servicio a pacientes"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "contentSection",
+              "blocks": [
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "01 · CONTEXTO"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 2,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Una operación territorial con demanda variable"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "La operación de transporte de pacientes debía coordinar flota, rutas, demanda, capacidad, SLA y continuidad operacional."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentSection",
+              "blocks": [
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "02 · POR QUÉ IMPORTABA"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 2,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "La capacidad debía seguir la demanda"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Una asignación adecuada de flota era relevante para sostener el servicio y responder a necesidades territoriales."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentSection",
+              "blocks": [
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "03 · MI CONTRIBUCIÓN"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 2,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Diseñar y coordinar una asignación basada en demanda"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Diseñé un modelo de asignación de flota usando demanda histórica y coordiné su uso operacional."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentSection",
+              "blocks": [
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "04 · ENFOQUE"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 2,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Planificación con contexto operativo"
+                    }
+                  ]
+                },
+                {
+                  "type": "list",
+                  "ordered": false,
+                  "items": [
+                    {
+                      "type": "listItem",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "Uso de demanda histórica para orientar la asignación."
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "Gestión de flota, rutas y capacidad."
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "Consideración de SLA y continuidad de la operación de pacientes."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentSection",
+              "blocks": [
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "05 · RESULTADO"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 2,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Menor uso de transportes"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "El modelo se asoció a una reducción aproximada de "
+                    },
+                    {
+                      "type": "strong",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "15% en el uso de transportes en la Región Metropolitana"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "text": "."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "linkGroup",
+          "blocks": [
+            {
+              "type": "link",
+              "href": "/projects/brazil-chile-data-migration/",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "← Caso anterior: datos Brasil–Chile"
+                }
+              ]
+            },
+            {
+              "type": "link",
+              "href": "/projects/picking-line-balancing/",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Siguiente caso: balanceo de picking →"
+                }
+              ]
+            }
+          ],
+          "label": "Navegación de proyectos"
+        }
+      ],
+      "anchor": "patient-transport"
+    },
+    {
+      "id": "picking-line-balancing",
+      "title": "Balanceo de línea de picking",
+      "route": "/projects/picking-line-balancing/",
+      "featured": true,
+      "summary": "Trabajé en balanceo operacional, business case, testing, go-live y adopción.",
+      "situation": "La preparación de pedidos requería equilibrar la carga entre zonas del centro de distribución.",
+      "task": "Mejorar balance operacional y apoyar adopción.",
+      "contribution": "Trabajé en balanceo operacional, business case, testing, go-live y adopción.",
+      "result": "Aproximadamente 95% de adopción post go-live.",
+      "evidence": "Resultado y alcance publicados en el caso existente.",
+      "tags": [
+        "supply-chain",
+        "distribution",
+        "productivity",
+        "operations"
+      ],
+      "caseDetails": [
+        {
+          "type": "linkGroup",
+          "blocks": [
+            {
+              "type": "link",
+              "href": "/",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Inicio"
+                }
+              ]
+            },
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "copyText",
+                  "text": "/"
+                }
+              ]
+            },
+            {
+              "type": "link",
+              "href": "/projects/",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Proyectos"
+                }
+              ]
+            },
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "copyText",
+                  "text": "/"
+                }
+              ]
+            },
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "copyText",
+                  "text": "Balanceo de picking"
+                }
+              ]
+            }
+          ],
+          "label": "Ruta de navegación"
+        },
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "CENTRO DE DISTRIBUCIÓN · FULFILLMENT · PRODUCTIVIDAD"
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 1,
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Balanceo de línea de picking"
+                }
+              ]
+            },
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Un proyecto de productividad y preparación de pedidos en un centro de distribución."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "copyText",
+                      "text": "~95%"
+                    }
+                  ]
+                },
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "copyText",
+                      "text": "adopción post go-live"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "media",
+          "blocks": [
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "contentGroup",
+                  "blocks": []
+                },
+                {
+                  "type": "image",
+                  "src": "/assets/picking-workload-balance.svg",
+                  "alt": "Los pedidos se distribuyen entre zonas de picking y se balancea la carga de trabajo para preparar pedidos en el centro de distribución.",
+                  "width": "680",
+                  "height": "260",
+                  "sources": [
+                    {
+                      "srcset": "/assets/mobile/picking-workload-balance.svg",
+                      "media": "(max-width: 42rem)"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Flujo de picking"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 2,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Distribuir pedidos y equilibrar trabajo entre zonas."
+                    }
+                  ],
+                  "anchor": "picking-visual-title"
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "El proyecto combinó balanceo operacional, prueba, puesta en marcha y adopción."
+                    }
+                  ]
+                },
+                {
+                  "type": "list",
+                  "ordered": true,
+                  "items": [
+                    {
+                      "type": "listItem",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "Pedidos"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "Zonas de picking"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "Cargas balanceadas"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "contentSection",
+              "blocks": [
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "01 · CONTEXTO"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 2,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Preparación de pedidos en un centro de distribución"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "La iniciativa se enfocó en el picking de pedidos, su productividad y el balanceo operacional."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentSection",
+              "blocks": [
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "02 · POR QUÉ IMPORTABA"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 2,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "La productividad dependía de una operación adoptable"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "El cambio necesitaba probarse, justificarse y acompañarse hasta el go-live para que los equipos pudieran usarlo."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentSection",
+              "blocks": [
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "03 · MI CONTRIBUCIÓN"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 2,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Del análisis a la adopción"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Trabajé en el balanceo operacional, business case, testing, go-live y adopción."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentSection",
+              "blocks": [
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "04 · ENFOQUE"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 2,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Probar, implementar y acompañar"
+                    }
+                  ]
+                },
+                {
+                  "type": "list",
+                  "ordered": false,
+                  "items": [
+                    {
+                      "type": "listItem",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "Balanceo de la operación de picking."
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "Preparación de business case y testing."
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listItem",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "Soporte al go-live y adopción."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentSection",
+              "blocks": [
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "05 · RESULTADO"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 2,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Adopción post go-live cercana al 95%"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "El proyecto alcanzó aproximadamente "
+                    },
+                    {
+                      "type": "strong",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "95% de adopción después del go-live"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "text": "."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "linkGroup",
+          "blocks": [
+            {
+              "type": "link",
+              "href": "/projects/patient-transport-optimization/",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "← Caso anterior: transporte de pacientes"
+                }
+              ]
+            },
+            {
+              "type": "link",
+              "href": "/projects/",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Todos los proyectos →"
+                }
+              ]
+            }
+          ],
+          "label": "Navegación de proyectos"
+        }
+      ],
+      "anchor": "picking-balance"
+    },
+    {
+      "id": "supply-planning-model",
+      "title": "Modelo predictivo de abastecimiento y riesgo de suministro",
+      "route": null,
+      "featured": false,
+      "summary": "Coordiné el modelo predictivo de planificación de abastecimiento.",
+      "situation": "La planificación necesitaba anticipar abastecimiento y riesgo de suministro.",
+      "task": "Apoyar decisiones con un modelo predictivo.",
+      "contribution": "Coordiné el modelo predictivo de planificación de abastecimiento.",
+      "result": "Mejora aproximada de 35% en precisión logística, según resultado reportado.",
+      "evidence": "Resumen y métrica publicados en el portafolio existente.",
+      "tags": [
+        "supply-chain",
+        "planning",
+        "data"
+      ],
+      "group": "Planificación y datos"
+    },
+    {
+      "id": "transport-anomalies",
+      "title": "Gestión y resolución de anomalías de transporte",
+      "route": null,
+      "featured": false,
+      "summary": "El portafolio presenta la iniciativa como una mejora/automatización del proceso.",
+      "situation": "Resolver anomalías de transporte podía tomar cerca de dos días.",
+      "task": "Reducir el tiempo de resolución operacional.",
+      "contribution": "El portafolio lo presenta como iniciativa de mejora/automatización; no atribuir una implementación personal más específica que el CV vigente.",
+      "result": "El tiempo de resolución pasó de aproximadamente dos días a cuatro horas.",
+      "evidence": "Resultado publicado; proyecto distinto del Control Tower.",
+      "tags": [
+        "operations",
+        "logistics",
+        "automation",
+        "transport"
+      ],
+      "group": "Transporte y automatización",
+      "anchor": "transport-anomalies"
+    },
+    {
+      "id": "inventory-control-model",
+      "title": "Modelo de control de inventario",
+      "route": null,
+      "featured": false,
+      "summary": "Un modelo para ordenar el seguimiento y clarificar el control de inventario.",
+      "situation": "El seguimiento de inventario requería mayor orden y claridad.",
+      "task": "Estructurar su seguimiento en la operación.",
+      "contribution": "No hay atribución más específica en el contenido vigente.",
+      "result": "Modelo descrito como una forma de ordenar el seguimiento y clarificar el control; sin métrica.",
+      "evidence": "Resumen publicado.",
+      "tags": [
+        "inventory",
+        "control",
+        "operations"
+      ],
+      "group": "Control e ingeniería",
+      "anchor": "inventory-control-model"
+    },
+    {
+      "id": "industrial-project-delivery",
+      "title": "Entrega de proyectos industriales",
+      "route": null,
+      "featured": false,
+      "summary": "Coordinación de equipos, planificación y calidad en iniciativas de infraestructura.",
+      "situation": "Proyectos industriales e infraestructura requerían coordinación, planificación y calidad.",
+      "task": "Apoyar la entrega de proyectos HVAC, PLC e infraestructura.",
+      "contribution": "Coordinación de equipos, planificación y calidad, según el CV vigente.",
+      "result": "Sin métrica publicada.",
+      "evidence": "Resumen publicado.",
+      "tags": [
+        "engineering",
+        "hvac",
+        "plc"
+      ],
+      "group": "Control e ingeniería",
+      "anchor": "industrial-project-delivery"
+    },
+    {
+      "id": "control-tower",
+      "title": "Automatización de Control Tower de Transporte",
+      "route": null,
+      "featured": false,
+      "summary": "Automatizó estados, métricas y tareas de operación para organizar el trabajo de transporte.",
+      "situation": "El seguimiento requería revisar estados de transportistas, métricas e indicadores de transporte, medidas de foco del trabajo, tareas de Customer Service y costos.",
+      "task": "Ordenar la información operativa y el trabajo asociado.",
+      "contribution": "La solución automatizó la captura de estados y organizó métricas/indicadores, medidas de foco, tareas de Customer Service y control de costos.",
+      "result": "El trabajo quedó más organizado y se liberaron horas significativas; no hay cifra exacta.",
+      "evidence": "Afirmación nueva del usuario para esta actualización. Mantener separado de anomalías; no inventar cantidad o atribución.",
+      "tags": [
+        "operations",
+        "transport",
+        "automation",
+        "control"
+      ],
+      "group": "Transporte y automatización",
+      "anchor": "control-tower"
+    }
+  ],
+  "career": [
+    {
+      "employer": "Natura & Co Chile",
+      "period": "2019–2021; 2023–2026",
+      "roles": [
+        "Analista Senior de Proyectos de Operaciones y Logística (2019–2021)",
+        "Analista Senior de Operaciones y Logística (2023–2025)",
+        "Coordinador de Tecnología de Operaciones (2025–2026)"
+      ],
+      "note": "Una progresión bajo el mismo empleador, preservando los años publicados."
+    },
+    {
+      "employer": "ACHS Servicios",
+      "period": "2021–2023",
+      "roles": [
+        "Jefe de Operaciones"
+      ],
+      "note": "Transporte de pacientes, flota, rutas, demanda, capacidad, SLA, continuidad y equipos."
+    },
+    {
+      "employer": "Coprove",
+      "period": "2017–2019",
+      "roles": [
+        "Jefe de Proyecto"
+      ],
+      "note": "Proyectos internos de inventario, control y mejora. Copy Home: “Convertir problemas de control en iniciativas con estructura, responsables y seguimiento.”"
+    },
+    {
+      "employer": "704 Ingeniería",
+      "period": "2015–2017",
+      "roles": [
+        "Ingeniero de Proyecto"
+      ],
+      "note": "HVAC, PLC e infraestructura, equipos, planificación y calidad."
+    }
+  ],
+  "education": {
+    "degree": "Ingeniería Mecánica",
+    "institution": "Universidad Central de Venezuela",
+    "year": "2015"
+  },
+  "languages": [
+    {
+      "language": "español",
+      "level": "nativo"
+    },
+    {
+      "language": "inglés",
+      "level": "avanzado profesional"
+    }
+  ],
+  "editorialRules": [
+    "Conectar significa alinear equipos, áreas y países para que el proyecto llegue a buen resultado; Brasil–Chile sirve como evidencia.",
+    "Control Tower se mantiene separado: automatización de estados de transportistas, indicadores, foco del trabajo, tareas de Customer Service y costos; horas significativas liberadas sin cifra.",
+    "IA en la práctica: “He implementado soluciones y compartido herramientas de IA con equipos para mejorar su productividad en el trabajo.”",
+    "No usar “11 años” como placa mecánica sobre el nombre en Home; el CV puede conservar el dato existente cuando sea útil. Sin total de proyectos en Home.",
+    "Usar lenguaje humano, concreto y factual; distinguir contribución personal del resultado de iniciativa.",
+    "Los rangos confirmados son solo por año. Meses no confirmados; no publicarlos antes de consultarlos a Harrys."
+  ],
+  "home": [
+    {
+      "type": "contentSection",
+      "blocks": [
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "heading",
+              "level": 1,
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Harrys Yusti"
+                }
+              ],
+              "anchor": "hero-title"
+            },
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Veo un proceso y me pregunto: ¿por qué lo hacemos así?"
+                }
+              ]
+            },
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Me gusta entender qué frena el trabajo, ordenar lo complejo y llevar mejoras concretas a la operación. La tecnología me interesa cuando libera tiempo y ayuda a decidir mejor."
+                }
+              ]
+            },
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Proyectos y transformación "
+                },
+                {
+                  "type": "text",
+                  "text": "·"
+                },
+                {
+                  "type": "text",
+                  "text": " Supply Chain "
+                },
+                {
+                  "type": "text",
+                  "text": "·"
+                },
+                {
+                  "type": "text",
+                  "text": " Operaciones"
+                }
+              ]
+            },
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "link",
+                  "href": "/projects/",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Ver proyectos "
+                    },
+                    {
+                      "type": "text",
+                      "text": "→"
+                    }
+                  ]
+                },
+                {
+                  "type": "link",
+                  "href": "#trayectoria",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Conocer mi recorrido"
+                    }
+                  ]
+                },
+                {
+                  "type": "link",
+                  "href": "/cv/",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "CV "
+                    },
+                    {
+                      "type": "text",
+                      "text": "↗"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "media",
+          "blocks": [
+            {
+              "type": "image",
+              "src": "/assets/harrys-yusti-portrait.webp",
+              "alt": "Retrato de Harrys Yusti",
+              "width": "760",
+              "height": "675"
+            }
+          ]
+        }
+      ],
+      "labelledBy": "hero-title"
+    },
+    {
+      "type": "contentSection",
+      "blocks": [
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "De fricción a una mejor forma de trabajar"
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 2,
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "No empiezo por la herramienta. Primero quiero entender qué está frenando el trabajo."
+                }
+              ],
+              "anchor": "signature-title"
+            },
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Productividad es diseñar mejores formas de trabajar, con el equipo y con evidencia."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "image",
+                  "src": "/assets/signature-route.svg",
+                  "alt": "",
+                  "width": "640",
+                  "height": "112",
+                  "decorative": true
+                }
+              ]
+            },
+            {
+              "type": "expandable",
+              "open": true,
+              "summary": [
+                {
+                  "type": "text",
+                  "text": "01"
+                },
+                {
+                  "type": "text",
+                  "text": "Ver la fricción"
+                }
+              ],
+              "blocks": [
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "copy",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "¿Dónde se pierde tiempo? ¿Qué excepción rompe el flujo? ¿Qué decisión llega tarde?"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "copy",
+                      "runs": [
+                        {
+                          "type": "strong",
+                          "runs": [
+                            {
+                              "type": "text",
+                              "text": "Una señal real:"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "text": " algunas anomalías operacionales pasaron de tomar cerca de dos días a resolverse en unas cuatro horas."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "anchor": "ver"
+            },
+            {
+              "type": "expandable",
+              "open": false,
+              "summary": [
+                {
+                  "type": "text",
+                  "text": "02"
+                },
+                {
+                  "type": "text",
+                  "text": "Simplificar"
+                }
+              ],
+              "blocks": [
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "copy",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Antes de automatizar, conviene eliminar pasos, aclarar reglas y hacer el proceso más simple."
+                        }
+                      ]
+                    },
+                    {
+                      "type": "copy",
+                      "runs": [
+                        {
+                          "type": "strong",
+                          "runs": [
+                            {
+                              "type": "text",
+                              "text": "Una señal real:"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "text": " la iniciativa de conciliación redujo 30% el tiempo de gestión y 40% los costos asociados al soporte."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "anchor": "simplificar"
+            },
+            {
+              "type": "expandable",
+              "open": false,
+              "summary": [
+                {
+                  "type": "text",
+                  "text": "03"
+                },
+                {
+                  "type": "text",
+                  "text": "Conectar"
+                }
+              ],
+              "blocks": [
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "copy",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Conecto equipos, áreas y países para que avancen hacia el mismo resultado y el proyecto llegue bien a la operación."
+                        }
+                      ]
+                    },
+                    {
+                      "type": "copy",
+                      "runs": [
+                        {
+                          "type": "strong",
+                          "runs": [
+                            {
+                              "type": "text",
+                              "text": "Una señal real:"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "text": " coordinación y validación entre Brasil y Chile para cerca de 120.000 registros maestros."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "anchor": "conectar"
+            },
+            {
+              "type": "expandable",
+              "open": false,
+              "summary": [
+                {
+                  "type": "text",
+                  "text": "04"
+                },
+                {
+                  "type": "text",
+                  "text": "Automatizar"
+                }
+              ],
+              "blocks": [
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "copy",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "En un Control Tower de Transporte, automatizamos la captura de estados de transportistas y ordenamos métricas e indicadores, foco del trabajo, tareas de Customer Service y control de costos."
+                        }
+                      ]
+                    },
+                    {
+                      "type": "copy",
+                      "runs": [
+                        {
+                          "type": "strong",
+                          "runs": [
+                            {
+                              "type": "text",
+                              "text": "Qué cambió:"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "text": " el trabajo quedó más organizado y se liberaron horas significativas."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "anchor": "automatizar"
+            },
+            {
+              "type": "expandable",
+              "open": false,
+              "summary": [
+                {
+                  "type": "text",
+                  "text": "05"
+                },
+                {
+                  "type": "text",
+                  "text": "Medir"
+                }
+              ],
+              "blocks": [
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "copy",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "El cambio no está terminado hasta entender qué mejoró en la operación."
+                        }
+                      ]
+                    },
+                    {
+                      "type": "copy",
+                      "runs": [
+                        {
+                          "type": "strong",
+                          "runs": [
+                            {
+                              "type": "text",
+                              "text": "Una señal real:"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "text": " un modelo de asignación se asoció a ~15% menos uso de transportes para pacientes en la Región Metropolitana."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "anchor": "medir"
+            }
+          ]
+        }
+      ],
+      "labelledBy": "signature-title",
+      "anchor": "como-trabajo"
+    },
+    {
+      "type": "contentSection",
+      "blocks": [
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Experiencia puesta en práctica"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 2,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Tres proyectos. Una misma intención: que el trabajo avance mejor."
+                    }
+                  ],
+                  "anchor": "transformations-title"
+                }
+              ]
+            },
+            {
+              "type": "link",
+              "href": "/projects/",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Ver proyectos "
+                },
+                {
+                  "type": "text",
+                  "text": "→"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "contentItem",
+              "blocks": [
+                {
+                  "type": "link",
+                  "href": "/projects/inventory-reconciliation/",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "\n                "
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n                "
+                    },
+                    {
+                      "type": "text",
+                      "text": "Conciliación de inventario"
+                    },
+                    {
+                      "type": "text",
+                      "text": "↗"
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n              "
+                    }
+                  ]
+                },
+                {
+                  "type": "factGroup",
+                  "blocks": [
+                    {
+                      "type": "contentGroup",
+                      "blocks": [
+                        {
+                          "type": "factLabel",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "Situación"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "factValue",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "Conciliar datos de operación y sistemas era manual."
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "contentGroup",
+                      "blocks": [
+                        {
+                          "type": "factLabel",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "Tarea"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "factValue",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "Reducir fricción y costo de soporte."
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "contentGroup",
+                      "blocks": [
+                        {
+                          "type": "factLabel",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "Acción"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "factValue",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "Coordiné rediseño, validaciones y automatización."
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "contentGroup",
+                      "blocks": [
+                        {
+                          "type": "factLabel",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "Resultado"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "factValue",
+                          "blocks": [
+                            {
+                              "type": "contentGroup",
+                              "blocks": [
+                                {
+                                  "type": "copyText",
+                                  "text": "−30%"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "copyText",
+                              "text": " tiempo de gestión · "
+                            },
+                            {
+                              "type": "contentGroup",
+                              "blocks": [
+                                {
+                                  "type": "copyText",
+                                  "text": "−40%"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "copyText",
+                              "text": " costos de soporte."
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentItem",
+              "blocks": [
+                {
+                  "type": "link",
+                  "href": "/projects/brazil-chile-data-migration/",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "\n                "
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n                "
+                    },
+                    {
+                      "type": "text",
+                      "text": "Brasil–Chile: datos y operación"
+                    },
+                    {
+                      "type": "text",
+                      "text": "↗"
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n              "
+                    }
+                  ]
+                },
+                {
+                  "type": "factGroup",
+                  "blocks": [
+                    {
+                      "type": "contentGroup",
+                      "blocks": [
+                        {
+                          "type": "factLabel",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "Situación"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "factValue",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "Migrar datos sin detener la operación."
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "contentGroup",
+                      "blocks": [
+                        {
+                          "type": "factLabel",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "Tarea"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "factValue",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "Validar y estabilizar datos maestros."
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "contentGroup",
+                      "blocks": [
+                        {
+                          "type": "factLabel",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "Acción"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "factValue",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "Conecté equipos regionales, operativos y técnicos."
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "contentGroup",
+                      "blocks": [
+                        {
+                          "type": "factLabel",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "Resultado"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "factValue",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "Cerca de "
+                            },
+                            {
+                              "type": "contentGroup",
+                              "blocks": [
+                                {
+                                  "type": "copyText",
+                                  "text": "120.000"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "copyText",
+                              "text": " registros coordinados; ~90% del alcance aprobado estabilizado."
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentItem",
+              "blocks": [
+                {
+                  "type": "link",
+                  "href": "/projects/patient-transport-optimization/",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "\n                "
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n                "
+                    },
+                    {
+                      "type": "text",
+                      "text": "Transporte de pacientes"
+                    },
+                    {
+                      "type": "text",
+                      "text": "↗"
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n              "
+                    }
+                  ]
+                },
+                {
+                  "type": "factGroup",
+                  "blocks": [
+                    {
+                      "type": "contentGroup",
+                      "blocks": [
+                        {
+                          "type": "factLabel",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "Situación"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "factValue",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "La demanda territorial de traslados variaba."
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "contentGroup",
+                      "blocks": [
+                        {
+                          "type": "factLabel",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "Tarea"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "factValue",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "Alinear flota, capacidad, rutas y servicio."
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "contentGroup",
+                      "blocks": [
+                        {
+                          "type": "factLabel",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "Acción"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "factValue",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "Diseñé un modelo basado en demanda histórica."
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "contentGroup",
+                      "blocks": [
+                        {
+                          "type": "factLabel",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "Resultado"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "factValue",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "~"
+                            },
+                            {
+                              "type": "contentGroup",
+                              "blocks": [
+                                {
+                                  "type": "copyText",
+                                  "text": "15%"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "copyText",
+                              "text": " menos uso de transportes en la Región Metropolitana."
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "labelledBy": "transformations-title"
+    },
+    {
+      "type": "contentSection",
+      "blocks": [
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "heading",
+              "level": 2,
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "He ido sumando herramientas para hacer que el trabajo funcione mejor."
+                }
+              ],
+              "anchor": "career-title"
+            },
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Empecé en ingeniería de campo, pasé por proyectos e inventario, después asumí una operación real y terminé más cerca de Supply Chain, datos y tecnología. La pregunta de fondo sigue siendo la misma: ¿cómo hacemos que un sistema funcione mejor?"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            {
+              "type": "listItem",
+              "blocks": [
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "copyText",
+                      "text": "Ingeniería"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 3,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "704 Ingeniería"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Aprendí a contrastar los planes con lo que realmente pasa en terreno."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "blocks": [
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "copyText",
+                      "text": "Proyectos"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 3,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Coprove"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Convertir problemas de control en iniciativas con estructura, responsables y seguimiento."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "blocks": [
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "copyText",
+                      "text": "Operaciones"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 3,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "ACHS Servicios"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Responder por continuidad, capacidad, servicio y decisiones diarias."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "blocks": [
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "copyText",
+                      "text": "Transformación"
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 3,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Natura & Co"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Conectar operación, Supply Chain, datos y tecnología para ejecutar cambios transversales."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "contentItem",
+              "blocks": [
+                {
+                  "type": "heading",
+                  "level": 3,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Aprendo haciendo"
+                    }
+                  ]
+                },
+                {
+                  "type": "callout",
+                  "blocks": [
+                    {
+                      "type": "copyText",
+                      "text": "Cuando algo me interesa, normalmente termino construyendo una prueba para entenderlo de verdad."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentItem",
+              "blocks": [
+                {
+                  "type": "heading",
+                  "level": 3,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Pienso en sistemas"
+                    }
+                  ]
+                },
+                {
+                  "type": "callout",
+                  "blocks": [
+                    {
+                      "type": "copyText",
+                      "text": "Me cuesta mirar un problema aislado; quiero entender qué ocurre antes, después y alrededor."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentItem",
+              "blocks": [
+                {
+                  "type": "heading",
+                  "level": 3,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Me gusta explicar"
+                    }
+                  ]
+                },
+                {
+                  "type": "callout",
+                  "blocks": [
+                    {
+                      "type": "copyText",
+                      "text": "Una mejora es más sostenible cuando el equipo entiende el porqué y puede apropiarse de ella."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentItem",
+              "blocks": [
+                {
+                  "type": "heading",
+                  "level": 3,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "IA en la práctica"
+                    }
+                  ]
+                },
+                {
+                  "type": "callout",
+                  "blocks": [
+                    {
+                      "type": "copyText",
+                      "text": "He implementado soluciones y compartido herramientas de IA con equipos para mejorar su productividad en el trabajo."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Lo que exploro ahora"
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 3,
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Agentes, IA local y automatización."
+                }
+              ],
+              "anchor": "curiosity-title"
+            },
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Exploro qué puede ser útil de verdad en una operación: menos hype, más aprendizaje aplicado."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "labelledBy": "career-title",
+      "anchor": "trayectoria"
+    },
+    {
+      "type": "contentSection",
+      "blocks": [
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Si algo de esto te resuena"
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 2,
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Conversemos."
+                }
+              ],
+              "anchor": "contact-title"
+            },
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Me interesa conocer a personas y equipos que estén buscando conectar operación, proyectos y tecnología para resolver un problema real."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "linkGroup",
+          "blocks": [
+            {
+              "type": "link",
+              "href": "https://www.linkedin.com/in/h-yusti/",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Conectar por LinkedIn "
+                },
+                {
+                  "type": "text",
+                  "text": "↗"
+                }
+              ]
+            },
+            {
+              "type": "link",
+              "href": "/cv/",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Ver mi trayectoria "
+                },
+                {
+                  "type": "text",
+                  "text": "→"
+                }
+              ]
+            },
+            {
+              "type": "link",
+              "href": "/projects/",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Explorar los proyectos "
+                },
+                {
+                  "type": "text",
+                  "text": "→"
+                }
+              ]
+            },
+            {
+              "type": "link",
+              "href": "https://github.com/harrysxavio",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "GitHub "
+                },
+                {
+                  "type": "text",
+                  "text": "↗"
+                }
+              ]
+            }
+          ],
+          "label": "Más información y contacto"
+        },
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "copyText",
+                  "text": "Harrys Yusti"
+                }
+              ]
+            },
+            {
+              "type": "contentGroup",
+              "blocks": [
+                {
+                  "type": "copyText",
+                  "text": "Proyectos · Operaciones · Supply Chain"
+                }
+              ]
+            },
+            {
+              "type": "link",
+              "href": "#top",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Volver arriba ↑"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "labelledBy": "contact-title",
+      "anchor": "contacto"
+    }
+  ],
+  "notFound": [
+    {
+      "type": "copy",
+      "runs": [
+        {
+          "type": "text",
+          "text": "404 · PÁGINA NO ENCONTRADA"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "runs": [
+        {
+          "type": "text",
+          "text": "Este camino no sigue por aquí."
+        }
+      ]
+    },
+    {
+      "type": "copy",
+      "runs": [
+        {
+          "type": "text",
+          "text": "La dirección no existe o el contenido se movió. Puedes volver al perfil o explorar los proyectos."
+        }
+      ]
+    },
+    {
+      "type": "contentGroup",
+      "blocks": [
+        {
+          "type": "link",
+          "href": "/",
+          "runs": [
+            {
+              "type": "text",
+              "text": "Ir al inicio "
+            },
+            {
+              "type": "text",
+              "text": "→"
+            }
+          ]
+        },
+        {
+          "type": "link",
+          "href": "/projects/",
+          "runs": [
+            {
+              "type": "text",
+              "text": "Ver proyectos "
+            },
+            {
+              "type": "text",
+              "text": "→"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "projectPortfolio": [
+    {
+      "type": "linkGroup",
+      "blocks": [
+        {
+          "type": "link",
+          "href": "/",
+          "runs": [
+            {
+              "type": "text",
+              "text": "Inicio"
+            }
+          ]
+        },
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "copyText",
+              "text": "/"
+            }
+          ]
+        },
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "copyText",
+              "text": "Proyectos"
+            }
+          ]
+        }
+      ],
+      "label": "Ruta de navegación"
+    },
+    {
+      "type": "contentGroup",
+      "blocks": [
+        {
+          "type": "heading",
+          "level": 1,
+          "runs": [
+            {
+              "type": "text",
+              "text": "Problemas reales. Cambios que llegaron a la operación."
+            }
+          ]
+        },
+        {
+          "type": "copy",
+          "runs": [
+            {
+              "type": "text",
+              "text": "Una conciliación manual que consumía tiempo. Una migración que debía avanzar sin detener la operación. Un transporte de pacientes que tenía que responder a la demanda. Un picking que podía organizarse de otra manera."
+            }
+          ]
+        },
+        {
+          "type": "copy",
+          "runs": [
+            {
+              "type": "text",
+              "text": "En cada proyecto cuento el contexto, el enfoque y qué cambió. Me interesa entender la fricción, sus síntomas y sus causas, y cómo una solución puede llegar al trabajo diario."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "cvPage": [
+    {
+      "type": "linkGroup",
+      "blocks": [
+        {
+          "type": "link",
+          "href": "/",
+          "runs": [
+            {
+              "type": "text",
+              "text": "Inicio"
+            }
+          ]
+        },
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "copyText",
+              "text": "/"
+            }
+          ]
+        },
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "copyText",
+              "text": "CV"
+            }
+          ]
+        }
+      ],
+      "label": "Ruta de navegación"
+    },
+    {
+      "type": "contentGroup",
+      "blocks": [
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "PERFIL PROFESIONAL"
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 1,
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Harrys Yusti"
+                }
+              ]
+            },
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Proyectos · Transformación · Supply Chain · Tecnología"
+                }
+              ]
+            },
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Ingeniero Mecánico. Trabajo entre operación, proyectos y tecnología para entender qué hace falta, ordenar el camino y ayudar a que las mejoras se implementen de verdad."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "link",
+              "href": "/cv/harrys-yusti-cv.pdf",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Descargar CV PDF "
+                },
+                {
+                  "type": "text",
+                  "text": "↓"
+                }
+              ],
+              "download": true
+            },
+            {
+              "type": "actionButton",
+              "label": "Imprimir",
+              "action": "print"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "contentSection",
+      "blocks": [
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "EN QUÉ PUEDO APORTAR"
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 2,
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Áreas donde aporto valor"
+                }
+              ],
+              "anchor": "value-title"
+            }
+          ]
+        },
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "contentItem",
+              "blocks": [
+                {
+                  "type": "heading",
+                  "level": 3,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Proyectos y transformación"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Definir alcance, alinear stakeholders, anticipar riesgos y presupuestos, y acompañar la entrega, la implementación y la adopción."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentItem",
+              "blocks": [
+                {
+                  "type": "heading",
+                  "level": 3,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Supply Chain y operaciones"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Inventario, logística, transporte, picking, fulfillment, planificación y productividad conectados con las necesidades reales de la operación."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentItem",
+              "blocks": [
+                {
+                  "type": "heading",
+                  "level": 3,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Datos y automatización"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Automatizar trabajo manual, ordenar información e indicadores y facilitar mejores decisiones con tecnología aplicada."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Cómo trabajo"
+                },
+                {
+                  "type": "text",
+                  "text": " Entender "
+                },
+                {
+                  "type": "text",
+                  "text": "→"
+                },
+                {
+                  "type": "text",
+                  "text": " estructurar "
+                },
+                {
+                  "type": "text",
+                  "text": "→"
+                },
+                {
+                  "type": "text",
+                  "text": " mejorar "
+                },
+                {
+                  "type": "text",
+                  "text": "→"
+                },
+                {
+                  "type": "text",
+                  "text": " implementar "
+                },
+                {
+                  "type": "text",
+                  "text": "→"
+                },
+                {
+                  "type": "text",
+                  "text": " medir"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "labelledBy": "value-title"
+    },
+    {
+      "type": "contentSection",
+      "blocks": [
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "TRAYECTORIA"
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 2,
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Experiencia profesional"
+                }
+              ],
+              "anchor": "experience-title"
+            }
+          ]
+        },
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "contentItem",
+              "blocks": [
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "heading",
+                      "level": 3,
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Natura & Co Chile"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "copy",
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Una progresión entre proyectos, operaciones y tecnología."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "contentGroup",
+                      "blocks": [
+                        {
+                          "type": "contentGroup",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "2025–2026"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "contentGroup",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "Coordinador de Tecnología de Operaciones"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "contentGroup",
+                      "blocks": [
+                        {
+                          "type": "list",
+                          "ordered": false,
+                          "items": [
+                            {
+                              "type": "listItem",
+                              "blocks": [
+                                {
+                                  "type": "copyText",
+                                  "text": "Lideré iniciativas de transformación tecnológica y operacional para Operaciones y Supply Chain, conectando necesidades de negocio con equipos técnicos."
+                                }
+                              ]
+                            },
+                            {
+                              "type": "listItem",
+                              "blocks": [
+                                {
+                                  "type": "copyText",
+                                  "text": "Coordiné un modelo predictivo de planificación de abastecimiento; la mejora de precisión logística reportada fue cercana a 35%."
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "copy",
+                          "runs": [
+                            {
+                              "type": "link",
+                              "href": "/projects/#inventory-reconciliation",
+                              "runs": [
+                                {
+                                  "type": "text",
+                                  "text": "Conciliación de inventario"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "link",
+                              "href": "/projects/#control-tower",
+                              "runs": [
+                                {
+                                  "type": "text",
+                                  "text": "Control Tower de Transporte"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "contentGroup",
+                      "blocks": [
+                        {
+                          "type": "contentGroup",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "2023–2025"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "contentGroup",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "Analista Senior de Operaciones y Logística"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "contentGroup",
+                      "blocks": [
+                        {
+                          "type": "list",
+                          "ordered": false,
+                          "items": [
+                            {
+                              "type": "listItem",
+                              "blocks": [
+                                {
+                                  "type": "copyText",
+                                  "text": "Coordiné trabajo transversal entre Operaciones, Logística, Tecnología, Finanzas y equipos regionales."
+                                }
+                              ]
+                            },
+                            {
+                              "type": "listItem",
+                              "blocks": [
+                                {
+                                  "type": "copyText",
+                                  "text": "Coordiné validación operacional y de datos en la migración Brasil–Chile: cerca de 120.000 registros maestros y ~90% del alcance aprobado estabilizado."
+                                }
+                              ]
+                            },
+                            {
+                              "type": "listItem",
+                              "blocks": [
+                                {
+                                  "type": "copyText",
+                                  "text": "Participé en rediseño de devoluciones e indemnizaciones y en la mejora de la resolución de anomalías de transporte, de ~2 días a 4 horas."
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "copy",
+                          "runs": [
+                            {
+                              "type": "link",
+                              "href": "/projects/#brazil-chile-data",
+                              "runs": [
+                                {
+                                  "type": "text",
+                                  "text": "Migración Brasil–Chile"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "link",
+                              "href": "/projects/#transport-anomalies",
+                              "runs": [
+                                {
+                                  "type": "text",
+                                  "text": "Anomalías de transporte"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "contentGroup",
+                      "blocks": [
+                        {
+                          "type": "contentGroup",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "2019–2021"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "contentGroup",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "Analista Senior de Proyectos de Operaciones y Logística"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "contentGroup",
+                      "blocks": [
+                        {
+                          "type": "list",
+                          "ordered": false,
+                          "items": [
+                            {
+                              "type": "listItem",
+                              "blocks": [
+                                {
+                                  "type": "copyText",
+                                  "text": "Proyectos asociados a logística, transporte, KPIs, automatización y productividad."
+                                }
+                              ]
+                            },
+                            {
+                              "type": "listItem",
+                              "blocks": [
+                                {
+                                  "type": "copyText",
+                                  "text": "Trabajo en procesos de picking, business cases y control presupuestario."
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "copy",
+                          "runs": [
+                            {
+                              "type": "link",
+                              "href": "/projects/picking-line-balancing/",
+                              "runs": [
+                                {
+                                  "type": "text",
+                                  "text": "Balanceo de línea de picking"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentItem",
+              "blocks": [
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "contentGroup",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "2021–2023"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "contentGroup",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "ACHS Servicios"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "heading",
+                      "level": 3,
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Jefe de Operaciones"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        {
+                          "type": "listItem",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "Gestión territorial de transporte de pacientes: flota, rutas, demanda, capacidad, SLA, continuidad operacional y equipos."
+                            }
+                          ]
+                        },
+                        {
+                          "type": "listItem",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "Diseñé un modelo de asignación de flota basado en demanda histórica."
+                            }
+                          ]
+                        },
+                        {
+                          "type": "listItem",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "El modelo se asoció a aproximadamente 15% menos uso de transportes en la Región Metropolitana."
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "copy",
+                      "runs": [
+                        {
+                          "type": "link",
+                          "href": "/projects/patient-transport-optimization/",
+                          "runs": [
+                            {
+                              "type": "text",
+                              "text": "Optimización de transporte de pacientes"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentItem",
+              "blocks": [
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "contentGroup",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "2017–2019"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "contentGroup",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "Coprove"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "heading",
+                      "level": 3,
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Jefe de Proyecto"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        {
+                          "type": "listItem",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "Proyectos internos de inventario, control operacional y mejora de procesos."
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentItem",
+              "blocks": [
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "contentGroup",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "2015–2017"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "contentGroup",
+                      "blocks": [
+                        {
+                          "type": "copyText",
+                          "text": "704 Ingeniería"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "contentGroup",
+                  "blocks": [
+                    {
+                      "type": "heading",
+                      "level": 3,
+                      "runs": [
+                        {
+                          "type": "text",
+                          "text": "Ingeniero de Proyecto"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        {
+                          "type": "listItem",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "Proyectos industriales de HVAC, PLC e infraestructura."
+                            }
+                          ]
+                        },
+                        {
+                          "type": "listItem",
+                          "blocks": [
+                            {
+                              "type": "copyText",
+                              "text": "Coordinación de equipos, planificación y calidad."
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "labelledBy": "experience-title",
+      "anchor": "experience"
+    },
+    {
+      "type": "contentSection",
+      "blocks": [
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "HERRAMIENTAS"
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 2,
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Capacidades y herramientas"
+                }
+              ],
+              "anchor": "skills-title"
+            }
+          ]
+        },
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "contentItem",
+              "blocks": [
+                {
+                  "type": "heading",
+                  "level": 3,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Proyectos y transformación"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Alcance · planificación · stakeholders · riesgos · presupuesto · testing · implementación · cambio · adopción · reporting"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "PMI / PMBOK · Agile · Scrum · Kanban · Lean · Jira · MS Project"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentItem",
+              "blocks": [
+                {
+                  "type": "heading",
+                  "level": 3,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Supply Chain y operaciones"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Logística · almacenamiento · inventario · fulfillment · transporte · picking · planificación de abastecimiento · KPIs"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "SAP · SAP S/4HANA · SAP EWM · WMS · Coupa"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentItem",
+              "blocks": [
+                {
+                  "type": "heading",
+                  "level": 3,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Datos y decisiones"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "SQL · BigQuery · Power BI · Excel · Databricks · VBA"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentItem",
+              "blocks": [
+                {
+                  "type": "heading",
+                  "level": 3,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Automatización"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Python · Apps Script · Power Automate · n8n"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "contentItem",
+              "blocks": [
+                {
+                  "type": "heading",
+                  "level": 3,
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Exploración actual"
+                    }
+                  ]
+                },
+                {
+                  "type": "copy",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "LLMs · AI Agents · RAG · Ollama · Codex · OpenCode · IA local"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "labelledBy": "skills-title"
+    },
+    {
+      "type": "contentSection",
+      "blocks": [
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "FORMACIÓN"
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 2,
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Educación"
+                }
+              ],
+              "anchor": "education-title"
+            },
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "strong",
+                  "runs": [
+                    {
+                      "type": "text",
+                      "text": "Ingeniería Mecánica"
+                    }
+                  ]
+                },
+                {
+                  "type": "break"
+                },
+                {
+                  "type": "text",
+                  "text": "Universidad Central de Venezuela · 2015"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "IDIOMAS"
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 2,
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Idiomas"
+                }
+              ]
+            },
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Español · nativo"
+                },
+                {
+                  "type": "break"
+                },
+                {
+                  "type": "text",
+                  "text": "Inglés · avanzado profesional"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "contentGroup",
+          "blocks": [
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "UBICACIÓN"
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 2,
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Base"
+                }
+              ]
+            },
+            {
+              "type": "copy",
+              "runs": [
+                {
+                  "type": "text",
+                  "text": "Santiago, Chile"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "labelledBy": "education-title"
+    }
+  ],
+  "profile": {
+    "profession": "Ingeniería Mecánica",
+    "location": "Santiago, Chile",
+    "positioning": "Proyectos · Transformación · Supply Chain · Tecnología"
+  },
+  "skills": [
+    {
+      "area": "Proyectos y transformación",
+      "skills": [
+        "alcance",
+        "planificación",
+        "stakeholders",
+        "riesgos",
+        "dependencias",
+        "presupuesto",
+        "testing",
+        "implementación",
+        "cambio",
+        "adopción",
+        "reporting"
+      ],
+      "tools": [
+        "PMI/PMBOK",
+        "Agile",
+        "Scrum",
+        "Kanban",
+        "Lean",
+        "Jira",
+        "MS Project"
+      ]
+    },
+    {
+      "area": "Supply Chain y operaciones",
+      "skills": [
+        "logística",
+        "almacenamiento",
+        "inventario",
+        "fulfillment",
+        "transporte",
+        "picking",
+        "abastecimiento",
+        "KPIs"
+      ],
+      "tools": [
+        "SAP",
+        "SAP S/4HANA",
+        "SAP EWM",
+        "WMS",
+        "Coupa"
+      ]
+    },
+    {
+      "area": "Datos y decisiones",
+      "skills": [
+        "SQL",
+        "BigQuery",
+        "Power BI",
+        "Excel",
+        "Databricks",
+        "VBA"
+      ],
+      "tools": []
+    },
+    {
+      "area": "Automatización",
+      "skills": [
+        "Python",
+        "Apps Script",
+        "Power Automate",
+        "n8n"
+      ],
+      "tools": []
+    },
+    {
+      "area": "Exploración aplicada",
+      "skills": [
+        "LLMs",
+        "AI Agents",
+        "RAG",
+        "Ollama",
+        "Codex",
+        "OpenCode",
+        "IA local"
+      ],
+      "tools": []
+    }
+  ]
+}
