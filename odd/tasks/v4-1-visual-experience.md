@@ -1,0 +1,73 @@
+# V4.1 Visual Experience
+
+## Objective
+Refine the approved V4 personal site into a visually distinctive, responsive, accessible professional experience while preserving its static architecture, route set, SEO, factual content, and five-act Home order.
+
+## Problem / Why
+The current V4 structure and content are sound, but its serif-heavy headings, repetitive rule/list rhythm, and passive signature details feel more like a styled CV than a memorable personal profile. V4.1 changes the visual language and makes the signature system meaningfully interactive without changing architecture or inventing claims/assets.
+
+## Scope
+- Preserve all eight public routes, route-specific SEO metadata, existing professional facts, attribution, CV print behavior, and Home act order.
+- Home: split 58/42 hero with name, 11-year engineering context, original personal question, one support sentence, subordinate domains and CTA set; abstract no-portrait visual. Then signature, selected projects, career/human notes, and navy contact.
+- Use system sans-serif 700 display headings; H1 88px desktop/56px mobile; 17–18px body; Georgia only for the personal statement/quotes; selective mono metadata. Retain paper/navy/red/pale-blue palette; reduce red uppercase mono labels roughly by half and use fewer borders.
+- Signature content remains one source with five evidence-backed details (`ver`, `simplificar`, `conectar`, `automatizar`, `medir`), progressively enhanced desktop tabs/one-panel view and native mobile/no-JS details. Implement keyboard roving focus, arrows/Home/End, click activation, ARIA links; breakpoint changes preserve selection and only restore focus when the focused control disappears. Initialization failure leaves fallback intact.
+- Create four distinct, light, honest reusable SVG/CSS project visuals; preserve domain constraints and outcomes. Inventory reconciliation (2-day to 4-hour exception resolution plus 30%/40% initiative outcomes); Brazil–Chile data mapping (~120k); patient transport is patient allocation/routes/service, never freight; picking is orders/zones/workload balancing, never manufacturing. Four case pages use a consistent problem/outcome/visual/flow/contribution/confirmed decisions/before-after/outcome rhythm and distinguish personal contribution from collective results.
+- Keep hero visual abstract and intentional, never a fake portrait. Document future `assets/harrys-portrait-800.webp` slot only; do not add missing image placeholder.
+- Keep AI exploration copy factual and secondary; remove public pending-portrait, FTE, internal, defensive, or legal disclaimers.
+- Update DESIGN.md and README where behavior/design system changes. Preserve unrelated untracked `.codegraph/`, `.codex-remote-attachments/`, and existing ODD work.
+
+## Constraints / Authorization
+- User explicitly authorizes implementation on branch `redesign/v4-1-visual-experience` and work-unit Conventional Commits, without Co-Authored-By attribution.
+- No push, merge, PR, deployment, automation, or native review; parent owns delivery and has confirmed clone RDD off.
+- TDD explicitly off; use ordinary functional checks. No imagegen; SVG/CSS abstract visuals and existing image use/correction explicitly authorized.
+- Maintain static HTML/CSS and minimal JS; retain print layout and all SEO/routing.
+- Delivery strategy: single branch / no PR now, explicit user-authorized direct branch/merge delivery exception to ~400-line heuristic; do not enforce a size-only split or open PR.
+
+## Effective TDD / Verification
+TDD: off (explicit prior-session instruction); ordinary checks required.
+Commands: `python tools/build_site.py`; `python tools/verify_site.py`; `git diff --check`; `node --check script.js`.
+Visual/interaction checks: browser if available; home at desktop and 390×844 and 360×800; signature selection, keyboard movement, fallback and breakpoint state. Do not claim screenshot/browser QA unless performed.
+Native RDD: off by explicit parent instruction; do not start a review lifecycle.
+
+## Route and Trigger
+Route: delegated direct single writer (as assigned by parent); implementation touches multiple existing HTML/CSS/JS/doc files, so writer delegation trigger is 2+ non-trivial files. User authorized branch commits. Do not create SDD artifacts or use native review.
+
+## Tasks / Progress
+- [x] V41-1 — Add this recovery/acceptance document and full Engram mirror before source writes; read back both. Evidence: file read back; Engram topic `odd/v4-1-visual-experience/tasks` saved and read-back confirmed below.
+- [ ] V41-2 — Recompose Home into the precise 5-act V4.1 visual system and update DESIGN.md / README.
+- [ ] V41-3 — Implement progressive signature interaction with accessible tabs/detail fallback, preserve CV print behavior.
+- [ ] V41-4 — Redesign all four project case visuals/content rhythm and the featured/secondary project composition without changing facts.
+- [ ] V41-5 — Apply responsive design and typography across all public routes; preserve metadata and route behavior.
+- [ ] V41-6 — Run required build, verifier, JS syntax, diff checks; perform available browser interaction/viewport checks, recording unavailable items honestly.
+- [ ] V41-7 — Commit coherent tested work units; record commit IDs; leave push/merge/deploy and native review to parent.
+
+## Acceptance Criteria
+1. All 8 routes remain buildable and retain their route-specific canonical/social/JSON-LD content and factual professional content.
+2. Home order is exactly identity/hero, signature, selected transformations, career+human, contact; no sixth act.
+3. Desktop hero is 58/42 and split; mobile 390 viewport shows name, statement, actions, and start of visual. No placeholder/fake portrait.
+4. Signature preserves its single native content source, all five exact IDs and evidence, desktop tab interaction, mobile/no-JS details fallback, ARIA relationships and keyboard interaction; breakpoint changes do not steal focus.
+5. All four project visuals are distinct and factually honest; patient transport and picking contexts are accurately represented; contribution and outcomes remain separate.
+6. Sans display and body, Georgia only for statements/quotes, selective metadata, less red/mono and fewer rules; palette retained.
+7. Public copy contains no pending-portrait/FTE/internal/defensive/legal disclaimers; AI exploration uses approved framing.
+8. `/cv/` print layout and eight SEO routes remain intact; no new dependencies/framework.
+9. Required checks are run and reported accurately; commits contain only V4.1 files, no unrelated untracked content.
+
+## Progress Evidence
+- Initial branch: `redesign/v4-1-visual-experience`.
+- Initial tracked state is clean; unrelated untracked `.codegraph/`, `.codex-remote-attachments/`, and `odd/tasks/personal-brand-v4.md` must remain untouched.
+- CodeGraph index is healthy but only covers Python/JS/XML, not HTML; structural HTML/CSS mapping therefore requires narrow source inspection after checking `codegraph status` and `codegraph files`.
+- Existing public pages: `/`, `/projects/`, four case pages, `/cv/`, and `/404.html`.
+- `tools/build_site.py` and `tools/verify_site.py` support multipage route discovery and SEO checks; build invocation is `python tools/build_site.py`, verifier invocation `python tools/verify_site.py`.
+- Original V4 case content and professional facts remain the source of truth; the supplied V4.1 execution brief supersedes any visual implementation assumptions.
+
+## Next Step
+Complete task V41-1 mirror/readback, then implement V41-2 through V41-5, verify, and commit coherent work units. No push/merge/PR/deploy.
+
+## Relevant Files
+- `index.html` — five-act homepage and signature detail content.
+- `styles.css` — shared responsive visual system and CV print styles.
+- `script.js` — progressive signature interaction.
+- `projects/` — projects index and four case studies.
+- `cv/index.html` — standalone print-ready CV.
+- `DESIGN.md`, `README.md` — design/product and local usage documentation.
+- `tools/build_site.py`, `tools/verify_site.py` — public site build and route validation.
