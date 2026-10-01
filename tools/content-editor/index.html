@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Editor local · Harrys Yusti</title>
+  <link rel="stylesheet" href="/app.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="editor-shell">
+    <header class="editor-header">
+      <a class="editor-brand" href="/" aria-label="Editor de contenido, inicio">HY <span>Contenido del sitio</span></a>
+      <a class="preview-link" href="http://127.0.0.1:8767/" target="_blank" rel="noopener noreferrer">Abrir vista previa ↗</a>
+    </header>
+    <main id="main">
+      <section class="editor-intro" aria-labelledby="editor-title">
+        <p class="eyebrow">Edición local</p>
+        <h1 id="editor-title">Tu contenido, en un solo lugar.</h1>
+        <p>Edita los textos y datos del sitio sin tocar HTML ni código. Los cambios se guardan en este equipo y reconstruyen la vista previa; todavía no se publican en internet.</p>
+      </section>
+      <div class="editor-layout">
+        <nav class="editor-nav" aria-label="Secciones del editor">
+          <button type="button" class="nav-item is-active" data-view="site" aria-current="page">Sitio</button>
+          <button type="button" class="nav-item" data-view="home">Inicio</button>
+          <button type="button" class="nav-item" data-view="projects">Proyectos</button>
+          <button type="button" class="nav-item" data-view="cv">CV y trayectoria</button>
+        </nav>
+        <section class="editor-panel" aria-label="Formulario de edición">
+          <div id="form-content" aria-live="polite"><p>Cargando el contenido…</p></div>
+          <div class="save-bar">
+            <p id="save-status" role="status" aria-live="polite">Los cambios aún no se guardaron.</p>
+            <button id="save-button" class="save-button" type="button">Guardar y reconstruir vista previa</button>
+          </div>
+        </section>
+      </div>
+      <aside class="publication-note"><strong>Importante:</strong> guardar actualiza la vista previa local. Para publicar en el sitio, hace falta revisar y enviar los cambios por el flujo habitual de GitHub Pages.</aside>
+    </main>
+    <footer class="editor-footer">Editor local del sitio personal · No expone un servicio de escritura a internet.</footer>
+  </div>
+</body>
+</html>
