@@ -1,6 +1,6 @@
 # Master Content Source — ODD Recovery Tracker
 
-**Status:** In progress — MCS-1 semantic wiring is corrected; MCS-2 and MCS-3 are complete; MCS-4 remains.
+**Status:** Complete — canonical source/generation, discovery, typography, and final verification are complete locally.
 
 ## Objective
 Establish one editable structured content source as the canonical input for Home, Projects, CV, and all nine project/case pages, then generate checked-in static HTML at the existing GitHub Pages routes and `dist/`. Improve project discovery with multi-assignable tags, accessible client-side text search and tag filters, and make typography, spacing, the name treatment, and secondary project CTA alignment consistent.
@@ -32,13 +32,13 @@ Content is currently maintained across multiple pages, making facts and presenta
 ## Tasks
 
 ### [x] MCS-1 — Establish canonical content and static generation
-**Status:** Complete, including semantic-wiring correction. **Route:** delegated direct writer. **Initial commit:** `162e505` (`feat(content): generate static routes from canonical data`). **Corrective commit:** recorded after commit creation.
+**Status:** Complete, including semantic-wiring correction. **Route:** delegated direct writer. **Initial commit:** `162e505` (`feat(content): generate static routes from canonical data`). **Corrective commit:** `0ae6bc3` (`fix(content): render CV from semantic profile data`).
 
 - [x] Define one author-friendly semantic JSON source covering Home, Projects, CV, and all nine existing project/case pages; remove the duplicated editorial facts document after migration.
 - [x] Generate static HTML from that source using only the Python standard library and static HTML/CSS/JavaScript; check in outputs at current routes and `dist/`.
 - [x] Preserve confirmed facts and current routes; add no framework or dependency.
 - [x] Ensure CV-visible career, skills, education, languages, profile, and location render from the corresponding structured domain fields instead of parallel copy blocks. Reopened after final semantic audit found these fields were only validated while duplicate prose in `cvPage` drove visible output; migrated the copy into the structured fields and made `cvPage` breadcrumb-only.
-- [x] Record the corrective work-unit commit and focused verification result here; exact commit identity will be filled immediately after commit creation.
+- [x] Record the corrective work-unit commit and focused verification result here: `0ae6bc3`.
 
 **Acceptance criteria**
 - [x] All in-scope pages are represented in the canonical source and visible domain facts are rendered from their semantic fields, without duplicate parallel CV prose.
@@ -91,26 +91,29 @@ Content is currently maintained across multiple pages, making facts and presenta
 - [x] Inspected Home, Projects, CV, and a long-form inventory case in local Playwright at 1440×900 and/or 390×844; verified headings, nav wrapping, content, portrait/diagram, card layout, and comfortable mobile rendering. Projects/Home were captured at both required viewport sizes.
 - [x] Screenshot evidence is in untracked `output/playwright/`; filters and CTA baselines were also interaction/geometry checked in the browser.
 
-### [ ] MCS-4 — End-to-end verification and visual QA
-**Status:** Planned. **Route:** delegated verification after implementation; independent from the writer so the complete generated site can be checked in a fresh context.
+### [x] MCS-4 — End-to-end verification and visual QA
+**Status:** Complete. **Route:** delegated final verification after implementation.
 
-- [ ] Verify the structured source, generator, generated routes, search/filter behavior, and visual changes together.
-- [ ] Resolve only issues within the authorized scope; preserve unrelated working-tree state.
-- [ ] Record exact checks, results, screenshots or browser evidence location (if any), remaining limitations, and final local state.
+- [x] Verify the structured source, generator, generated routes, search/filter behavior, and visual changes together.
+- [x] Resolve only issues within the authorized scope; preserve unrelated working-tree state.
+- [x] Record exact checks, results, screenshot/browser evidence location, remaining limitations, and final local state.
 
 **Acceptance criteria**
-- [ ] Every page in scope is generated from the canonical source and available at its pre-existing route and under `dist/`.
-- [ ] Search and tag filtering pass the supported keyboard and interaction scenarios.
-- [ ] Visual QA confirms normalized type/spacing, readable name tracking, responsive layout, and aligned secondary CTAs.
-- [ ] Verification distinguishes local results from remote publication; no push, PR, merge, or deployment is claimed.
+- [x] Every page in scope is generated from the canonical source and available at its pre-existing route and under `dist/`.
+- [x] Search and tag filtering pass the supported keyboard and interaction scenarios.
+- [x] Visual QA confirms normalized type/spacing, readable name tracking, responsive layout, and aligned secondary CTAs.
+- [x] Verification distinguishes local results from remote publication; no push, PR, merge, or deployment is claimed.
 
 **Checks**
-- [ ] Run `python tools/build_site.py` and `python tools/verify_site.py`; include observed outputs/status.
-- [ ] Run local desktop and mobile browser walkthroughs for all routes; focus deeply on Projects interactions and representative long/short content pages, while confirming route presence for every page.
-- [ ] Inspect `git status` and changed-path inventory to ensure unrelated pre-existing untracked paths were not changed or staged.
+- [x] `python tools/build_site.py` — PASS; two consecutive builds produced identical SHA-256 hashes for 49 public source/dist files. Both root and `dist/` contain exactly eight HTML routes.
+- [x] `python tools/verify_site.py` — PASS for route/HTML/resource/image checks, SEO/canonical/JSON-LD/robots/sitemap/output allowlist, project/case coverage and diagrams. `node --check script.js`, `python -m py_compile tools/build_site.py tools/verify_site.py`, and `git diff --check` passed.
+- [x] Local browser visited all eight routes at `http://127.0.0.1:8765`; each reported its expected page title and h1, with no broken images. Browser console had 0 errors and 0 warnings.
+- [x] Projects/Home screenshots captured at 1440×900 and 390×844; updated CV screenshots captured at both sizes in `output/playwright/final-{projects,home,cv}-{1440,390}.png`. Inspected all six images. CV browser readback matched canonical career/profile/skills/education/language/location facts, including the reported ~35% claim.
+- [x] Projects interaction: typed `inventario`, tabbed to native taxonomy checkboxes and toggled with Space; tested `no-match` (0/9 and empty state), then clicked reset (9/9, empty query, no checked tags). Desktop secondary card actions aligned at y=2948 in transport and y=3444 in control/engineering groups.
+- [x] Final `git status` confirmed only the tracker remained modified before its verification commit; protected pre-existing `.codegraph/`, `.codex-remote-attachments/`, and `odd/tasks/personal-brand-v4.md` stayed unmodified and unstaged. QA screenshots remain local/untracked; no remote operations occurred.
 
 ## Progress and Next Step
-MCS-1's initial generator is at `162e505`; its final semantic audit found CV-visible facts came from parallel `cvPage` copy instead of career/skills/education/languages/profile fields. The corrective work migrates those values into semantic fields and makes the page template render them; emitted CV content is checked against the source. Record the corrective commit identity after creation. MCS-2 is complete at `98c854c`; MCS-3 at `c1539c9`. Complete MCS-4 route inventory, final regeneration and verification, working-tree reconciliation, and sync the final mirror.
+MCS-1's initial generator is at `162e505`; its final semantic audit found CV-visible facts came from parallel `cvPage` copy instead of career/skills/education/languages/profile fields. The corrective work at `0ae6bc3` migrates those values into semantic fields and makes the page template render them; emitted CV content is checked against the source. MCS-2 is complete at `98c854c`; MCS-3 at `c1539c9`; MCS-4 final verification is complete. Outputs are deterministic across 49 files, all eight existing routes work locally, project search/filter interaction and responsive screenshots were inspected, and no remote work was performed.
 
 ## Relevant Files
 - `odd/tasks/master-content-source.md` — this feature's recovery tracker; separate from `odd/tasks/profile-polish-dark-home-cv.md`.
