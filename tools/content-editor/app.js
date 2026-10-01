@@ -315,7 +315,7 @@ function renderProjects() {
       remove.className = "remove-button";
       remove.textContent = "Quitar este proyecto";
       remove.addEventListener("click", () => {
-        if (!window.confirm(`¿Quieres quitar “${project.title || "este registro"}” de la lista? Para guardar, mantén los nueve registros del sitio.`)) return;
+        if (!window.confirm(`¿Quieres quitar “${project.title || "este registro"}” de la lista? Los cuatro casos con ruta se conservan.`)) return;
         content.projects.splice(index, 1);
         markDirty();
         render();
@@ -326,7 +326,7 @@ function renderProjects() {
   });
   const callout = document.createElement("p");
   callout.className = "field-help project-count-note";
-  callout.textContent = "La estructura actual requiere nueve registros, cuatro casos con ruta y cuatro proyectos destacados. Para reemplazar una experiencia, elimina primero una tarjeta secundaria y agrega su reemplazo antes de guardar.";
+  callout.textContent = "Puedes agregar o quitar proyectos secundarios. Asigna al menos un tema existente a cada proyecto y conserva los cuatro casos con ruta y las cuatro prioridades destacadas.";
   heading.append(callout);
 }
 

@@ -42,6 +42,81 @@ class ContentEditorSaveTests(unittest.TestCase):
         self.path_patch.stop()
         self.temporary_directory.cleanup()
 
+    def _secondary_project(self):
+        selected_ids = set(self.source["home"]["selectedWork"]["projectIds"])
+        return next(project for project in self.source["projects"]
+                    if project.get("route") is None and not project["featured"]
+                    and project["id"] not in selected_ids)
+
+    def _validate_and_render_projects(self):
+        data = build_site._load_content()
+        return data, build_site._render_project_portfolio(data, build_site.DEFAULT_SITE_URL)
+
+    def test_tenth_secondary_project_with_one_valid_tag_is_supported(self):
+        added = copy.deepcopy(self._secondary_project())
+        added.update({"id": "new-secondary-project", "title": "Proyecto secundario agregado",
+                      "featured": False, "route": None,
+                      "tags": [self.source["taxonomy"]["tags"][0]["id"]]})
+        self.source["projects"].append(added)
+
+        content_editor.save_content(self.source, build_fn=self._validate_and_render_projects)
+        data, rendered = self._validate_and_render_projects()
+
+        self.assertEqual(len(data["projects"]), 10)
+        self.assertEqual(data["projects"][-1]["tags"], [self.source["taxonomy"]["tags"][0]["id"]])
+        self.assertEqual(sum(project["featured"] for project in data["projects"]), 4)
+        self.assertIn('data-project-id="new-secondary-project"', rendered)
+        self.assertIn("Proyecto secundario agregado", rendered)
+
+    def test_secondary_project_can_be_removed_without_changing_case_routes(self):
+        removed = self._secondary_project()
+        removed_id = removed["id"]
+        expected_routes = {project["route"] for project in self.source["projects"] if project.get("route")}
+        self.source["projects"].remove(removed)
+
+        content_editor.save_content(self.source, build_fn=self._validate_and_render_projects)
+        data, rendered = self._validate_and_render_projects()
+
+        self.assertEqual(len(data["projects"]), 8)
+        self.assertEqual({project["route"] for project in data["projects"] if project.get("route")}, expected_routes)
+        self.assertEqual(sum(project["featured"] for project in data["projects"]), 4)
+        self.assertNotIn(f'data-project-id="{removed_id}"', rendered)
+
+    def test_unknown_project_tag_is_rejected(self):
+        self.source["projects"][0]["tags"] = ["unknown-tag"]
+        rebuild = unittest.mock.Mock()
+
+        with self.assertRaisesRegex(ValueError, "unknown taxonomy IDs"):
+            content_editor.save_content(self.source, build_fn=rebuild)
+
+        self.assertEqual(self.content_path.read_bytes(), self.original)
+        rebuild.assert_not_called()
+
+    def test_four_existing_case_routes_cannot_be_removed_or_reassigned(self):
+        original_route_set = {project["route"] for project in self.source["projects"] if project.get("route")}
+        case = next(project for project in self.source["projects"] if project.get("route"))
+        case["route"] = "/projects/new-route/"
+
+        with self.assertRaisesRegex(ValueError, "uniquely preserve the existing case routes"):
+            content_editor.save_content(self.source, build_fn=unittest.mock.Mock())
+
+        self.assertEqual(self.content_path.read_bytes(), self.original)
+        self.assertEqual(len(original_route_set), 4)
+
+    def test_duplicate_case_route_on_new_project_is_rejected_before_writes(self):
+        duplicate = copy.deepcopy(next(project for project in self.source["projects"] if project.get("route")))
+        duplicate.update({"id": "duplicate-case-route", "title": "Duplicated case route", "featured": False})
+        self.source["projects"].append(duplicate)
+        rebuild = unittest.mock.Mock()
+
+        with self.assertRaisesRegex(ValueError, "exactly four project records must uniquely preserve"):
+            content_editor.save_content(self.source, build_fn=rebuild)
+
+        self.assertEqual(self.content_path.read_bytes(), self.original)
+        self.assertEqual(self.root_home.read_bytes(), b"original root home")
+        self.assertEqual(self.dist_home.read_bytes(), b"original dist home")
+        rebuild.assert_not_called()
+
     def test_valid_content_is_written_and_rebuilt(self):
         self.source["home"]["hero"]["thesis"] = "Entender lo complejo. Hacerlo funcionar mejor."
         rebuild = unittest.mock.Mock()

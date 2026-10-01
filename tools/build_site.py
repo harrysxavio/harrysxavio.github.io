@@ -168,8 +168,8 @@ def _load_content() -> dict[str, object]:
             raise ValueError(f"{field}.label is required")
         tag_ids.add(tag["id"])
     projects = data.get("projects")
-    if not isinstance(projects, list) or len(projects) != 9:
-        raise ValueError("content/site.json: projects must contain exactly nine records")
+    if not isinstance(projects, list) or len(projects) < 4:
+        raise ValueError("content/site.json: projects must include the four existing case records")
     project_ids: set[str] = set()
     for index, project in enumerate(projects):
         if not isinstance(project, dict) or not isinstance(project.get("id"), str):
@@ -199,13 +199,15 @@ def _load_content() -> dict[str, object]:
                 raise ValueError(f"{field}.homeCard requires title, situation, task, contribution, and result prose")
         if project.get("route"):
             _validate_case_details(project.get("caseDetails"), f"{field}.caseDetails")
-    project_routes = {project["route"] for project in projects if project.get("route")}
+    routed_projects = [project for project in projects if project.get("route")]
+    assigned_routes = [project["route"] for project in routed_projects]
+    project_routes = set(assigned_routes)
     expected_project_routes = {
         "/projects/inventory-reconciliation/", "/projects/brazil-chile-data-migration/",
         "/projects/patient-transport-optimization/", "/projects/picking-line-balancing/",
     }
-    if project_routes != expected_project_routes:
-        raise ValueError("content/site.json: project route assignments must preserve the four existing case routes")
+    if len(routed_projects) != len(expected_project_routes) or len(project_routes) != len(assigned_routes) or project_routes != expected_project_routes:
+        raise ValueError("content/site.json: exactly four project records must uniquely preserve the existing case routes")
     featured_projects = [project for project in projects if project["featured"]]
     if len(featured_projects) != 4:
         raise ValueError("content/site.json: exactly four projects must remain featured")
