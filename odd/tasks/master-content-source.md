@@ -1,6 +1,6 @@
 # Master Content Source — ODD Recovery Tracker
 
-**Status:** Complete — canonical source/generation, discovery, typography, and final verification are complete locally.
+**Status:** Complete — MCS-1's independent-QA correction and final end-to-end checks are complete; MCS-2, MCS-3, and MCS-4 remain complete.
 
 ## Objective
 Establish one editable structured content source as the canonical input for Home, Projects, CV, and all nine project/case pages, then generate checked-in static HTML at the existing GitHub Pages routes and `dist/`. Improve project discovery with multi-assignable tags, accessible client-side text search and tag filters, and make typography, spacing, the name treatment, and secondary project CTA alignment consistent.
@@ -32,16 +32,20 @@ Content is currently maintained across multiple pages, making facts and presenta
 ## Tasks
 
 ### [x] MCS-1 — Establish canonical content and static generation
-**Status:** Complete, including semantic-wiring correction. **Route:** delegated direct writer. **Initial commit:** `162e505` (`feat(content): generate static routes from canonical data`). **Corrective commit:** `0ae6bc3` (`fix(content): render CV from semantic profile data`).
+**Status:** Complete after independent-QA correction. **Route:** delegated direct writer. **Initial commit:** `162e505` (`feat(content): generate static routes from canonical data`). **CV correction:** `0ae6bc3` (`fix(content): render CV from semantic profile data`). **Reopen reason/evidence:** independent QA counted 288 heading/copy/link/contentGroup presentation nodes in `home` and case copy, still passed directly through `_render_blocks`; `content/README.md` also incorrectly documented `casePages`. Corrected and recorded in `35a2d8c`.
 
 - [x] Define one author-friendly semantic JSON source covering Home, Projects, CV, and all nine existing project/case pages; remove the duplicated editorial facts document after migration.
 - [x] Generate static HTML from that source using only the Python standard library and static HTML/CSS/JavaScript; check in outputs at current routes and `dist/`.
 - [x] Preserve confirmed facts and current routes; add no framework or dependency.
 - [x] Ensure CV-visible career, skills, education, languages, profile, and location render from the corresponding structured domain fields instead of parallel copy blocks. Reopened after final semantic audit found these fields were only validated while duplicate prose in `cvPage` drove visible output; migrated the copy into the structured fields and made `cvPage` breadcrumb-only.
 - [x] Record the corrective work-unit commit and focused verification result here: `0ae6bc3`.
+- [x] Replace all remaining Home, Projects-page, not-found, and case-page presentation AST with plain semantic fields and data arrays; build templates that own layout, HTML structure, and escaping.
+- [x] Make `home` an author-friendly named object (hero, signature stages, narrative/career story, selected project IDs, human notes/contact); represent caseDetails with domain concepts such as context/problem, role, decisions, before/after, outcome, and exact approved copy.
+- [x] Correct README to document exact schema and source-edit/build workflow; add verifier regression checks for semantic-only source and representative Home/case/career field output.
+- [x] Record corrective commit `35a2d8c` (`fix(content): render profile pages from semantic data`) and actual build, verifier, syntax, compile, diff, deterministic, and browser results below.
 
 **Acceptance criteria**
-- [x] All in-scope pages are represented in the canonical source and visible domain facts are rendered from their semantic fields, without duplicate parallel CV prose.
+- [x] All in-scope pages are represented in the canonical source; editable prose/facts/tags use semantic fields, never presentation-node/HTML-tree schemas, and render from those fields.
 - [x] Generated files exist at the existing public routes and in `dist/`, with no route additions.
 - [x] Rebuilding is deterministic for unchanged input: 33 root-route/dist route-and-asset files retained identical SHA-256 hashes across two builds.
 
@@ -52,6 +56,13 @@ Content is currently maintained across multiple pages, making facts and presenta
 - [x] Correct CV field wiring, rebuild, inspect emitted CV against `career[]`, `skills[]`, `education`, `languages[]`, and `profile`, then record the corrective commit.
 - [x] `python tools/build_site.py`, `python tools/verify_site.py`, and `python -m py_compile tools/build_site.py tools/verify_site.py` — PASS; verifier compares all semantic profile, career, education, skills, tools, language and role-link values against generated CV text.
 - [x] Local Playwright CV readback: rendered 3,733 characters, all source-driven headings, reported ~35% metric, education/year, and location; PDF and print actions remain present.
+- [x] Replaced remaining content-page AST, corrected the editing guide, and verified representative domain fields map to emitted Home/case/career text without parallel presentation prose.
+- [x] `python tools/build_site.py` (twice) — PASS; repeated builds produced identical SHA-256 hashes for 44 selected public route/asset files; root and `dist/` each contain the same eight HTML routes.
+- [x] `python tools/verify_site.py` — PASS for route inventory, HTML/resources, SEO/canonical/JSON-LD/robots/sitemap/allowlist, taxonomy/case coverage, and semantic-source-to-output regression assertions.
+- [x] `python -m py_compile tools/build_site.py tools/verify_site.py`, `node --check script.js`, and `git diff --check` — PASS; Git emitted only expected working-copy LF/CRLF notices.
+- [x] Semantic audit confirmed no presentation keys (`type`, `blocks`, `runs`, `attrs`, `level`, `element`, `contentGroup`, `html`, or `fragment`) or HTML fragments in Home, Projects intro, 404 copy, project Home cards, or caseDetails. CV facts continue to render from their semantic fields.
+- [x] Local browser visited all eight routes with one h1 each, zero broken images, and zero page errors. Projects search returned `2 de 9 proyectos` for `inventario`; no-match displayed 0/9; clear restored 9/9. The two-card secondary groups kept aligned action baselines (y=3113 and y=3610 at 1440px).
+- [x] Captured and inspected Home and Projects at 1440×900 and 390×844, plus inventory case at 1440×900 and 390×844. Screenshots are local at `output/playwright/semantic-{home,projects}-{1440,390}.png` and `output/playwright/semantic-inventory-{1440,390}.png`.
 
 ### [x] MCS-2 — Add project tag taxonomy, search, and filters
 **Status:** Complete. **Route:** delegated direct writer. **Commit:** `98c854c` (`feat(projects): add accessible client-side discovery`).
@@ -92,7 +103,7 @@ Content is currently maintained across multiple pages, making facts and presenta
 - [x] Screenshot evidence is in untracked `output/playwright/`; filters and CTA baselines were also interaction/geometry checked in the browser.
 
 ### [x] MCS-4 — End-to-end verification and visual QA
-**Status:** Complete. **Route:** delegated final verification after implementation.
+**Status:** Complete. **Route:** delegated final verification after implementation and the MCS-1 semantic-source correction.
 
 - [x] Verify the structured source, generator, generated routes, search/filter behavior, and visual changes together.
 - [x] Resolve only issues within the authorized scope; preserve unrelated working-tree state.
@@ -110,10 +121,11 @@ Content is currently maintained across multiple pages, making facts and presenta
 - [x] Local browser visited all eight routes at `http://127.0.0.1:8765`; each reported its expected page title and h1, with no broken images. Browser console had 0 errors and 0 warnings.
 - [x] Projects/Home screenshots captured at 1440×900 and 390×844; updated CV screenshots captured at both sizes in `output/playwright/final-{projects,home,cv}-{1440,390}.png`. Inspected all six images. CV browser readback matched canonical career/profile/skills/education/language/location facts, including the reported ~35% claim.
 - [x] Projects interaction: typed `inventario`, tabbed to native taxonomy checkboxes and toggled with Space; tested `no-match` (0/9 and empty state), then clicked reset (9/9, empty query, no checked tags). Desktop secondary card actions aligned at y=2948 in transport and y=3444 in control/engineering groups.
+- [x] Final semantic-source regression pass: 8 routes visited; no broken images or page errors; Home/Projects screenshots at 1440×900 and 390×844 plus inventory case at both sizes inspected; search, empty, reset, and secondary action geometry passed after commit `35a2d8c`.
 - [x] Final `git status` confirmed only the tracker remained modified before its verification commit; protected pre-existing `.codegraph/`, `.codex-remote-attachments/`, and `odd/tasks/personal-brand-v4.md` stayed unmodified and unstaged. QA screenshots remain local/untracked; no remote operations occurred.
 
 ## Progress and Next Step
-MCS-1's initial generator is at `162e505`; its final semantic audit found CV-visible facts came from parallel `cvPage` copy instead of career/skills/education/languages/profile fields. The corrective work at `0ae6bc3` migrates those values into semantic fields and makes the page template render them; emitted CV content is checked against the source. MCS-2 is complete at `98c854c`; MCS-3 at `c1539c9`; MCS-4 final verification is complete. Outputs are deterministic across 49 files, all eight existing routes work locally, project search/filter interaction and responsive screenshots were inspected, and no remote work was performed.
+MCS-1 is complete after its independent-QA correction: Home, Projects intro, 404, and case copy now use named semantic fields and author-friendly arrays; `_render_blocks` and its presentation-node schema are removed, templates own markup/escaping, README documents the actual v3 model, and the verifier rejects AST regressions. Commit: `35a2d8c`. Final build, verifier, syntax, compile, diff, deterministic hash, route, and browser checks are recorded above. MCS-2 (`98c854c`), MCS-3 (`c1539c9`), the CV semantic correction (`0ae6bc3`), and MCS-4 final QA remain recorded.
 
 ## Relevant Files
 - `odd/tasks/master-content-source.md` — this feature's recovery tracker; separate from `odd/tasks/profile-polish-dark-home-cv.md`.
