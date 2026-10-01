@@ -28,3 +28,7 @@ Production: [https://harrysxavio.github.io/](https://harrysxavio.github.io/). Gi
 ## Design and SEO
 
 Editorial Executive Profile: warm paper, navy ink, a restrained red accent, serif display type, sans-serif reading text, open layouts, and fine rules. Each indexable page has route-specific canonical/social metadata and structured data; `robots.txt` points to the generated route sitemap.
+
+## V4.1 experience
+
+The Home retains its five-act story while using an abstract connection-flow hero and progressively enhanced signature steps. At desktop widths the five evidence-backed steps become keyboard-operable tabs; mobile and no-JavaScript use native disclosures. Project detail pages use compact, explanatory SVG process diagrams. The diagrams describe the documented workflow and do not represent a specific production system. The `/cv/` A4 print stylesheet and static, framework-free delivery remain unchanged.

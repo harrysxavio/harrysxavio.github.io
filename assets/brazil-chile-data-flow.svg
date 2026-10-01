@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 260" role="img" aria-labelledby="title desc">
+  <title id="title">Validación y mapeo de datos Brasil–Chile</title>
+  <desc id="desc">Datos maestros de Brasil pasan por validación y mapeo antes de estabilizarse en Chile. El alcance coordinado fue de aproximadamente 120.000 registros maestros.</desc>
+  <style>
+    .line{fill:none;stroke:#8396a1;stroke-width:3;stroke-linecap:round}.node{fill:#f4f0e7;stroke:#172d45;stroke-width:2}.focus{fill:#ab3d32;stroke:#ab3d32}.label{fill:#172d45;font:700 18px system-ui,sans-serif}.note{fill:#536777;font:500 15px system-ui,sans-serif}.inverse{fill:#fff}
+  </style>
+  <path class="line" d="M188 119h102m190 0h80"/>
+  <circle class="node" cx="105" cy="119" r="82"/><rect class="node" x="290" y="65" width="190" height="108" rx="3"/><circle class="focus" cx="560" cy="119" r="82"/>
+  <text class="label" x="105" y="113" text-anchor="middle">Brasil</text><text class="note" x="105" y="136" text-anchor="middle">datos maestros</text>
+  <text class="label" x="385" y="104" text-anchor="middle">Validación</text><text class="label" x="385" y="126" text-anchor="middle">y mapeo</text><text class="note" x="385" y="149" text-anchor="middle">equipos regionales y técnicos</text>
+  <text class="label inverse" x="560" y="113" text-anchor="middle">Chile</text><text class="note inverse" x="560" y="136" text-anchor="middle">destino</text>
+  <text class="note" x="340" y="235" text-anchor="middle">~120.000 registros maestros coordinados</text>
+</svg>

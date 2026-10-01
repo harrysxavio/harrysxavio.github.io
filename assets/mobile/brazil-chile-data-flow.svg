@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 340" role="img" aria-labelledby="title desc">
+  <title id="title">Validación de datos Brasil–Chile</title><desc id="desc">Los datos de Brasil pasan por validación y mapeo antes de estabilizarse en Chile; el alcance fue de aproximadamente 120.000 registros.</desc>
+  <style>text{font-family:Arial,sans-serif;fill:#182b43;font-size:16px;font-weight:600}.muted{fill:#526173;font-size:14px;font-weight:400}.node{fill:#fbf8f1;stroke:#9ca9b5;stroke-width:1.5}.accent{fill:#e8edf2;stroke:#526173}</style>
+  <rect width="360" height="340" rx="12" fill="#f4f0e7"/>
+  <rect class="node" x="54" y="20" width="252" height="58" rx="8"/><text x="180" y="45" text-anchor="middle">Datos de Brasil</text><text class="muted" x="180" y="66" text-anchor="middle">~120.000 registros</text>
+  <path d="M180 78v25" fill="none" stroke="#a8463b" stroke-width="2"/><path d="m173 97 7 7 7-7" fill="none" stroke="#a8463b" stroke-width="2"/>
+  <rect class="node" x="54" y="108" width="252" height="58" rx="8"/><text x="180" y="133" text-anchor="middle">Validación</text><text class="muted" x="180" y="154" text-anchor="middle">revisión operacional y técnica</text>
+  <path d="M180 166v25" fill="none" stroke="#a8463b" stroke-width="2"/><path d="m173 185 7 7 7-7" fill="none" stroke="#a8463b" stroke-width="2"/>
+  <rect class="node" x="54" y="196" width="252" height="58" rx="8"/><text x="180" y="221" text-anchor="middle">Mapeo</text><text class="muted" x="180" y="242" text-anchor="middle">alinear campos de datos</text>
+  <path d="M180 254v25" fill="none" stroke="#a8463b" stroke-width="2"/><path d="m173 273 7 7 7-7" fill="none" stroke="#a8463b" stroke-width="2"/>
+  <rect class="accent" x="54" y="284" width="252" height="42" rx="8"/><text x="180" y="311" text-anchor="middle">Estabilización en Chile</text>
+</svg>

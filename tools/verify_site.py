@@ -24,6 +24,18 @@ REQUIRED_ROUTES = {
 EXPECTED_LINKS = {
     "https://www.linkedin.com/in/h-yusti/", "https://github.com/harrysxavio",
 }
+PROJECT_VISUALS = {
+    "inventory-reconciliation-flow.svg": {"operación", "sistemas", "conciliar", "excepciones", "control"},
+    "brazil-chile-data-flow.svg": {"brasil", "validación", "mapeo", "chile", "120.000"},
+    "patient-transport-allocation.svg": {"demanda", "capacidad", "asignación", "rutas", "servicio", "pacientes"},
+    "picking-workload-balance.svg": {"pedidos", "balanceo", "zona a", "zona b", "picking"},
+}
+CASE_VISUALS = {
+    "projects/inventory-reconciliation/index.html": "inventory-reconciliation-flow.svg",
+    "projects/brazil-chile-data-migration/index.html": "brazil-chile-data-flow.svg",
+    "projects/patient-transport-optimization/index.html": "patient-transport-allocation.svg",
+    "projects/picking-line-balancing/index.html": "picking-workload-balance.svg",
+}
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
 
 
@@ -57,6 +69,8 @@ class Parser(HTMLParser):
         if tag == "a" and values.get("href"): self.links.append(values["href"])
         if tag == "img": self.images.append(values)
         if tag in {"script", "source"} and values.get("src"): self.resources.append(values["src"])
+        if tag == "source" and values.get("srcset"):
+            self.resources.extend(candidate.split()[0] for candidate in values["srcset"].split(",") if candidate.split())
         if tag == "link":
             rel = values.get("rel", "").casefold().split()
             if "canonical" in rel: self.canonical.append(values.get("href", ""))
@@ -186,6 +200,63 @@ def check_sitemap(base: Path, site_url: str) -> None:
     require(root.tag.endswith("urlset") and set(locs) == set(expected) and len(locs) == len(expected), "sitemap must list each indexable route exactly once and exclude 404")
 
 
+def check_project_visuals(base: Path) -> None:
+    portfolio = (base / "projects" / "index.html").read_text(encoding="utf-8")
+    groups = re.findall(r'<section class="portfolio-group[^\"]*"[^>]*>(.*?)</section>', portfolio, flags=re.I | re.S)
+    require(len(groups) == 2, "projects/index.html: expected separate featured and other-project groups")
+    require("Casos destacados" in groups[0] and "Otros proyectos" in groups[1], "projects/index.html: portfolio group headings/order must be explicit")
+    featured_rows = re.findall(r"<li\b([^>]*)>(.*?)</li>", groups[0], flags=re.I | re.S)
+    other_rows = re.findall(r"<li\b([^>]*)>(.*?)</li>", groups[1], flags=re.I | re.S)
+    featured = [body for attrs, body in featured_rows if "portfolio-item--featured" in attrs]
+    compact = [body for attrs, body in other_rows if "portfolio-item--compact" in attrs]
+    require(len(featured) == 4 and len(compact) == 4, "projects/index.html: expected four featured cases followed by four compact projects")
+    require("portfolio-item--primary" in featured_rows[0][0] and "portfolio-item--secondary" not in featured_rows[0][0], "projects/index.html: inventory must lead as the primary case")
+    require(sum("portfolio-item--secondary" in attrs for attrs, _ in featured_rows) == 3, "projects/index.html: three supporting cases must follow inventory")
+    require("Rediseño y automatización de conciliación de inventario" in featured[0], "projects/index.html: inventory must be the lead featured case")
+    require("mejora cualitativa del proceso confirmada" not in portfolio.casefold(), "projects/index.html: remove internal confirmation language")
+    featured_assets = [re.search(r"<img\b[^>]*src=[\"']([^\"']+)[\"']", row, flags=re.I) for row in featured]
+    expected_featured = ["/assets/inventory-reconciliation-flow.svg", "/assets/brazil-chile-data-flow.svg", "/assets/patient-transport-allocation.svg", "/assets/picking-workload-balance.svg"]
+    require(all(match is not None for match in featured_assets), "projects/index.html: each featured case must have a visual asset")
+    require([match.group(1) for match in featured_assets if match] == expected_featured, "projects/index.html: featured visual assets must match the four case subjects in order")
+    for row in featured:
+        require(re.search(r"<img\b[^>]*\balt=[\"'][^\"']+", row, flags=re.I) is not None, "projects/index.html: featured project diagram needs descriptive alt text")
+        mobile = re.search(r'<source\b[^>]*srcset=["\']([^"\']+)["\']', row, flags=re.I)
+        require(mobile is not None and "/assets/mobile/" in mobile.group(1), "projects/index.html: featured diagram needs its responsive mobile SVG")
+    for relative, asset_name in CASE_VISUALS.items():
+        page = base / relative
+        _, parsed = parse_page(page)
+        images = [image for image in parsed.images if asset_name in image.get("src", "")]
+        require(len(images) == 1 and bool(images[0].get("alt", "").strip()), f"{relative}: expected its shared SVG asset and descriptive alt text")
+        source, _ = parse_page(page)
+        require(f'/assets/mobile/{asset_name}' in source, f"{relative}: expected its responsive mobile diagram")
+    for asset_name, required_labels in PROJECT_VISUALS.items():
+        asset = base / "assets" / asset_name
+        try:
+            svg = ET.parse(asset).getroot()
+        except (ET.ParseError, OSError) as exc:
+            fail(f"assets/{asset_name}: invalid or unavailable SVG: {exc}")
+        ids = {node.attrib.get("id", ""): node for node in svg.iter() if node.attrib.get("id")}
+        labelled = svg.attrib.get("aria-labelledby", "").split()
+        require(svg.tag.endswith("svg") and svg.attrib.get("role") == "img", f"assets/{asset_name}: root must be an accessible image")
+        require(len(labelled) == 2 and all(label in ids for label in labelled), f"assets/{asset_name}: title and description references are required")
+        require(ids[labelled[0]].tag.endswith("title") and ids[labelled[1]].tag.endswith("desc"), f"assets/{asset_name}: accessible labels must reference title then description")
+        labels = " ".join((node.text or "") for node in svg.iter()).casefold()
+        require(all(label in labels for label in required_labels), f"assets/{asset_name}: expected workflow labels missing")
+        mobile_name = base / "assets" / "mobile" / asset_name
+        try:
+            mobile_source = mobile_name.read_text(encoding="utf-8")
+            mobile_svg = ET.fromstring(mobile_source)
+        except (ET.ParseError, OSError) as exc:
+            fail(f"assets/mobile/{asset_name}: invalid or unavailable mobile SVG: {exc}")
+        mobile_ids = {node.attrib.get("id", ""): node for node in mobile_svg.iter() if node.attrib.get("id")}
+        mobile_refs = mobile_svg.attrib.get("aria-labelledby", "").split()
+        mobile_labels = " ".join((node.text or "") for node in mobile_svg.iter()).casefold()
+        require(mobile_svg.tag.endswith("svg") and len(mobile_refs) == 2 and all(ref in mobile_ids for ref in mobile_refs), f"assets/mobile/{asset_name}: accessible title and description are required")
+        require(all(label in mobile_labels for label in required_labels), f"assets/mobile/{asset_name}: expected workflow labels missing")
+        font_sizes = [int(size) for size in re.findall(r"font-size:\s*(\d+)px", mobile_source)]
+        require(font_sizes and min(font_sizes) >= 12, f"assets/mobile/{asset_name}: labels must remain at least 12px")
+
+
 def check_output(base: Path, site_url: str) -> None:
     pages = pages_under(base)
     seen = {p.relative_to(base).as_posix() for p in pages if p.is_file()}
@@ -193,6 +264,7 @@ def check_output(base: Path, site_url: str) -> None:
     for page in pages:
         if page.is_file(): check_page(page, base, site_url)
     check_sitemap(base, site_url)
+    check_project_visuals(base)
 
 
 def check_dist(site_url: str) -> None:
@@ -216,6 +288,7 @@ def main() -> None:
     check_dist(site_url)
     print("PASS: all required routes, semantic HTML, headings, links, local resources, and image dimensions")
     print("PASS: canonical URLs, social metadata, structured data, robots.txt, sitemap, and public output allowlist")
+    print("PASS: grouped featured/other portfolio, primary inventory lead, responsive readable mobile diagrams")
 
 
 if __name__ == "__main__": main()
