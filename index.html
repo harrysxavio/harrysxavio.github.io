@@ -146,18 +146,8 @@
           <div class="transformation-list">
             <article class="transformation transformation--featured">
               <div class="project-mini-diagram">
-                <svg viewBox="0 0 600 280" role="img" aria-label="Conciliación de inventario" aria-describedby="home-inventory-description">
-                  <desc id="home-inventory-description">Operación y sistemas alimentan una validación común que deja las diferencias listas para revisar.</desc>
-                  <path d="M144 86h90q28 0 28 28v20m0 0q0 28 30 28h55m0 0q30 0 30-28v-20q0-28 28-28h82" />
-                  <path class="mini-flow-secondary" d="M144 194h90q28 0 28-28v-24" />
-                  <rect class="mini-node" x="20" y="56" width="124" height="60" /><rect class="mini-node" x="20" y="164" width="124" height="60" />
-                  <rect class="mini-node mini-node--focus" x="292" y="102" width="112" height="68" /><rect class="mini-node" x="485" y="56" width="105" height="60" />
-                  <text x="82" y="82" text-anchor="middle">Operación</text><text class="mini-note" x="82" y="103" text-anchor="middle">existencias</text>
-                  <text x="82" y="190" text-anchor="middle">Sistemas</text><text class="mini-note" x="82" y="211" text-anchor="middle">registros</text>
-                  <text class="mini-focus-label" x="348" y="132" text-anchor="middle">Validar</text><text class="mini-focus-note" x="348" y="153" text-anchor="middle">conciliar</text>
-                  <text x="537" y="82" text-anchor="middle">Control</text><text class="mini-note" x="537" y="103" text-anchor="middle">excepciones</text>
-                </svg>
-                <p>Operación <span aria-hidden="true">+</span> sistemas <span aria-hidden="true">→</span> control de excepciones</p>
+                <img src="/assets/inventory-reconciliation-flow.svg" alt="Existencias de operación y registros de sistemas se concilian; las excepciones quedan listas para revisión y seguimiento de control." width="680" height="260">
+                <p>Dos fuentes <span aria-hidden="true">→</span> conciliación <span aria-hidden="true">→</span> excepciones y control</p>
                 <span class="project-mini-domain">01 · Supply Chain · Inventario · Automatización</span>
               </div>
               <div class="transformation-content">
@@ -173,26 +163,18 @@
                 <div class="transformation-label"><span>02</span><p>Datos · Transformación regional</p></div>
                 <div class="transformation-content">
                   <figure class="secondary-project-visual">
-                    <svg viewBox="0 0 420 104" role="img" aria-label="Flujo de validación de datos entre Brasil y Chile" aria-describedby="home-migration-description">
-                      <desc id="home-migration-description">Los registros de Brasil pasan por mapeo y validación antes de estabilizarse en Chile.</desc>
-                      <path d="M78 52h92m78 0h94"/><circle cx="44" cy="52" r="27"/><rect x="170" y="27" width="78" height="50"/><circle class="secondary-project-visual__accent" cx="376" cy="52" r="27"/>
-                      <text x="44" y="56" text-anchor="middle">BR</text><text x="209" y="48" text-anchor="middle">Mapeo</text><text class="secondary-project-visual__note" x="209" y="65" text-anchor="middle">validar</text><text x="376" y="56" text-anchor="middle">CL</text>
-                    </svg>
+                    <img src="/assets/brazil-chile-data-flow.svg" alt="Datos maestros de Brasil pasan por validación y mapeo antes de estabilizarse en Chile; cerca de 120.000 registros coordinados." width="680" height="260">
                   </figure>
-                  <h3>Migración y estabilización de datos Brasil–Chile</h3><p>Coordiné validaciones operacionales y de datos entre equipos regionales y técnicos.</p><p class="outcome"><span>Escala del proyecto</span><strong>~120.000</strong> registros maestros</p><a class="case-link" href="/projects/brazil-chile-data-migration/">Leer caso <span aria-hidden="true">→</span></a>
+                  <h3>Migración y estabilización de datos Brasil–Chile</h3><p class="project-problem"><strong>Problema:</strong> la migración requería validar y estabilizar un volumen alto de datos maestros para sostener la operación local.</p><p>Coordiné validaciones operacionales y de datos entre equipos regionales y técnicos.</p><p class="outcome"><span>Escala del proyecto</span><strong>~120.000</strong> registros maestros</p><a class="case-link" href="/projects/brazil-chile-data-migration/">Leer caso <span aria-hidden="true">→</span></a>
                 </div>
               </article>
               <article class="transformation">
                 <div class="transformation-label"><span>03</span><p>Operaciones · Planificación · Salud</p></div>
                 <div class="transformation-content">
                   <figure class="secondary-project-visual secondary-project-visual--blue">
-                    <svg viewBox="0 0 420 104" role="img" aria-label="Asignación de flota según demanda de traslados de pacientes" aria-describedby="home-patient-description">
-                      <desc id="home-patient-description">Demanda y capacidad orientan la flota y las rutas para el servicio de traslado de pacientes.</desc>
-                      <path d="M92 30h88q26 0 26 22m0 0h74q26 0 26-22h26m-126 22q26 0 26 22h100"/><circle cx="48" cy="30" r="24"/><circle cx="48" cy="74" r="18"/><rect class="secondary-project-visual__accent" x="180" y="30" width="100" height="46"/><rect x="332" y="14" width="78" height="34"/><rect x="332" y="56" width="78" height="34"/>
-                      <text x="48" y="34" text-anchor="middle">Demanda</text><text class="secondary-project-visual__note" x="48" y="78" text-anchor="middle">capacidad</text><text class="secondary-project-visual__accent-label" x="230" y="58" text-anchor="middle">Asignación</text><text x="371" y="35" text-anchor="middle">Ruta</text><text x="371" y="78" text-anchor="middle">Paciente</text>
-                    </svg>
+                    <img src="/assets/patient-transport-allocation.svg" alt="Demanda de traslados y capacidad disponible orientan asignación de flota, rutas y servicio para pacientes." width="720" height="280">
                   </figure>
-                  <h3>Optimización de transporte de pacientes</h3><p>Diseñé un modelo de asignación de flota basado en demanda histórica y coordiné su uso operacional.</p><p class="outcome"><span>Resultado asociado</span><strong>~15%</strong> menos uso de transportes en la RM</p><a class="case-link" href="/projects/patient-transport-optimization/">Leer caso <span aria-hidden="true">→</span></a>
+                  <h3>Optimización de transporte de pacientes</h3><p class="project-problem"><strong>Problema:</strong> asignar capacidad y flota a una operación territorial con demanda variable de traslados de pacientes.</p><p>Diseñé un modelo de asignación de flota basado en demanda histórica y coordiné su uso operacional.</p><p class="outcome"><span>Resultado asociado</span><strong>~15%</strong> menos uso de transportes en la RM</p><a class="case-link" href="/projects/patient-transport-optimization/">Leer caso <span aria-hidden="true">→</span></a>
                 </div>
               </article>
             </div>

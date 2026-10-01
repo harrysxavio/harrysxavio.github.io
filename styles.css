@@ -418,7 +418,7 @@ h3 { font-size: clamp(1.2rem, 1.7vw, 1.5rem); line-height: 1.18; }
 .outcome strong { font-family: var(--display); font-size: 1.45rem; font-weight: 750; letter-spacing: -.04em; }
 .case-link { min-height: 2.9rem; font-size: .88rem; }
 .secondary-project-visual { margin: 0 0 .9rem; }
-.secondary-project-visual svg { display: block; width: 100%; height: auto; overflow: visible; }
+.secondary-project-visual svg, .secondary-project-visual img { display: block; width: 100%; height: auto; overflow: visible; }
 .secondary-project-visual path { fill: none; stroke: #8197a2; stroke-width: 2.2; }
 .secondary-project-visual circle, .secondary-project-visual rect { fill: var(--paper); stroke: var(--ink); stroke-width: 1.8; }
 .secondary-project-visual .secondary-project-visual__accent { fill: var(--red); stroke: var(--red); }
@@ -462,7 +462,7 @@ h3 { font-size: clamp(1.2rem, 1.7vw, 1.5rem); line-height: 1.18; }
 .case-visual { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(12rem, .8fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; margin: 2rem 0 3rem; padding: clamp(1.2rem, 3vw, 2.25rem); background: var(--blue); }
 .case-visual--paper { background: #ece6da; }
 .project-mini-diagram { align-self: center; }
-.project-mini-diagram svg { display: block; width: 100%; height: auto; overflow: visible; }
+.project-mini-diagram svg, .project-mini-diagram img { display: block; width: 100%; height: auto; overflow: visible; }
 .project-mini-diagram path { fill: none; stroke: #758b98; stroke-width: 2.5; }
 .project-mini-diagram .mini-flow-secondary { stroke: var(--red); stroke-dasharray: 5 8; }
 .project-mini-diagram .mini-node { fill: var(--paper); stroke: var(--ink); stroke-width: 2; }
@@ -473,7 +473,7 @@ h3 { font-size: clamp(1.2rem, 1.7vw, 1.5rem); line-height: 1.18; }
 .project-mini-diagram > p { margin: .25rem 0 .6rem; color: var(--ink); font-size: .82rem; font-weight: 650; }
 .project-mini-diagram > p span { color: var(--red); }
 .project-mini-domain { color: var(--ink-soft); font-size: .72rem; }
-.case-visual svg { display: block; width: 100%; height: auto; color: var(--ink); }
+.case-visual svg, .case-visual img { display: block; width: 100%; height: auto; color: var(--ink); }
 .diagram-line { fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; }
 .diagram-line--soft { stroke: #8396a1; stroke-dasharray: 5 8; }
 .diagram-node { fill: var(--paper); stroke: currentColor; stroke-width: 2; }
@@ -492,10 +492,16 @@ h3 { font-size: clamp(1.2rem, 1.7vw, 1.5rem); line-height: 1.18; }
 .case-result { padding-block: 2rem !important; }
 .attribution-note { color: var(--ink-soft); font-family: var(--sans); font-size: .82rem; letter-spacing: 0; }
 .portfolio-list { border-top: 0; }
-.portfolio-item { grid-template-columns: minmax(12rem, .35fr) minmax(0, 1fr) minmax(5rem, auto); padding-block: 1.3rem; border-color: #d4d0c6; }
-.portfolio-item--case:first-child { padding: 1.7rem; background: #ece6da; }
+.portfolio-item { padding-block: 1.3rem; border-color: #d4d0c6; }
+.portfolio-item--featured { grid-template-columns: minmax(14rem, .8fr) minmax(0, 1.6fr) minmax(6rem, auto); grid-template-areas: "meta meta action" "visual copy action"; align-items: center; gap: .7rem clamp(1rem, 2vw, 1.8rem); }
+.portfolio-item--featured .portfolio-meta { grid-area: meta; }
+.portfolio-visual { grid-area: visual; min-width: 0; margin: 0; }
+.portfolio-visual img { display: block; width: 100%; height: auto; }
+.portfolio-item--featured .portfolio-copy { grid-area: copy; min-width: 0; }
+.portfolio-item--featured .case-link { grid-area: action; align-self: end; }
+.portfolio-item--compact { grid-template-columns: minmax(12rem, .38fr) minmax(0, 1fr); align-items: center; gap: .5rem 2rem; }
 .portfolio-copy h2 { font-family: var(--display); font-size: clamp(1.35rem, 2vw, 1.75rem); font-weight: 700; }
-.portfolio-copy p { font-size: .96rem; }
+.portfolio-copy p { font-size: 1rem; }
 
 @media (min-width: 1024px) {
   .signature-steps { min-height: 18rem; }
@@ -512,6 +518,13 @@ h3 { font-size: clamp(1.2rem, 1.7vw, 1.5rem); line-height: 1.18; }
   .career-arc { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .career-arc::before { display: none; }
   .career-arc li { padding-top: 1.3rem; }
+  .portfolio-item--featured { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); grid-template-areas: "meta meta" "visual copy" "action action"; }
+  .portfolio-item--featured .case-link { align-self: start; justify-self: start; }
+  .portfolio-item--compact { grid-template-columns: minmax(10rem, .65fr) minmax(0, 1.35fr); }
+}
+@media (min-width: 851px) and (max-width: 1100px) {
+  .portfolio-item--featured { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "meta meta" "visual copy" "action action"; }
+  .portfolio-item--featured .case-link { align-self: start; justify-self: start; }
 }
 @media (max-width: 600px) {
   .hero { grid-template-columns: 1fr; gap: 1.3rem; padding: 2rem 0 2.5rem; }
@@ -535,7 +548,7 @@ h3 { font-size: clamp(1.2rem, 1.7vw, 1.5rem); line-height: 1.18; }
   .step-copy { font-size: .95rem; }
   .transformation--featured { display: block; padding: 1.25rem; }
   .project-mini-diagram { margin-bottom: 1.2rem; }
-  .project-mini-diagram svg { max-height: 13rem; }
+  .project-mini-diagram svg, .project-mini-diagram img { max-height: 13rem; }
   .transformation--featured .transformation-label { margin-bottom: .75rem; }
   .transformation-pair { grid-template-columns: 1fr; }
   .transformation-pair .transformation + .transformation { border-top: 1px solid #d4d0c6; }
@@ -549,10 +562,13 @@ h3 { font-size: clamp(1.2rem, 1.7vw, 1.5rem); line-height: 1.18; }
   .current-curiosity { grid-template-columns: 1fr; gap: .3rem; }
   .current-curiosity .section-kicker { grid-column: auto; }
   .case-visual { grid-template-columns: 1fr; gap: 1rem; margin-block: 1.5rem 2.3rem; padding: 1rem; }
-  .case-visual svg { max-height: 12rem; }
+  .case-visual svg, .case-visual img { max-height: 12rem; }
   .case-flow { gap: .45rem .55rem; font-size: .78rem; }
   .case-flow li + li::before { margin-right: .55rem; }
   .portfolio-item--case:first-child { padding: 1.15rem; }
+  .portfolio-item { grid-template-columns: minmax(0, 1fr); grid-template-areas: "meta" "visual" "copy" "action"; gap: .6rem; }
+  .portfolio-item--compact { grid-template-columns: minmax(0, 1fr); grid-template-areas: "meta" "copy"; }
+  .portfolio-item--featured .case-link { grid-column: auto; justify-self: start; }
 }
 @media (max-width: 380px) {
   .hero h1 { font-size: 3.45rem; }

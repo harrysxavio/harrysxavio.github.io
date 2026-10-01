@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 280" role="img" aria-labelledby="title desc">
+  <title id="title">Asignación de transporte asistido de pacientes</title>
+  <desc id="desc">La demanda de traslados y la capacidad disponible orientan la asignación de flota, las rutas y el servicio para pacientes.</desc>
+  <style>
+    .line{fill:none;stroke:#8396a1;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.node{fill:#f4f0e7;stroke:#172d45;stroke-width:2}.focus{fill:#ab3d32;stroke:#ab3d32}.label{fill:#172d45;font:700 18px system-ui,sans-serif}.note{fill:#536777;font:500 15px system-ui,sans-serif}.inverse{fill:#fff}
+  </style>
+  <path class="line" d="M170 73h78q28 0 28 28v20m0 0q0 24 28 24h44m0 0h30q28 0 28-24v-20q0-28 28-28h74m-160 72h72q28 0 28 24v11q0 22 26 22h46"/>
+  <rect class="node" x="18" y="40" width="152" height="64" rx="3"/><rect class="node" x="18" y="148" width="152" height="64" rx="3"/><rect class="focus" x="276" y="91" width="112" height="72" rx="3"/>
+  <rect class="node" x="508" y="40" width="190" height="64" rx="3"/><rect class="node" x="508" y="170" width="190" height="64" rx="3"/>
+  <text class="label" x="94" y="67" text-anchor="middle">Demanda</text><text class="note" x="94" y="88" text-anchor="middle">traslados de pacientes</text>
+  <text class="label" x="94" y="175" text-anchor="middle">Capacidad</text><text class="note" x="94" y="196" text-anchor="middle">flota disponible</text>
+  <text class="label inverse" x="332" y="122" text-anchor="middle">Asignación</text><text class="note inverse" x="332" y="144" text-anchor="middle">modelo de flota</text>
+  <text class="label" x="603" y="67" text-anchor="middle">Rutas</text><text class="note" x="603" y="88" text-anchor="middle">planificación territorial</text>
+  <text class="label" x="603" y="197" text-anchor="middle">Servicio</text><text class="note" x="603" y="218" text-anchor="middle">traslado de pacientes</text>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 260" role="img" aria-labelledby="title desc">
+  <title id="title">Balanceo de carga en preparación de pedidos</title>
+  <desc id="desc">Los pedidos se distribuyen entre zonas de picking y se balancea la carga de trabajo para preparar los pedidos en el centro de distribución.</desc>
+  <style>
+    .line{fill:none;stroke:#8396a1;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.node{fill:#f4f0e7;stroke:#172d45;stroke-width:2}.focus{fill:#ab3d32;stroke:#ab3d32}.label{fill:#172d45;font:700 18px system-ui,sans-serif}.note{fill:#536777;font:500 15px system-ui,sans-serif}.inverse{fill:#fff}
+  </style>
+  <path class="line" d="M176 130h80m166 0h62q30 0 30-30v-16h34m-64 46v38q0 30 30 30h34"/>
+  <rect class="node" x="18" y="98" width="158" height="64" rx="3"/><rect class="focus" x="256" y="92" width="166" height="76" rx="3"/><rect class="node" x="518" y="52" width="144" height="60" rx="3"/><rect class="node" x="518" y="170" width="144" height="60" rx="3"/>
+  <text class="label" x="97" y="125" text-anchor="middle">Pedidos</text><text class="note" x="97" y="146" text-anchor="middle">por preparar</text>
+  <text class="label inverse" x="339" y="122" text-anchor="middle">Balanceo</text><text class="note inverse" x="339" y="145" text-anchor="middle">carga de trabajo</text>
+  <text class="label" x="590" y="78" text-anchor="middle">Zona A</text><text class="note" x="590" y="99" text-anchor="middle">picking</text>
+  <text class="label" x="590" y="196" text-anchor="middle">Zona B</text><text class="note" x="590" y="217" text-anchor="middle">picking</text>
+</svg>
