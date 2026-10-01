@@ -80,8 +80,8 @@ def _load_content() -> dict[str, object]:
             raise ValueError(f"content/site.json: site.{field} is required")
     if not isinstance(data["site"].get("sameAs"), list) or not all(isinstance(url, str) for url in data["site"]["sameAs"]):
         raise ValueError("content/site.json: site.sameAs must be an array of profile URLs")
-    if not isinstance(data.get("profile"), dict) or not all(data["profile"].get(key) for key in ("profession", "location", "positioning")):
-        raise ValueError("content/site.json: profile.profession, location, and positioning are required")
+    if not isinstance(data.get("profile"), dict) or not all(data["profile"].get(key) for key in ("profession", "location", "positioning", "summary", "cvPdfUrl", "workflow")):
+        raise ValueError("content/site.json: profile.profession, location, positioning, summary, cvPdfUrl, and workflow are required")
     taxonomy = data.get("taxonomy")
     if not isinstance(taxonomy, dict) or taxonomy.get("version") != 1 or not isinstance(taxonomy.get("tags"), list):
         raise ValueError("content/site.json: taxonomy.version 1 and taxonomy.tags array are required")
@@ -135,17 +135,37 @@ def _load_content() -> dict[str, object]:
         raise ValueError("content/site.json: project route assignments must preserve the four existing case routes")
     if not isinstance(data.get("career"), list) or not data["career"]:
         raise ValueError("content/site.json: career must be a non-empty array")
-    for index, role in enumerate(data["career"]):
-        if not isinstance(role, dict) or not isinstance(role.get("employer"), str) or not role["employer"].strip():
-            raise ValueError(f"content/site.json: career[{index}].employer is required")
-        if not isinstance(role.get("period"), str) or not isinstance(role.get("roles"), list) or not role["roles"]:
-            raise ValueError(f"content/site.json: career entry {role['employer']}.period and roles are required")
+    for index, employer in enumerate(data["career"]):
+        field = f"content/site.json: career[{index}]"
+        if not isinstance(employer, dict) or not isinstance(employer.get("employer"), str) or not employer["employer"].strip():
+            raise ValueError(f"{field}.employer is required")
+        if not isinstance(employer.get("period"), str) or not isinstance(employer.get("roles"), list) or not employer["roles"]:
+            raise ValueError(f"{field}.period and roles are required")
+        for role_index, role in enumerate(employer["roles"]):
+            role_field = f"{field} ({employer['employer']}).roles[{role_index}]"
+            if not isinstance(role, dict) or not all(isinstance(role.get(key), str) and role[key].strip() for key in ("period", "title")):
+                raise ValueError(f"{role_field}.period and title are required")
+            if not isinstance(role.get("bullets"), list) or not role["bullets"] or not all(isinstance(item, str) and item.strip() for item in role["bullets"]):
+                raise ValueError(f"{role_field}.bullets must be a non-empty array of prose")
+            projects_for_role = role.get("projects", [])
+            if not isinstance(projects_for_role, list) or any(not isinstance(item, dict) or not item.get("title") or not item.get("href") for item in projects_for_role):
+                raise ValueError(f"{role_field}.projects must be an array of title/href links")
     if not isinstance(data.get("skills"), list) or not data["skills"]:
         raise ValueError("content/site.json: skills must be a non-empty array")
+    for index, skill in enumerate(data["skills"]):
+        field = f"content/site.json: skills[{index}]"
+        if not isinstance(skill, dict) or not isinstance(skill.get("area"), str) or not skill["area"].strip():
+            raise ValueError(f"{field}.area is required")
+        if not isinstance(skill.get("skills"), list) or not skill["skills"] or not all(isinstance(item, str) and item.strip() for item in skill["skills"]):
+            raise ValueError(f"{field}.skills must be a non-empty array of labels")
+        if not isinstance(skill.get("tools"), list) or not all(isinstance(item, str) and item.strip() for item in skill["tools"]):
+            raise ValueError(f"{field}.tools must be an array of labels")
     if not isinstance(data.get("education"), dict) or not all(data["education"].get(key) for key in ("degree", "institution", "year")):
         raise ValueError("content/site.json: education.degree, institution, and year are required")
-    if not isinstance(data.get("languages"), list) or not data["languages"]:
-        raise ValueError("content/site.json: languages are required")
+    if not isinstance(data.get("languages"), list) or not data["languages"] or any(not isinstance(item, dict) or not item.get("language") or not item.get("level") for item in data["languages"]):
+        raise ValueError("content/site.json: languages[] requires language and level")
+    if not isinstance(data.get("cvPage"), list) or len(data["cvPage"]) != 1 or data["cvPage"][0].get("type") != "linkGroup":
+        raise ValueError("content/site.json: cvPage must contain only the route breadcrumb; CV facts belong in semantic fields")
     if not isinstance(data.get("editorialRules"), list) or not data["editorialRules"]:
         raise ValueError("content/site.json: editorialRules must preserve content-authoring guardrails")
     pages = data.get("pages")
@@ -366,6 +386,111 @@ def _seo_markup(page: dict[str, object], site_url: str) -> str:
     return "".join(parts)
 
 
+def _cv_copy(value: str) -> str:
+    return html.escape(value, quote=False)
+
+
+def _cv_group(content: str) -> str:
+    return f'<div class="content-block content-block--contentGroup">{content}</div>'
+
+
+def _cv_section(label: str, title: str, anchor: str, content: str) -> str:
+    heading = _cv_group(
+        f'<p class="content-copy">{_cv_copy(label)}</p>'
+        f'<h2 id="{html.escape(anchor, quote=True)}" class="content-heading content-heading--2">{_cv_copy(title)}</h2>'
+    )
+    return f'<section id="{html.escape(anchor.removesuffix("-title"), quote=True)}" aria-labelledby="{html.escape(anchor, quote=True)}" class="content-block content-block--contentSection">{heading}{_cv_group(content)}</section>'
+
+
+def _render_cv_career(career: list[dict[str, object]]) -> str:
+    employers = []
+    for employer in career:
+        pieces = [
+            f'<h3 class="content-heading content-heading--3">{_cv_copy(employer["employer"])}</h3>',
+            f'<p class="content-copy">{_cv_copy(employer["period"])}</p>',
+        ]
+        if employer.get("summary"):
+            pieces.append(f'<p class="content-copy">{_cv_copy(employer["summary"])}</p>')
+        for role in employer["roles"]:
+            role_parts = [
+                f'<p class="content-copy"><strong>{_cv_copy(role["title"])}</strong> · {_cv_copy(role["period"])}</p>',
+                "<ul>" + "".join(f"<li>{_cv_copy(item)}</li>" for item in role["bullets"]) + "</ul>",
+            ]
+            if role.get("projects"):
+                role_parts.append('<p class="content-copy">' + " · ".join(
+                    f'<a href="{html.escape(project["href"], quote=True)}">{_cv_copy(project["title"])}</a>'
+                    for project in role["projects"]
+                ) + "</p>")
+            pieces.append(_cv_group("".join(role_parts)))
+        employers.append(f'<article class="content-block content-block--contentItem">{"".join(pieces)}</article>')
+    return _cv_section("TRAYECTORIA", "Experiencia profesional", "experience-title", "".join(employers))
+
+
+def _render_cv_skills(skills: list[dict[str, object]], profile: dict[str, object]) -> str:
+    items = []
+    for skill in skills:
+        pieces = [f'<h3 class="content-heading content-heading--3">{_cv_copy(skill["area"])}</h3>']
+        pieces.append(f'<p class="content-copy">{_cv_copy(" · ".join(skill["skills"]))}</p>')
+        if skill["tools"]:
+            pieces.append(f'<p class="content-copy">{_cv_copy(" · ".join(skill["tools"]))}</p>')
+        items.append(f'<article class="content-block content-block--contentItem">{"".join(pieces)}</article>')
+    return _cv_section("HERRAMIENTAS", "Capacidades y herramientas", "skills-title", "".join(items))
+
+
+def _render_cv_value_areas(skills: list[dict[str, object]], profile: dict[str, object]) -> str:
+    descriptions = [skill["description"] for skill in skills if skill.get("description")]
+    names = [skills[0]["area"], skills[1]["area"], "Datos y automatización"]
+    items = "".join(
+        f'<article class="content-block content-block--contentItem"><h3 class="content-heading content-heading--3">{_cv_copy(name)}</h3><p class="content-copy">{_cv_copy(description)}</p></article>'
+        for name, description in zip(names, descriptions)
+    )
+    items += f'<p class="content-copy"><strong>Cómo trabajo</strong> {_cv_copy(profile["workflow"])}</p>'
+    return _cv_section("EN QUÉ PUEDO APORTAR", "Áreas donde aporto valor", "value-title", items)
+
+
+def _render_cv_education(data: dict[str, object]) -> str:
+    education = data["education"]
+    profile = data["profile"]
+    education_content = (
+        f'<p class="content-copy"><strong>{_cv_copy(education["degree"])}</strong><br>'
+        f'{_cv_copy(education["institution"])} · {_cv_copy(education["year"])}</p>'
+    )
+    language_content = "<p class=\"content-copy\">" + "<br>".join(
+        f'{_cv_copy(item["language"])} · {_cv_copy(item["level"])}' for item in data["languages"]
+    ) + "</p>"
+    location_content = f'<p class="content-copy">{_cv_copy(profile["location"])}</p>'
+    panels = []
+    for label, title, content in (
+        ("FORMACIÓN", "Educación", education_content),
+        ("IDIOMAS", "Idiomas", language_content),
+        ("UBICACIÓN", "Base", location_content),
+    ):
+        panels.append(_cv_group(f'<p class="content-copy">{label}</p><h2 class="content-heading content-heading--2">{title}</h2>{content}'))
+    heading = _cv_group('<h2 class="content-heading content-heading--2">Formación y datos complementarios</h2>')
+    return f'<section aria-label="Formación y datos complementarios" class="content-block content-block--contentSection">{heading}{"".join(panels)}</section>'
+
+
+def _render_cv(data: dict[str, object], site_url: str) -> str:
+    profile = data["profile"]
+    intro = (
+        f'<p class="content-copy">PERFIL PROFESIONAL</p>'
+        f'<h1 class="content-heading content-heading--1">{_cv_copy(data["site"]["name"])}</h1>'
+        f'<p class="content-copy">{_cv_copy(profile["positioning"])}</p>'
+        f'<p class="content-copy"><strong>{_cv_copy(profile["profession"])}.</strong> {_cv_copy(profile["summary"])}</p>'
+    )
+    actions = (
+        f'<a class="content-link" href="{html.escape(profile["cvPdfUrl"], quote=True)}" download>Descargar CV PDF ↓</a>'
+        '<button type="button" data-action="print" class="content-block content-block--actionButton">Imprimir</button>'
+    )
+    opening = f'{_cv_group(intro)}{_cv_group(actions)}'
+    lead = _render_cv_career(data["career"])
+    return (
+        _render_blocks(data["cvPage"], site_url) + opening + _render_cv_value_areas(data["skills"], profile) + lead
+        + _render_cv_skills(data["skills"], profile)
+        + _render_cv_education(data)
+    )
+
+
 def _render_project_card(project: dict[str, object], labels: dict[str, str], featured: bool) -> str:
     anchor = html.escape(str(project.get("anchor", project["id"])), quote=True)
     tag_ids = project["tags"]
@@ -432,7 +557,9 @@ def _generate_source_pages(data: dict[str, object], site_url: str) -> list[Path]
         copy_key = {"not-found": "notFound", "projects": "projectPortfolio", "cv": "cvPage"}.get(page["id"], page["id"])
         if copy_key == "projectPortfolio":
             main = _render_project_portfolio(data, site_url)
-        elif copy_key in {"home", "notFound", "cvPage"}:
+        elif copy_key == "cvPage":
+            main = _render_cv(data, site_url)
+        elif copy_key in {"home", "notFound"}:
             main = _render_blocks(data[copy_key], site_url)
         else:
             target = "/projects/" + page["route"].removeprefix("projects/").removesuffix("/index.html") + "/"

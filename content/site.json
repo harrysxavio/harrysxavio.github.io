@@ -2911,36 +2911,108 @@
     {
       "employer": "Natura & Co Chile",
       "period": "2019–2021; 2023–2026",
+      "summary": "Una progresión entre proyectos, operaciones y tecnología.",
       "roles": [
-        "Analista Senior de Proyectos de Operaciones y Logística (2019–2021)",
-        "Analista Senior de Operaciones y Logística (2023–2025)",
-        "Coordinador de Tecnología de Operaciones (2025–2026)"
-      ],
-      "note": "Una progresión bajo el mismo empleador, preservando los años publicados."
+        {
+          "period": "2025–2026",
+          "title": "Coordinador de Tecnología de Operaciones",
+          "bullets": [
+            "Lideré iniciativas de transformación tecnológica y operacional para Operaciones y Supply Chain, conectando necesidades de negocio con equipos técnicos.",
+            "Coordiné un modelo predictivo de planificación de abastecimiento; la mejora de precisión logística reportada fue cercana a 35%."
+          ],
+          "projects": [
+            {
+              "title": "Conciliación de inventario",
+              "href": "/projects/#inventory-reconciliation"
+            },
+            {
+              "title": "Control Tower de Transporte",
+              "href": "/projects/#control-tower"
+            }
+          ]
+        },
+        {
+          "period": "2023–2025",
+          "title": "Analista Senior de Operaciones y Logística",
+          "bullets": [
+            "Coordiné trabajo transversal entre Operaciones, Logística, Tecnología, Finanzas y equipos regionales.",
+            "Coordiné validación operacional y de datos en la migración Brasil–Chile: cerca de 120.000 registros maestros y ~90% del alcance aprobado estabilizado.",
+            "Participé en rediseño de devoluciones e indemnizaciones y en la mejora de la resolución de anomalías de transporte, de ~2 días a 4 horas."
+          ],
+          "projects": [
+            {
+              "title": "Migración Brasil–Chile",
+              "href": "/projects/#brazil-chile-data"
+            },
+            {
+              "title": "Anomalías de transporte",
+              "href": "/projects/#transport-anomalies"
+            }
+          ]
+        },
+        {
+          "period": "2019–2021",
+          "title": "Analista Senior de Proyectos de Operaciones y Logística",
+          "bullets": [
+            "Proyectos asociados a logística, transporte, KPIs, automatización y productividad.",
+            "Trabajo en procesos de picking, business cases y control presupuestario."
+          ],
+          "projects": [
+            {
+              "title": "Balanceo de línea de picking",
+              "href": "/projects/picking-line-balancing/"
+            }
+          ]
+        }
+      ]
     },
     {
       "employer": "ACHS Servicios",
       "period": "2021–2023",
       "roles": [
-        "Jefe de Operaciones"
-      ],
-      "note": "Transporte de pacientes, flota, rutas, demanda, capacidad, SLA, continuidad y equipos."
+        {
+          "period": "2021–2023",
+          "title": "Jefe de Operaciones",
+          "bullets": [
+            "Gestión territorial de transporte de pacientes: flota, rutas, demanda, capacidad, SLA, continuidad operacional y equipos.",
+            "Diseñé un modelo de asignación de flota basado en demanda histórica.",
+            "El modelo se asoció a aproximadamente 15% menos uso de transportes en la Región Metropolitana."
+          ],
+          "projects": [
+            {
+              "title": "Optimización de transporte de pacientes",
+              "href": "/projects/patient-transport-optimization/"
+            }
+          ]
+        }
+      ]
     },
     {
       "employer": "Coprove",
       "period": "2017–2019",
       "roles": [
-        "Jefe de Proyecto"
-      ],
-      "note": "Proyectos internos de inventario, control y mejora. Copy Home: “Convertir problemas de control en iniciativas con estructura, responsables y seguimiento.”"
+        {
+          "period": "2017–2019",
+          "title": "Jefe de Proyecto",
+          "bullets": [
+            "Proyectos internos de inventario, control operacional y mejora de procesos."
+          ]
+        }
+      ]
     },
     {
       "employer": "704 Ingeniería",
       "period": "2015–2017",
       "roles": [
-        "Ingeniero de Proyecto"
-      ],
-      "note": "HVAC, PLC e infraestructura, equipos, planificación y calidad."
+        {
+          "period": "2015–2017",
+          "title": "Ingeniero de Proyecto",
+          "bullets": [
+            "Proyectos industriales de HVAC, PLC e infraestructura.",
+            "Coordinación de equipos, planificación y calidad."
+          ]
+        }
+      ]
     }
   ],
   "education": {
@@ -2950,12 +3022,12 @@
   },
   "languages": [
     {
-      "language": "español",
-      "level": "nativo"
+      "language": "Español",
+      "level": "Nativo"
     },
     {
-      "language": "inglés",
-      "level": "avanzado profesional"
+      "language": "Inglés",
+      "level": "Avanzado profesional"
     }
   ],
   "editorialRules": [
@@ -4486,1063 +4558,15 @@
         }
       ],
       "label": "Ruta de navegación"
-    },
-    {
-      "type": "contentGroup",
-      "blocks": [
-        {
-          "type": "contentGroup",
-          "blocks": [
-            {
-              "type": "copy",
-              "runs": [
-                {
-                  "type": "text",
-                  "text": "PERFIL PROFESIONAL"
-                }
-              ]
-            },
-            {
-              "type": "heading",
-              "level": 1,
-              "runs": [
-                {
-                  "type": "text",
-                  "text": "Harrys Yusti"
-                }
-              ]
-            },
-            {
-              "type": "copy",
-              "runs": [
-                {
-                  "type": "text",
-                  "text": "Proyectos · Transformación · Supply Chain · Tecnología"
-                }
-              ]
-            },
-            {
-              "type": "copy",
-              "runs": [
-                {
-                  "type": "text",
-                  "text": "Ingeniero Mecánico. Trabajo entre operación, proyectos y tecnología para entender qué hace falta, ordenar el camino y ayudar a que las mejoras se implementen de verdad."
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "contentGroup",
-          "blocks": [
-            {
-              "type": "link",
-              "href": "/cv/harrys-yusti-cv.pdf",
-              "runs": [
-                {
-                  "type": "text",
-                  "text": "Descargar CV PDF "
-                },
-                {
-                  "type": "text",
-                  "text": "↓"
-                }
-              ],
-              "download": true
-            },
-            {
-              "type": "actionButton",
-              "label": "Imprimir",
-              "action": "print"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "contentSection",
-      "blocks": [
-        {
-          "type": "contentGroup",
-          "blocks": [
-            {
-              "type": "copy",
-              "runs": [
-                {
-                  "type": "text",
-                  "text": "EN QUÉ PUEDO APORTAR"
-                }
-              ]
-            },
-            {
-              "type": "heading",
-              "level": 2,
-              "runs": [
-                {
-                  "type": "text",
-                  "text": "Áreas donde aporto valor"
-                }
-              ],
-              "anchor": "value-title"
-            }
-          ]
-        },
-        {
-          "type": "contentGroup",
-          "blocks": [
-            {
-              "type": "contentItem",
-              "blocks": [
-                {
-                  "type": "heading",
-                  "level": 3,
-                  "runs": [
-                    {
-                      "type": "text",
-                      "text": "Proyectos y transformación"
-                    }
-                  ]
-                },
-                {
-                  "type": "copy",
-                  "runs": [
-                    {
-                      "type": "text",
-                      "text": "Definir alcance, alinear stakeholders, anticipar riesgos y presupuestos, y acompañar la entrega, la implementación y la adopción."
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "contentItem",
-              "blocks": [
-                {
-                  "type": "heading",
-                  "level": 3,
-                  "runs": [
-                    {
-                      "type": "text",
-                      "text": "Supply Chain y operaciones"
-                    }
-                  ]
-                },
-                {
-                  "type": "copy",
-                  "runs": [
-                    {
-                      "type": "text",
-                      "text": "Inventario, logística, transporte, picking, fulfillment, planificación y productividad conectados con las necesidades reales de la operación."
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "contentItem",
-              "blocks": [
-                {
-                  "type": "heading",
-                  "level": 3,
-                  "runs": [
-                    {
-                      "type": "text",
-                      "text": "Datos y automatización"
-                    }
-                  ]
-                },
-                {
-                  "type": "copy",
-                  "runs": [
-                    {
-                      "type": "text",
-                      "text": "Automatizar trabajo manual, ordenar información e indicadores y facilitar mejores decisiones con tecnología aplicada."
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "copy",
-              "runs": [
-                {
-                  "type": "text",
-                  "text": "Cómo trabajo"
-                },
-                {
-                  "type": "text",
-                  "text": " Entender "
-                },
-                {
-                  "type": "text",
-                  "text": "→"
-                },
-                {
-                  "type": "text",
-                  "text": " estructurar "
-                },
-                {
-                  "type": "text",
-                  "text": "→"
-                },
-                {
-                  "type": "text",
-                  "text": " mejorar "
-                },
-                {
-                  "type": "text",
-                  "text": "→"
-                },
-                {
-                  "type": "text",
-                  "text": " implementar "
-                },
-                {
-                  "type": "text",
-                  "text": "→"
-                },
-                {
-                  "type": "text",
-                  "text": " medir"
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "labelledBy": "value-title"
-    },
-    {
-      "type": "contentSection",
-      "blocks": [
-        {
-          "type": "contentGroup",
-          "blocks": [
-            {
-              "type": "copy",
-              "runs": [
-                {
-                  "type": "text",
-                  "text": "TRAYECTORIA"
-                }
-              ]
-            },
-            {
-              "type": "heading",
-              "level": 2,
-              "runs": [
-                {
-                  "type": "text",
-                  "text": "Experiencia profesional"
-                }
-              ],
-              "anchor": "experience-title"
-            }
-          ]
-        },
-        {
-          "type": "contentGroup",
-          "blocks": [
-            {
-              "type": "contentItem",
-              "blocks": [
-                {
-                  "type": "contentGroup",
-                  "blocks": [
-                    {
-                      "type": "heading",
-                      "level": 3,
-                      "runs": [
-                        {
-                          "type": "text",
-                          "text": "Natura & Co Chile"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "copy",
-                      "runs": [
-                        {
-                          "type": "text",
-                          "text": "Una progresión entre proyectos, operaciones y tecnología."
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "contentGroup",
-                  "blocks": [
-                    {
-                      "type": "contentGroup",
-                      "blocks": [
-                        {
-                          "type": "contentGroup",
-                          "blocks": [
-                            {
-                              "type": "copyText",
-                              "text": "2025–2026"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "contentGroup",
-                          "blocks": [
-                            {
-                              "type": "copyText",
-                              "text": "Coordinador de Tecnología de Operaciones"
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "type": "contentGroup",
-                      "blocks": [
-                        {
-                          "type": "list",
-                          "ordered": false,
-                          "items": [
-                            {
-                              "type": "listItem",
-                              "blocks": [
-                                {
-                                  "type": "copyText",
-                                  "text": "Lideré iniciativas de transformación tecnológica y operacional para Operaciones y Supply Chain, conectando necesidades de negocio con equipos técnicos."
-                                }
-                              ]
-                            },
-                            {
-                              "type": "listItem",
-                              "blocks": [
-                                {
-                                  "type": "copyText",
-                                  "text": "Coordiné un modelo predictivo de planificación de abastecimiento; la mejora de precisión logística reportada fue cercana a 35%."
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "copy",
-                          "runs": [
-                            {
-                              "type": "link",
-                              "href": "/projects/#inventory-reconciliation",
-                              "runs": [
-                                {
-                                  "type": "text",
-                                  "text": "Conciliación de inventario"
-                                }
-                              ]
-                            },
-                            {
-                              "type": "link",
-                              "href": "/projects/#control-tower",
-                              "runs": [
-                                {
-                                  "type": "text",
-                                  "text": "Control Tower de Transporte"
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "contentGroup",
-                  "blocks": [
-                    {
-                      "type": "contentGroup",
-                      "blocks": [
-                        {
-                          "type": "contentGroup",
-                          "blocks": [
-                            {
-                              "type": "copyText",
-                              "text": "2023–2025"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "contentGroup",
-                          "blocks": [
-                            {
-                              "type": "copyText",
-                              "text": "Analista Senior de Operaciones y Logística"
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "type": "contentGroup",
-                      "blocks": [
-                        {
-                          "type": "list",
-                          "ordered": false,
-                          "items": [
-                            {
-                              "type": "listItem",
-                              "blocks": [
-                                {
-                                  "type": "copyText",
-                                  "text": "Coordiné trabajo transversal entre Operaciones, Logística, Tecnología, Finanzas y equipos regionales."
-                                }
-                              ]
-                            },
-                            {
-                              "type": "listItem",
-                              "blocks": [
-                                {
-                                  "type": "copyText",
-                                  "text": "Coordiné validación operacional y de datos en la migración Brasil–Chile: cerca de 120.000 registros maestros y ~90% del alcance aprobado estabilizado."
-                                }
-                              ]
-                            },
-                            {
-                              "type": "listItem",
-                              "blocks": [
-                                {
-                                  "type": "copyText",
-                                  "text": "Participé en rediseño de devoluciones e indemnizaciones y en la mejora de la resolución de anomalías de transporte, de ~2 días a 4 horas."
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "copy",
-                          "runs": [
-                            {
-                              "type": "link",
-                              "href": "/projects/#brazil-chile-data",
-                              "runs": [
-                                {
-                                  "type": "text",
-                                  "text": "Migración Brasil–Chile"
-                                }
-                              ]
-                            },
-                            {
-                              "type": "link",
-                              "href": "/projects/#transport-anomalies",
-                              "runs": [
-                                {
-                                  "type": "text",
-                                  "text": "Anomalías de transporte"
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "contentGroup",
-                  "blocks": [
-                    {
-                      "type": "contentGroup",
-                      "blocks": [
-                        {
-                          "type": "contentGroup",
-                          "blocks": [
-                            {
-                              "type": "copyText",
-                              "text": "2019–2021"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "contentGroup",
-                          "blocks": [
-                            {
-                              "type": "copyText",
-                              "text": "Analista Senior de Proyectos de Operaciones y Logística"
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "type": "contentGroup",
-                      "blocks": [
-                        {
-                          "type": "list",
-                          "ordered": false,
-                          "items": [
-                            {
-                              "type": "listItem",
-                              "blocks": [
-                                {
-                                  "type": "copyText",
-                                  "text": "Proyectos asociados a logística, transporte, KPIs, automatización y productividad."
-                                }
-                              ]
-                            },
-                            {
-                              "type": "listItem",
-                              "blocks": [
-                                {
-                                  "type": "copyText",
-                                  "text": "Trabajo en procesos de picking, business cases y control presupuestario."
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "type": "copy",
-                          "runs": [
-                            {
-                              "type": "link",
-                              "href": "/projects/picking-line-balancing/",
-                              "runs": [
-                                {
-                                  "type": "text",
-                                  "text": "Balanceo de línea de picking"
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "contentItem",
-              "blocks": [
-                {
-                  "type": "contentGroup",
-                  "blocks": [
-                    {
-                      "type": "contentGroup",
-                      "blocks": [
-                        {
-                          "type": "copyText",
-                          "text": "2021–2023"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "contentGroup",
-                      "blocks": [
-                        {
-                          "type": "copyText",
-                          "text": "ACHS Servicios"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "contentGroup",
-                  "blocks": [
-                    {
-                      "type": "heading",
-                      "level": 3,
-                      "runs": [
-                        {
-                          "type": "text",
-                          "text": "Jefe de Operaciones"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "list",
-                      "ordered": false,
-                      "items": [
-                        {
-                          "type": "listItem",
-                          "blocks": [
-                            {
-                              "type": "copyText",
-                              "text": "Gestión territorial de transporte de pacientes: flota, rutas, demanda, capacidad, SLA, continuidad operacional y equipos."
-                            }
-                          ]
-                        },
-                        {
-                          "type": "listItem",
-                          "blocks": [
-                            {
-                              "type": "copyText",
-                              "text": "Diseñé un modelo de asignación de flota basado en demanda histórica."
-                            }
-                          ]
-                        },
-                        {
-                          "type": "listItem",
-                          "blocks": [
-                            {
-                              "type": "copyText",
-                              "text": "El modelo se asoció a aproximadamente 15% menos uso de transportes en la Región Metropolitana."
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "type": "copy",
-                      "runs": [
-                        {
-                          "type": "link",
-                          "href": "/projects/patient-transport-optimization/",
-                          "runs": [
-                            {
-                              "type": "text",
-                              "text": "Optimización de transporte de pacientes"
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "contentItem",
-              "blocks": [
-                {
-                  "type": "contentGroup",
-                  "blocks": [
-                    {
-                      "type": "contentGroup",
-                      "blocks": [
-                        {
-                          "type": "copyText",
-                          "text": "2017–2019"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "contentGroup",
-                      "blocks": [
-                        {
-                          "type": "copyText",
-                          "text": "Coprove"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "contentGroup",
-                  "blocks": [
-                    {
-                      "type": "heading",
-                      "level": 3,
-                      "runs": [
-                        {
-                          "type": "text",
-                          "text": "Jefe de Proyecto"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "list",
-                      "ordered": false,
-                      "items": [
-                        {
-                          "type": "listItem",
-                          "blocks": [
-                            {
-                              "type": "copyText",
-                              "text": "Proyectos internos de inventario, control operacional y mejora de procesos."
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "contentItem",
-              "blocks": [
-                {
-                  "type": "contentGroup",
-                  "blocks": [
-                    {
-                      "type": "contentGroup",
-                      "blocks": [
-                        {
-                          "type": "copyText",
-                          "text": "2015–2017"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "contentGroup",
-                      "blocks": [
-                        {
-                          "type": "copyText",
-                          "text": "704 Ingeniería"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "contentGroup",
-                  "blocks": [
-                    {
-                      "type": "heading",
-                      "level": 3,
-                      "runs": [
-                        {
-                          "type": "text",
-                          "text": "Ingeniero de Proyecto"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "list",
-                      "ordered": false,
-                      "items": [
-                        {
-                          "type": "listItem",
-                          "blocks": [
-                            {
-                              "type": "copyText",
-                              "text": "Proyectos industriales de HVAC, PLC e infraestructura."
-                            }
-                          ]
-                        },
-                        {
-                          "type": "listItem",
-                          "blocks": [
-                            {
-                              "type": "copyText",
-                              "text": "Coordinación de equipos, planificación y calidad."
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "labelledBy": "experience-title",
-      "anchor": "experience"
-    },
-    {
-      "type": "contentSection",
-      "blocks": [
-        {
-          "type": "contentGroup",
-          "blocks": [
-            {
-              "type": "copy",
-              "runs": [
-                {
-                  "type": "text",
-                  "text": "HERRAMIENTAS"
-                }
-              ]
-            },
-            {
-              "type": "heading",
-              "level": 2,
-              "runs": [
-                {
-                  "type": "text",
-                  "text": "Capacidades y herramientas"
-                }
-              ],
-              "anchor": "skills-title"
-            }
-          ]
-        },
-        {
-          "type": "contentGroup",
-          "blocks": [
-            {
-              "type": "contentItem",
-              "blocks": [
-                {
-                  "type": "heading",
-                  "level": 3,
-                  "runs": [
-                    {
-                      "type": "text",
-                      "text": "Proyectos y transformación"
-                    }
-                  ]
-                },
-                {
-                  "type": "copy",
-                  "runs": [
-                    {
-                      "type": "text",
-                      "text": "Alcance · planificación · stakeholders · riesgos · presupuesto · testing · implementación · cambio · adopción · reporting"
-                    }
-                  ]
-                },
-                {
-                  "type": "copy",
-                  "runs": [
-                    {
-                      "type": "text",
-                      "text": "PMI / PMBOK · Agile · Scrum · Kanban · Lean · Jira · MS Project"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "contentItem",
-              "blocks": [
-                {
-                  "type": "heading",
-                  "level": 3,
-                  "runs": [
-                    {
-                      "type": "text",
-                      "text": "Supply Chain y operaciones"
-                    }
-                  ]
-                },
-                {
-                  "type": "copy",
-                  "runs": [
-                    {
-                      "type": "text",
-                      "text": "Logística · almacenamiento · inventario · fulfillment · transporte · picking · planificación de abastecimiento · KPIs"
-                    }
-                  ]
-                },
-                {
-                  "type": "copy",
-                  "runs": [
-                    {
-                      "type": "text",
-                      "text": "SAP · SAP S/4HANA · SAP EWM · WMS · Coupa"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "contentItem",
-              "blocks": [
-                {
-                  "type": "heading",
-                  "level": 3,
-                  "runs": [
-                    {
-                      "type": "text",
-                      "text": "Datos y decisiones"
-                    }
-                  ]
-                },
-                {
-                  "type": "copy",
-                  "runs": [
-                    {
-                      "type": "text",
-                      "text": "SQL · BigQuery · Power BI · Excel · Databricks · VBA"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "contentItem",
-              "blocks": [
-                {
-                  "type": "heading",
-                  "level": 3,
-                  "runs": [
-                    {
-                      "type": "text",
-                      "text": "Automatización"
-                    }
-                  ]
-                },
-                {
-                  "type": "copy",
-                  "runs": [
-                    {
-                      "type": "text",
-                      "text": "Python · Apps Script · Power Automate · n8n"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "contentItem",
-              "blocks": [
-                {
-                  "type": "heading",
-                  "level": 3,
-                  "runs": [
-                    {
-                      "type": "text",
-                      "text": "Exploración actual"
-                    }
-                  ]
-                },
-                {
-                  "type": "copy",
-                  "runs": [
-                    {
-                      "type": "text",
-                      "text": "LLMs · AI Agents · RAG · Ollama · Codex · OpenCode · IA local"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "labelledBy": "skills-title"
-    },
-    {
-      "type": "contentSection",
-      "blocks": [
-        {
-          "type": "contentGroup",
-          "blocks": [
-            {
-              "type": "copy",
-              "runs": [
-                {
-                  "type": "text",
-                  "text": "FORMACIÓN"
-                }
-              ]
-            },
-            {
-              "type": "heading",
-              "level": 2,
-              "runs": [
-                {
-                  "type": "text",
-                  "text": "Educación"
-                }
-              ],
-              "anchor": "education-title"
-            },
-            {
-              "type": "copy",
-              "runs": [
-                {
-                  "type": "strong",
-                  "runs": [
-                    {
-                      "type": "text",
-                      "text": "Ingeniería Mecánica"
-                    }
-                  ]
-                },
-                {
-                  "type": "break"
-                },
-                {
-                  "type": "text",
-                  "text": "Universidad Central de Venezuela · 2015"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "contentGroup",
-          "blocks": [
-            {
-              "type": "copy",
-              "runs": [
-                {
-                  "type": "text",
-                  "text": "IDIOMAS"
-                }
-              ]
-            },
-            {
-              "type": "heading",
-              "level": 2,
-              "runs": [
-                {
-                  "type": "text",
-                  "text": "Idiomas"
-                }
-              ]
-            },
-            {
-              "type": "copy",
-              "runs": [
-                {
-                  "type": "text",
-                  "text": "Español · nativo"
-                },
-                {
-                  "type": "break"
-                },
-                {
-                  "type": "text",
-                  "text": "Inglés · avanzado profesional"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "contentGroup",
-          "blocks": [
-            {
-              "type": "copy",
-              "runs": [
-                {
-                  "type": "text",
-                  "text": "UBICACIÓN"
-                }
-              ]
-            },
-            {
-              "type": "heading",
-              "level": 2,
-              "runs": [
-                {
-                  "type": "text",
-                  "text": "Base"
-                }
-              ]
-            },
-            {
-              "type": "copy",
-              "runs": [
-                {
-                  "type": "text",
-                  "text": "Santiago, Chile"
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "labelledBy": "education-title"
     }
   ],
   "profile": {
-    "profession": "Ingeniería Mecánica",
+    "profession": "Ingeniero Mecánico",
     "location": "Santiago, Chile",
-    "positioning": "Proyectos · Transformación · Supply Chain · Tecnología"
+    "positioning": "Proyectos · Transformación · Supply Chain · Tecnología",
+    "summary": "Trabajo entre operación, proyectos y tecnología para entender qué hace falta, ordenar el camino y ayudar a que las mejoras se implementen de verdad.",
+    "cvPdfUrl": "/cv/harrys-yusti-cv.pdf",
+    "workflow": "Entender → estructurar → mejorar → implementar → medir"
   },
   "skills": [
     {
@@ -5568,7 +4592,8 @@
         "Lean",
         "Jira",
         "MS Project"
-      ]
+      ],
+      "description": "Definir alcance, alinear stakeholders, anticipar riesgos y presupuestos, y acompañar la entrega, la implementación y la adopción."
     },
     {
       "area": "Supply Chain y operaciones",
@@ -5588,7 +4613,8 @@
         "SAP EWM",
         "WMS",
         "Coupa"
-      ]
+      ],
+      "description": "Inventario, logística, transporte, picking, fulfillment, planificación y productividad conectados con las necesidades reales de la operación."
     },
     {
       "area": "Datos y decisiones",
@@ -5600,7 +4626,8 @@
         "Databricks",
         "VBA"
       ],
-      "tools": []
+      "tools": [],
+      "description": "Automatizar trabajo manual, ordenar información e indicadores y facilitar mejores decisiones con tecnología aplicada."
     },
     {
       "area": "Automatización",
@@ -5610,10 +4637,11 @@
         "Power Automate",
         "n8n"
       ],
-      "tools": []
+      "tools": [],
+      "description": ""
     },
     {
-      "area": "Exploración aplicada",
+      "area": "Exploración actual",
       "skills": [
         "LLMs",
         "AI Agents",
@@ -5623,7 +4651,8 @@
         "OpenCode",
         "IA local"
       ],
-      "tools": []
+      "tools": [],
+      "description": ""
     }
   ]
 }

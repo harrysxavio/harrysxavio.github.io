@@ -58,6 +58,7 @@ class Parser(HTMLParser):
         self.current_heading: int | None = None
         self.lang = ""
         self.doctype = False
+        self.text: list[str] = []
 
     def handle_decl(self, decl: str) -> None:
         self.doctype = decl.casefold() == "doctype html"
@@ -95,6 +96,7 @@ class Parser(HTMLParser):
         if opening != tag: self.errors.append(f"</{tag}> closes <{opening}>")
 
     def handle_data(self, data: str) -> None:
+        self.text.append(data)
         if self.in_title: self.title += data
         if self.in_jsonld: self.jsonld[-1] += data
         if self.current_heading is not None:
@@ -297,8 +299,28 @@ def check_output(base: Path, site_url: str) -> None:
             "index.html: remove the experience eyebrow and preserve a single home heading")
     require(len(re.findall(r"<h1\b", home, flags=re.I)) == 1, "index.html: Home must have exactly one h1")
     cv = (base / "cv" / "index.html").read_text(encoding="utf-8")
-    require(re.search(r'<a\b(?=[^>]*href="/cv/harrys-yusti-cv\.pdf")(?=[^>]*\bdownload(?:[=\s]|>))[^>]*>', cv, flags=re.I) is not None,
+    cv_parser = Parser()
+    cv_parser.feed(cv)
+    cv_text = " ".join(cv_parser.text)
+    source = json.loads((ROOT / "content" / "site.json").read_text(encoding="utf-8"))
+    pdf_href = re.escape(source["profile"]["cvPdfUrl"])
+    require(re.search(r'<a\b(?=[^>]*href="' + pdf_href + r'")(?=[^>]*\bdownload(?:[=\s]|>))[^>]*>', cv, flags=re.I) is not None,
             "cv/index.html: a real downloadable CV PDF is required")
+    profile = source["profile"]
+    cv_values = [source["site"]["name"], *[profile[field] for field in ("profession", "location", "positioning", "summary", "workflow")],
+                 source["education"]["degree"], source["education"]["institution"], source["education"]["year"]]
+    cv_values.extend(item[key] for item in source["languages"] for key in ("language", "level"))
+    cv_values.extend(employer["employer"] for employer in source["career"])
+    cv_values.extend(role[key] for employer in source["career"] for role in employer["roles"] for key in ("period", "title"))
+    cv_values.extend(bullet for employer in source["career"] for role in employer["roles"] for bullet in role["bullets"])
+    cv_values.extend(project["title"] for employer in source["career"] for role in employer["roles"] for project in role.get("projects", []))
+    cv_values.extend(skill["area"] for skill in source["skills"])
+    cv_values.extend(label for skill in source["skills"] for label in skill["skills"] + skill["tools"])
+    cv_values.extend(skill["description"] for skill in source["skills"] if skill.get("description"))
+    missing_cv_values = [value for value in cv_values if value not in cv_text]
+    require(not missing_cv_values, f"cv/index.html: semantic CV source fields are not rendered: {missing_cv_values}")
+    require(len(source["cvPage"]) == 1 and source["cvPage"][0].get("type") == "linkGroup",
+            "content/site.json: cvPage should contain only the route breadcrumb; CV facts belong in semantic fields")
     require("Áreas donde aporto valor" in cv and "Entender" in cv and "medir" in cv,
             "cv/index.html: value areas and workflow are required")
     for page in pages:
