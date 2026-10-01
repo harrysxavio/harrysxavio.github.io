@@ -316,8 +316,10 @@ def check_output(base: Path, site_url: str) -> None:
             "index.html: three featured project cards must use their semantic component")
     require('class="career-timeline"' in home and 'class="career-milestone"' in home,
             "index.html: the connected career timeline component is missing")
-    require('class="contact-section"' in home and 'class="site-footer simple-footer"' in home,
-            "index.html: contact and global footer components are required")
+    require('class="contact-section"' in home and 'class="site-footer simple-footer simple-footer--home"' in home,
+            "index.html: contact and single source-driven footer components are required")
+    require(home.count('<footer class="site-footer') == 1,
+            "index.html: exactly one visible global footer is required")
     require('.signature-tabs [role="tab"]' in stylesheet and '.signature--tabs .signature-step > summary { display: none; }' in stylesheet
             and '.signature-tabs {' in stylesheet and 'display: none;' in stylesheet[stylesheet.index('.signature-tabs {'):stylesheet.index('.signature-tabs {') + 260]
             and '.signature--tabs .signature-tabs { display: grid; }' in stylesheet,
@@ -341,6 +343,13 @@ def check_output(base: Path, site_url: str) -> None:
     cv_parser.feed(cv)
     cv_text = " ".join(cv_parser.text)
     source = json.loads((ROOT / "content" / "site.json").read_text(encoding="utf-8"))
+    home_footer = source["home"]["footer"]
+    require(all(value in home for value in (
+        home_footer["name"], home_footer["tagline"],
+        home_footer["backToTop"]["label"], home_footer["backToTop"]["href"],
+    )), "index.html: footer name, tagline, and back-to-top link must render from home.footer")
+    require(".page-main--home + .simple-footer" not in (ROOT / "styles.css").read_text(encoding="utf-8"),
+            "styles.css: the global footer must remain visible on Home")
     def assert_semantic(value: object, location: str) -> None:
         forbidden = {"type", "blocks", "runs", "attrs", "level", "element", "contentGroup", "html", "fragment"}
         if isinstance(value, dict):

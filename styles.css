@@ -75,7 +75,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 
 .simple-footer a { display: inline-flex; align-items: center; min-height: 2.75rem; color: var(--ink); font-size: .82rem; font-weight: 700; text-decoration: none; }
 .simple-footer a:hover { color: var(--blue); }
-.page-main--home + .simple-footer { display: none; }
+.simple-footer--home .footer-identity { display: grid; gap: .15rem; margin-right: auto; }
+.simple-footer--home .footer-name { margin-right: 0; }
+.simple-footer--home .footer-tagline { color: var(--ink-soft); font-size: .78rem; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; } }
 /* Shared visual components. */
 .hero { min-height: min(44rem, calc(100vh - 7rem)); max-width: 86rem; margin: 0 auto; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: clamp(2rem, 5vw, 5.5rem); padding: clamp(1rem, 2vw, 2rem) 0 clamp(4rem, 8vw, 7rem); }

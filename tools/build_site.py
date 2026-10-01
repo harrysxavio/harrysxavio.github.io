@@ -699,6 +699,24 @@ def _generate_source_pages(data: dict[str, object], site_url: str) -> list[Path]
             project = next(project for project in data["projects"] if project.get("route") == target)
             main = _render_case(project, data["projects"])
         canonical_route = "/" if page["route"] == "index.html" else "/" + page["route"].removesuffix("index.html")
+        if copy_key == "home":
+            footer = data["home"]["footer"]
+            back_to_top = footer["backToTop"]
+            footer_markup = (
+                '<footer class="site-footer simple-footer simple-footer--home">'
+                f'<div class="footer-identity"><span class="footer-name">{html.escape(footer["name"])}</span>'
+                f'<span class="footer-tagline">{html.escape(footer["tagline"])}</span></div>'
+                '<a href="/projects/">Proyectos</a>'
+                f'<a href="{html.escape(back_to_top["href"], quote=True)}">{html.escape(back_to_top["label"])}</a>'
+                f'<a href="{html.escape(data["site"]["sameAs"][0], quote=True)}" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>'
+                '</footer>'
+            )
+        else:
+            footer_markup = (
+                '<footer class="site-footer simple-footer">'
+                f'<span class="footer-name">{html.escape(data["site"]["name"])}</span><a href="/projects/">Proyectos</a><a href="/">Inicio</a>'
+                f'<a href="{html.escape(data["site"]["sameAs"][0], quote=True)}" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></footer>'
+            )
         head = (
             '<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
             + _seo_markup(page, site_url)
@@ -712,9 +730,7 @@ def _generate_source_pages(data: dict[str, object], site_url: str) -> list[Path]
             f'<header class="site-header" id="top"><a class="wordmark" href="/" aria-label="{html.escape(data["site"]["name"], quote=True)}, inicio">{html.escape(data["site"]["name"])}</a>'
             '<nav class="top-nav" aria-label="Navegación principal"><a href="/projects/">Proyectos</a><a href="/cv/">CV</a></nav></header>'
             f'<main id="main" class="page-main page-main--{html.escape(page["id"], quote=True)}">{main}</main>'
-            '<footer class="site-footer simple-footer">'
-            f'<span class="footer-name">{html.escape(data["site"]["name"])}</span><a href="/projects/">Proyectos</a><a href="/">Inicio</a>'
-            f'<a href="{html.escape(data["site"]["sameAs"][0], quote=True)}" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></footer>'
+            f'{footer_markup}'
             '</div><script src="/script.js" defer></script></body></html>'
         )
         destination.write_text(markup + "\n", encoding="utf-8", newline="\n")
