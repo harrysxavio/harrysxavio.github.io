@@ -706,8 +706,9 @@ p, li, dd, blockquote { hyphens: auto; }
 .contact-main h2 { margin-bottom: .75rem; font-size: clamp(2.8rem,5vw,4.5rem); }
 .contact-main > p:not(.section-kicker) { color: var(--ink-soft); }
 .contact-links { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem 1.1rem; border-top: 1px solid var(--rule-dark); border-bottom: 1px solid var(--rule-dark); }
-.contact-links a { justify-content: space-between; gap: .5rem; color: var(--ink); }
+.contact-links a { justify-content: space-between; gap: .5rem; color: inherit; }
 .contact-links a:hover { color: var(--red); }
+.contact-main > p:not(.section-kicker) { color: inherit; }
 .footer-bottom { grid-column: 1 / -1; margin-top: .7rem; border-color: var(--rule); }
 .career-arc::before { background: var(--rule-dark); }
 .career-arc li::before { border-color: var(--paper); }
