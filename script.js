@@ -9,6 +9,41 @@ let tabButtons = [];
 let selectedIndex = Math.max(0, signatureSteps.findIndex((step) => step.open));
 let desktopTabs = false;
 
+function setupThemeToggle() {
+  const navigation = document.querySelector(".top-nav");
+  if (!navigation || navigation.querySelector("[data-theme-toggle]")) return;
+
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "theme-toggle";
+  button.dataset.themeToggle = "";
+  button.innerHTML = '<svg class="theme-toggle__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.2 15.2A8.5 8.5 0 0 1 8.8 3.8 8.5 8.5 0 1 0 20.2 15.2Z"/></svg><span data-theme-label></span>';
+  navigation.append(button);
+
+  const label = button.querySelector("[data-theme-label]");
+  const themeColor = document.querySelector('meta[name="theme-color"]');
+  const applyTheme = (theme, persist = false) => {
+    const isDark = theme === "dark";
+    document.documentElement.dataset.theme = isDark ? "dark" : "light";
+    button.setAttribute("aria-pressed", String(isDark));
+    button.setAttribute("aria-label", isDark ? "Activar tema claro" : "Activar tema oscuro");
+    label.textContent = isDark ? "Claro" : "Oscuro";
+    if (themeColor) themeColor.content = isDark ? "#101822" : "#135eef";
+    if (persist) {
+      try {
+        localStorage.setItem("harrys-site-theme", isDark ? "dark" : "light");
+      } catch {
+        // The selected theme remains active until navigation when storage is unavailable.
+      }
+    }
+  };
+
+  applyTheme(document.documentElement.dataset.theme === "dark" ? "dark" : "light");
+  button.addEventListener("click", () => {
+    applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark", true);
+  });
+}
+
 function updateSignatureRoute(index) {
   if (!signatureRoute) return;
   signatureRoute.dataset.activeIndex = String(index);
@@ -102,6 +137,7 @@ function updateSignatureMode() {
 }
 
 try {
+  setupThemeToggle();
   if (signatureSteps.length === 5) {
     signatureSteps.forEach((step, index) => {
       if (!step.id) step.id = `signature-panel-${index + 1}`;
