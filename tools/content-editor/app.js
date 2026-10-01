@@ -368,11 +368,11 @@ function renderCv() {
   });
 }
 
-function render() {
+function render({ scrollToForm = false } = {}) {
   if (!content) return;
   formRoot.replaceChildren();
   ({ site: renderSite, home: renderHome, projects: renderProjects, cv: renderCv })[activeView]();
-  formRoot.scrollIntoView({ block: "start", behavior: "smooth" });
+  if (scrollToForm) formRoot.scrollIntoView({ block: "start", behavior: "smooth" });
 }
 
 navButtons.forEach((button) => button.addEventListener("click", () => {
@@ -386,7 +386,7 @@ navButtons.forEach((button) => button.addEventListener("click", () => {
     item.classList.toggle("is-active", selected);
     if (selected) item.setAttribute("aria-current", "page"); else item.removeAttribute("aria-current");
   });
-  render();
+  render({ scrollToForm: true });
 }));
 
 saveButton.addEventListener("click", async () => {

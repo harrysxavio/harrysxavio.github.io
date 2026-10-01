@@ -318,8 +318,10 @@ def check_output(base: Path, site_url: str) -> None:
             "index.html: the connected career timeline component is missing")
     require('class="contact-section"' in home and 'class="site-footer simple-footer"' in home,
             "index.html: contact and global footer components are required")
-    require('.signature-tabs [role="tab"]' in stylesheet and '.signature--tabs .signature-step > summary { display: none; }' in stylesheet,
-            "styles.css: intentional desktop tabs and duplicate-summary suppression are required")
+    require('.signature-tabs [role="tab"]' in stylesheet and '.signature--tabs .signature-step > summary { display: none; }' in stylesheet
+            and '.signature-tabs {' in stylesheet and 'display: none;' in stylesheet[stylesheet.index('.signature-tabs {'):stylesheet.index('.signature-tabs {') + 260]
+            and '.signature--tabs .signature-tabs { display: grid; }' in stylesheet,
+            "styles.css: responsive tab visibility and duplicate-summary suppression are required")
     require('min-height: 4rem' in stylesheet and 'ArrowRight' in controller and 'event.key === "End"' in controller,
             "signature tabs: minimum target size and keyboard navigation hooks are required")
     for route, required_classes in {
