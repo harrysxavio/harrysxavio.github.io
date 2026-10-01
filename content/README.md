@@ -1,36 +1,53 @@
-# Edit the site content
+# Guía para editar el contenido del sitio
 
-`content/site.json` is the single editable source for the profile, Home, Projects, CV, and all four case pages. Edit the named facts and copy fields in that file; do not edit generated route HTML directly.
+`content/site.json` es la fuente editable del perfil, Inicio, Proyectos, CV y los cuatro casos. El editor local ofrece formularios para los campos habituales; el archivo JSON permanece como respaldo completo. No edites el HTML generado: el builder lo reemplaza.
 
-## Edit and rebuild
+## Abrir el editor
 
-1. Open `content/site.json` in a JSON-aware editor and keep valid JSON syntax (double quotes, commas between fields, no trailing comma).
-2. Edit Home under `home.hero`, `home.signature.stages[]`, `home.selectedWork`, `home.careerStory`, `home.contact`, and `home.footer`. Selected project cards use `homeCard` fields on the corresponding `projects[]` records; `selectedWork.projectIds` controls which records appear.
-3. Edit project facts and taxonomy under `projects[]` and `taxonomy.tags[]`. Keep tag IDs stable slugs; assign one or more existing IDs in each project's `tags` array. The four routed projects also have `caseDetails` fields for their hero, metrics, diagram, context, problem, role, approach decisions, outcome, and navigation labels. Teaser-only projects do not have case details.
-4. Edit the Projects introduction in `projectsPage`, the 404 page in `notFound`, and CV facts in `profile`, `career[]`, `education`, `skills[]`, and `languages[]`. Career-story copy on Home is separate from the factual CV employment entries so each page can be edited in its own context.
-5. Edit titles, descriptions, social metadata, and structured data under the matching `pages[].seo` record. Keep the eight existing page IDs and routes unchanged.
-6. From the repository root, run `python tools/build_site.py` to generate the checked-in root routes and `dist/`, then run `python tools/verify_site.py`.
+1. En Windows, ejecuta `Editar-contenido.cmd` desde el repositorio.
+2. Deja abierta la ventana de consola y abre `http://127.0.0.1:8766/` en el navegador. La vista previa del sitio queda en `http://127.0.0.1:8767/`.
+3. Selecciona una sección —Sitio, Inicio, Proyectos o CV y trayectoria— y edita los campos. Las áreas de texto conservan párrafos; en listas, escribe un elemento por línea.
+4. En Inicio puedes seleccionar tres proyectos. En Proyectos, puedes actualizar títulos, resúmenes, resultados, temas y casos; los cuatro destinos existentes se conservan.
+5. Pulsa **Guardar y reconstruir vista previa**. El editor valida el contenido y actualiza las páginas locales; si encuentra un problema, muestra el campo pendiente y restaura el JSON anterior.
+6. Abre **Abrir vista previa** para revisar los cambios generados.
+7. Para cerrar el editor, vuelve a la consola y pulsa `Ctrl+C`.
 
-The builder uses only the Python standard library. It owns page structure, layout, HTML escaping, route mapping, shared navigation, SEO output, and the page shell; the JSON contains plain text, URLs, image data, and domain-specific arrays rather than HTML fragments or HTML element trees. Validation errors name the page, project ID, or field that needs correction.
+Guardar **no publica** el sitio. La publicación requiere revisar los archivos generados y seguir el flujo habitual del repositorio hacia GitHub Pages.
 
-## Schema version 3
+## Criterios de edición
 
-| Field | Required shape | Purpose |
-|---|---|---|
-| `schemaVersion` | `3` | Rejects unsupported source versions. |
-| `site` | `name`, `siteUrl`, `language`, `sameAs[]` | Shared identity, canonical URL, language, and profile links. |
-| `profile` | `profession`, `location`, `positioning`, `summary`, `workflow`, `cvPdfUrl` | Profile facts and CV introduction. |
-| `taxonomy` | `version: 1`, `tags[]` | Stable `{id, label}` taxonomy vocabulary. |
-| `projects[]` | Exactly nine records | Project facts, tags, route, and featured status. Three Home cards also have `homeCard` copy; the four routed records have semantic `caseDetails`. |
-| `home` | Named objects: `hero`, `signature`, `selectedWork`, `careerStory`, `contact`, `footer` | Home copy, image data, signature stages, selected project IDs, narrative milestones, human notes, and contact links. |
-| `projectsPage`, `notFound` | Named objects containing plain text and link data | Projects introduction and 404-page copy. |
-| `career[]` | Employer, period, optional summary, roles with period/title/bullets/optional project links | Confirmed employment copy and evidence; dates stay at year precision. |
-| `education`, `skills[]`, `languages[]` | Structured object/arrays | Education, capabilities/tools, and language levels rendered by the CV template. |
-| `pages[]` | Exactly eight `{id, route, seo}` records | Existing route inventory and per-page SEO title, description, social tags, and JSON-LD. |
-| `editorialRules[]` | String array | Accuracy and copy guardrails for future edits. |
+- Escribe hechos y resultados que puedas respaldar. No agregues cifras, fechas, cargos, empresas o tecnologías sin confirmarlos.
+- Mantén los identificadores de página, las rutas y los identificadores estables de proyectos.
+- Cada proyecto debe conservar al menos dos temas existentes. Para reemplazar un registro secundario, elimina el anterior y agrega el nuevo antes de guardar; el esquema actual mantiene nueve proyectos, cuatro casos con ruta y cuatro destacados.
+- Edita los textos del relato de Inicio aparte de los registros laborales del CV; cumplen propósitos distintos.
+- El contenido son datos y texto plano, no HTML ni instrucciones de presentación. El builder se encarga de la estructura, el escape y la navegación.
 
-The generator validates required semantic fields and relationships, including Home-selected project IDs, project tag IDs, and the four stable case routes. Keep profile facts and claims accurate; do not add unverified dates, metrics, roles, technologies, or baselines.
+## Estructura del contenido
 
-## CV PDF
+| Campo | Qué contiene |
+|---|---|
+| `site` | Nombre común, URL canónica, idioma y perfiles públicos. |
+| `profile` | Profesión, ubicación, presentación del CV, forma de trabajo y enlace al PDF. |
+| `taxonomy.tags[]` | Temas compartidos por los proyectos; cada identificador es un slug estable. |
+| `projects[]` | Nueve registros con situación, tarea, contribución, resultado, evidencia, temas y prioridad; cuatro incluyen `caseDetails`. |
+| `home` | Presentación, cinco etapas de trabajo, tres proyectos, relato profesional, notas y contacto. |
+| `projectsPage`, `notFound` | Textos de la portada de Proyectos y la página 404. |
+| `career[]` | Organizaciones, períodos, cargos, aportes y enlaces relacionados del CV. |
+| `education`, `skills[]`, `languages[]` | Formación, capacidades, herramientas e idiomas. |
+| `pages[].seo` | Título, descripción, metadatos sociales y datos estructurados para cada ruta. |
+| `editorialRules[]` | Guardas editoriales para mantener contenido fiel y verificable. |
 
-The downloadable PDF remains a static asset. After changing CV data, rebuild the site and use the CV page's print action to produce a refreshed PDF; a deterministic PDF generator is not configured.
+## Validación manual
+
+Desde la raíz del repositorio, ejecuta:
+
+```powershell
+python tools/build_site.py
+python tools/verify_site.py
+```
+
+El generador usa solo la biblioteca estándar de Python. La verificación revisa las rutas, el HTML, los enlaces, las imágenes, los metadatos y el inventario de proyectos.
+
+## PDF del CV
+
+El PDF descargable es un archivo estático. Después de modificar el CV, revisá la página `/cv/` e imprimí o exportá el documento con la acción **Imprimir** del navegador. No hay un generador de PDF automatizado configurado.

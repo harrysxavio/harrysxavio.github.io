@@ -1,42 +1,34 @@
-# Design system — Editorial Executive Profile
+# Design system — Personal Transformation Profile
 
 ## Position
 
-The site presents Harrys Yusti as a mechanical engineer working across projects, operations, Supply Chain, productivity, and operational transformation. Technology, data, automation, and AI are enablers—not the primary professional identity. The visual personality supports clarity and evidence rather than turning the profile into a field guide or a product dashboard.
+The site presents Harrys Yusti's confirmed experience across engineering, projects, operations, Supply Chain, and transformation. Data, automation, and AI are practical enablers—not a claim to be an AI product company, SaaS template, or generic technology designer. Personal statements stay first-person and grounded in the supplied content; this document does not assert independent recruiter research or certified accessibility conformance.
 
 ## Visual language
 
-- **Canvas:** warm paper `#f4f0e7`, navy ink, soft secondary ink, and restrained editorial red.
-- **Type:** system sans-serif display headings and reading/navigation, Georgia for personal statements and quotes, selective monospaced metadata; no external font requests.
-- **Composition:** fine rules, whitespace, open ledger rows, restrained numbering, and typographic impact measures rather than KPI cards.
-- **Visuals:** Home uses an intentional abstract connection-flow drawing; project pages use small process diagrams, not portrait or project-photo substitutes. A future approved portrait may use `assets/harrys-portrait-800.webp`.
+- **Canvas and color:** light off-white, navy ink, strong blue, and restrained coral; dark mode swaps to corresponding deep-navy surfaces with readable text and focus states.
+- **Type:** cohesive system sans-serif for headings, navigation, and body copy; normal tracking for names and titles; no external font requests.
+- **Composition:** generous but purposeful spacing, balanced split portrait hero, rounded CTA hierarchy, quiet depth, connected process controls, and compact evidence-led cards instead of dense report rows.
+- **Portrait and visual assets:** use the supplied transparent portrait at `assets/harrys-yusti-portrait.webp`. Use focused project marks in the Home band and the existing descriptive workflow diagrams within case pages.
 
-## Home — five acts
+## Home sequence
 
-1. **Identity:** name, engineering background, experience, domains, and a concise value proposition.
-2. **How I work:** understand friction, simplify, connect teams/data, automate with controls, and measure.
-3. **Selected transformations:** three short, evidence-led examples with contribution separated from initiative outcome.
-4. **Career and person:** professional evolution, a concise human perspective, and current AI/automation exploration.
-5. **Continue the conversation:** clear recruiter-facing invitation and supplied LinkedIn/GitHub links.
+1. **Identity:** name, a specific design statement, concise first-person context, supplied portrait, and a clear route to projects.
+2. **How I work:** five real stages with concrete supporting evidence; desktop uses an accessible connected tab system while mobile and no-JavaScript use native disclosures.
+3. **Selected work:** three same-band project cards with compact Situation/Task/Action/Result evidence, domain-specific marks, and aligned case links.
+4. **Career story:** scannable progression, four human notes—including practical applied-AI experience—and a distinct current exploration note.
+5. **Contact:** one characterized contact block followed by one restrained global footer.
 
-Projects and the detailed CV live on their own routes so the Home remains scannable.
+Projects and the CV have dedicated layouts rather than being forced into the Home composition. The projects index maintains the featured-case hierarchy and searchable/tag-filtered set. Cases use semantic hero, evidence, workflow, narrative, and navigation components. The CV has its own readable employer progression, value areas, capabilities, and browser print action.
 
 ## Responsive and accessible behavior
 
-Use one semantic document per route with a skip link, landmarks, one H1, clear heading order, visible keyboard focus, descriptive link names, and intrinsic image dimensions. Layouts collapse to one-column reading on narrow screens without horizontal scrolling. Motion is minimal and respects `prefers-reduced-motion`. The CV has a dedicated A4 print stylesheet. These implementation choices are not a claim of independently certified WCAG conformance.
+Use one semantic document per route with a skip link, landmarks, one H1, sensible heading order, visible keyboard focus, descriptive link names, native disclosure content, and intrinsic image dimensions. Desktop tab navigation supports arrow keys, Home, and End; the editor and filter controls have associated labels. Layouts are checked at 1440, 1280, 1024, 768, 430, 390, and 360 CSS pixels for horizontal overflow. Motion is short and respects `prefers-reduced-motion`. The CV can use the browser's print flow; automatic PDF generation is not part of the local editor.
 
 ## Content and evidence
 
-Use only facts and outcomes confirmed in the V4 Master Plan. State the project outcome separately from Harrys's contribution; do not assign collective results to him individually. Do not invent current title, contact details, client names, testimonials, tools used on a particular project, or photography. Label AI as current exploration.
+`content/site.json` remains the single semantic source. Do not invent personal facts, dates, results, endorsements, or credentials; separate project outcomes from individual contributions. Content is neutral professional Spanish. The local editor writes only to the canonical source after schema validation and build success; it binds to loopback and previews public allowlisted files only. Saving rebuilds local files and does not publish them.
 
 ## SEO and publishing
 
-Production base URL: `https://harrysxavio.github.io/`. Each page has a route-specific canonical and social URL. Home structured data identifies the Person and ProfilePage; other indexable pages use their page and breadcrumb entities. Sitemap contains all indexable routes and excludes the noindex 404. GitHub Pages continues to publish `main` from repository root; `tools/build_site.py` creates a local allowlisted artifact only.
-
-## V4.1 visual and interaction direction
-
-V4.1 preserves the static multipage architecture, the five Home acts, all route metadata, and all confirmed professional facts. The visual system moves to system-sans 700 headings with a 5.5rem desktop / 3.5rem mobile Home H1, 17–18px reading text, Georgia reserved for the personal statement and quotes, and sparse monospaced metadata. The existing paper, navy, restrained red, and pale-blue palette remains; rules and red all-caps labels are used more selectively.
-
-The Home hero is a 58/42 editorial split with a code-native abstract connection-flow visual. It is intentionally not a portrait; `assets/harrys-portrait-800.webp` is only a documented future asset destination and no missing-image placeholder is rendered. The signature section keeps each real example in one native `<details>` source. JavaScript enhances desktop widths (1024px and above) into keyboard-operable tabs and one visible panel; mobile and no-JavaScript rendering remain native disclosures. Breakpoint changes retain the selected step and transfer focus only when the currently focused control is replaced.
-
-Project visuals are four lightweight, reusable SVG assets shared between the Home and portfolio pages and each matching case: inventory reconciliation and exception control; Brazil-to-Chile master-data validation; patient transport allocation from demand and capacity; and order picking balanced across zones. Responsive mobile SVG variants preserve readable labels at narrow widths. They are explanatory diagrams, not screenshots or detailed depictions of a production system. The Projects index groups four featured cases under “Casos destacados” (inventory leads, followed by three supporting cases) and four compact entries under “Otros proyectos.” The CV route retains its dedicated A4 print stylesheet and print control.
+Production base URL: `https://harrysxavio.github.io/`. Each route has route-specific canonical and social metadata. Structured data and sitemap are generated from canonical content. `tools/build_site.py` creates the local allowlisted artifact; GitHub Pages publication still requires the repository's normal review and publishing flow.

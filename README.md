@@ -27,8 +27,12 @@ Production: [https://harrysxavio.github.io/](https://harrysxavio.github.io/). Gi
 
 ## Design and SEO
 
-Editorial Executive Profile: warm paper, navy ink, a restrained red accent, serif display type, sans-serif reading text, open layouts, and fine rules. Each indexable page has route-specific canonical/social metadata and structured data; `robots.txt` points to the generated route sitemap.
+Modern editorial professional profile: a clear system-sans hierarchy, navy and blue contrast, restrained coral accents, spacious components, and a real portrait. Each indexable page retains route-specific canonical/social metadata and structured data; `robots.txt` points to the generated route sitemap.
 
 ## V4.1 experience
 
-The Home retains its five-act story while using an abstract connection-flow hero and progressively enhanced signature steps. At desktop widths the five evidence-backed steps become keyboard-operable tabs; mobile and no-JavaScript use native disclosures. Project detail pages use compact, explanatory SVG process diagrams. The diagrams describe the documented workflow and do not represent a specific production system. The `/cv/` A4 print stylesheet and static, framework-free delivery remain unchanged.
+The Home uses a portrait-led introduction, five evidence-backed work steps, selected project examples, a career timeline, and one contact section. At desktop widths the work steps become keyboard-operable tabs; mobile and no-JavaScript use native disclosures. Project detail pages use compact, explanatory SVG process diagrams. The diagrams describe the documented workflow and do not represent a specific production system. The `/cv/` A4 print stylesheet and static, framework-free delivery remain in place.
+
+## Edición local
+
+En Windows, ejecuta `Editar-contenido.cmd` y abre `http://127.0.0.1:8766/`; la vista previa queda en `http://127.0.0.1:8767/`. El editor y la vista previa solo escuchan en este equipo. Guardar valida el contenido y reconstruye la vista previa local; no publica cambios en GitHub Pages. Consulta la guía en [`content/README.md`](content/README.md).
