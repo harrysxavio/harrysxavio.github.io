@@ -303,6 +303,28 @@ def check_output(base: Path, site_url: str) -> None:
     cv_parser.feed(cv)
     cv_text = " ".join(cv_parser.text)
     source = json.loads((ROOT / "content" / "site.json").read_text(encoding="utf-8"))
+    def assert_semantic(value: object, location: str) -> None:
+        forbidden = {"type", "blocks", "runs", "attrs", "level", "element", "contentGroup", "html", "fragment"}
+        if isinstance(value, dict):
+            for key, item in value.items():
+                require(key not in forbidden, f"{location}.{key}: presentation/HTML AST fields are not authorable content")
+                assert_semantic(item, f"{location}.{key}")
+        elif isinstance(value, list):
+            for index, item in enumerate(value):
+                assert_semantic(item, f"{location}[{index}]")
+        elif isinstance(value, str):
+            require(re.search(r"<\/?[a-z][^>]*>", value, flags=re.I) is None,
+                    f"{location}: content fields must be plain text, not HTML fragments")
+
+    require(source.get("schemaVersion") == 3, "content/site.json: semantic schema version 3 is required")
+    assert_semantic(source["home"], "home")
+    assert_semantic(source["projectsPage"], "projectsPage")
+    assert_semantic(source["notFound"], "notFound")
+    for project in source["projects"]:
+        if project.get("homeCard"):
+            assert_semantic(project["homeCard"], f"project {project['id']}.homeCard")
+        if project.get("caseDetails"):
+            assert_semantic(project["caseDetails"], f"project {project['id']}.caseDetails")
     pdf_href = re.escape(source["profile"]["cvPdfUrl"])
     require(re.search(r'<a\b(?=[^>]*href="' + pdf_href + r'")(?=[^>]*\bdownload(?:[=\s]|>))[^>]*>', cv, flags=re.I) is not None,
             "cv/index.html: a real downloadable CV PDF is required")
@@ -319,10 +341,25 @@ def check_output(base: Path, site_url: str) -> None:
     cv_values.extend(skill["description"] for skill in source["skills"] if skill.get("description"))
     missing_cv_values = [value for value in cv_values if value not in cv_text]
     require(not missing_cv_values, f"cv/index.html: semantic CV source fields are not rendered: {missing_cv_values}")
-    require(len(source["cvPage"]) == 1 and source["cvPage"][0].get("type") == "linkGroup",
-            "content/site.json: cvPage should contain only the route breadcrumb; CV facts belong in semantic fields")
     require("Áreas donde aporto valor" in cv and "Entender" in cv and "medir" in cv,
             "cv/index.html: value areas and workflow are required")
+    home_parser = Parser()
+    home_parser.feed(home)
+    home_text = " ".join(home_parser.text)
+    home_values = [source["home"]["hero"]["name"], source["home"]["hero"]["thesis"],
+                   source["home"]["careerStory"]["introduction"],
+                   source["home"]["careerStory"]["milestones"][0]["employer"],
+                   source["home"]["careerStory"]["milestones"][0]["description"]]
+    missing_home = [value for value in home_values if value not in home_text]
+    require(not missing_home, f"index.html: semantic Home and career story fields are not rendered: {missing_home}")
+    inventory = next(item for item in source["projects"] if item["id"] == "inventory-reconciliation")
+    case_parser = Parser()
+    case_parser.feed((base / "projects" / "inventory-reconciliation" / "index.html").read_text(encoding="utf-8"))
+    case_text = " ".join(case_parser.text)
+    case = inventory["caseDetails"]
+    case_values = [case["hero"]["title"], case["role"]["body"], case["approach"]["decisions"][0], case["outcome"]["body"]]
+    missing_case = [value for value in case_values if value not in case_text]
+    require(not missing_case, f"inventory case: semantic hero/role/decision/outcome fields are not rendered: {missing_case}")
     for page in pages:
         if page.is_file() and page.name != "sitemap.xml":
             source = page.read_text(encoding="utf-8")

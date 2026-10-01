@@ -71,8 +71,8 @@ def _load_content() -> dict[str, object]:
         data = json.loads(CONTENT_FILE.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
         raise ValueError(f"content/site.json: cannot read valid JSON: {exc}") from exc
-    if not isinstance(data, dict) or data.get("schemaVersion") != 2:
-        raise ValueError("content/site.json: schemaVersion must be 2")
+    if not isinstance(data, dict) or data.get("schemaVersion") != 3:
+        raise ValueError("content/site.json: schemaVersion must be 3")
     if not isinstance(data.get("site"), dict) or not isinstance(data["site"].get("siteUrl"), str):
         raise ValueError("content/site.json: site.siteUrl is required")
     for field in ("name", "language"):
@@ -121,11 +121,12 @@ def _load_content() -> dict[str, object]:
             raise ValueError(f"{field}.route must be a route string or null")
         if not isinstance(project.get("featured"), bool):
             raise ValueError(f"{field}.featured must be a boolean")
+        if project.get("homeCard") is not None:
+            card = project["homeCard"]
+            if not isinstance(card, dict) or not all(isinstance(card.get(key), str) and card[key].strip() for key in ("title", "situation", "task", "contribution", "result")):
+                raise ValueError(f"{field}.homeCard requires title, situation, task, contribution, and result prose")
         if project.get("route"):
-            case_details = project.get("caseDetails")
-            if not isinstance(case_details, list):
-                raise ValueError(f"{field}.caseDetails must contain the existing case page copy")
-            _validate_content_blocks(case_details, f"project {project['id']}.caseDetails")
+            _validate_case_details(project.get("caseDetails"), f"{field}.caseDetails")
     project_routes = {project["route"] for project in projects if project.get("route")}
     expected_project_routes = {
         "/projects/inventory-reconciliation/", "/projects/brazil-chile-data-migration/",
@@ -164,8 +165,14 @@ def _load_content() -> dict[str, object]:
         raise ValueError("content/site.json: education.degree, institution, and year are required")
     if not isinstance(data.get("languages"), list) or not data["languages"] or any(not isinstance(item, dict) or not item.get("language") or not item.get("level") for item in data["languages"]):
         raise ValueError("content/site.json: languages[] requires language and level")
-    if not isinstance(data.get("cvPage"), list) or len(data["cvPage"]) != 1 or data["cvPage"][0].get("type") != "linkGroup":
-        raise ValueError("content/site.json: cvPage must contain only the route breadcrumb; CV facts belong in semantic fields")
+    _validate_home(data.get("home"), project_ids)
+    for name in ("projectsPage", "notFound"):
+        if not isinstance(data.get(name), dict):
+            raise ValueError(f"content/site.json: {name} must be an object of named page copy fields")
+    _validate_semantic_object(data["projectsPage"], "content/site.json: projectsPage", ("title", "introduction", "context"))
+    _validate_semantic_object(data["notFound"], "content/site.json: notFound", ("eyebrow", "title", "description"))
+    for index, link in enumerate(data["notFound"].get("actions", [])):
+        _validate_semantic_object(link, f"content/site.json: notFound.actions[{index}]", ("label", "href"))
     if not isinstance(data.get("editorialRules"), list) or not data["editorialRules"]:
         raise ValueError("content/site.json: editorialRules must preserve content-authoring guardrails")
     pages = data.get("pages")
@@ -190,12 +197,7 @@ def _load_content() -> dict[str, object]:
         routes.append(route)
         if not isinstance(page.get("seo"), dict):
             raise ValueError(f"{field}.seo is required")
-        copy_key = {"not-found": "notFound", "projects": "projectPortfolio", "cv": "cvPage"}.get(page["id"], page["id"])
-        if copy_key in {"home", "notFound", "projectPortfolio", "cvPage"}:
-            if not isinstance(data.get(copy_key), list):
-                raise ValueError(f"content/site.json: {copy_key} must be an array of semantic content blocks")
-            _validate_content_blocks(data[copy_key], copy_key)
-        else:
+        if page["id"] not in {"home", "notFound", "projectPortfolio", "cvPage"}:
             target = "/projects/" + page["route"].removeprefix("projects/").removesuffix("/index.html") + "/"
             if not any(project.get("route") == target for project in projects):
                 raise ValueError(f"content/site.json: page {page['id']} does not map to a project record")
@@ -218,150 +220,189 @@ def _load_content() -> dict[str, object]:
     return data
 
 
-def _validate_content_blocks(blocks: list[object], field: str) -> None:
-    known = {
-        "contentSection", "contentItem", "media", "callout", "linkGroup", "contentGroup",
-        "factGroup", "factLabel", "factValue", "measureGrid", "measureGroup", "measureRow",
-        "measureCell", "formControls", "controlLabel", "actionButton", "textControl", "rule",
-        "copy", "list", "listItem", "expandable", "expandableTitle", "copyText", "heading",
-        "image", "link",
-    }
-    for index, block in enumerate(blocks):
-        location = f"{field}[{index}]"
-        if not isinstance(block, dict) or block.get("type") not in known:
-            raise ValueError(f"{location}.type must be a supported semantic content block")
-        if "anchor" in block and (not isinstance(block["anchor"], str) or not block["anchor"].strip()):
-            raise ValueError(f"{location}.anchor must be a non-empty string")
-        for child_key in ("blocks", "items"):
-            if child_key in block:
-                if not isinstance(block[child_key], list):
-                    raise ValueError(f"{location}.{child_key} must be an array")
-                _validate_content_blocks(block[child_key], f"{location}.{child_key}")
-        if "runs" in block and not isinstance(block["runs"], list):
-            raise ValueError(f"{location}.runs must be an array")
-        if block["type"] == "heading" and block.get("level") not in {1, 2, 3, 4, 5, 6}:
-            raise ValueError(f"{location}.level must be a heading level from 1 to 6")
-        if block["type"] in {"heading", "copy", "link"}:
-            runs = block.get("runs")
-            if not isinstance(runs, list):
-                raise ValueError(f"{location}.runs is required")
-            _validate_runs(runs, f"{location}.runs")
-        if block["type"] == "image" and not all(block.get(key) for key in ("src", "alt", "width", "height")):
-            if not block.get("decorative") or not block.get("src") or not block.get("width") or not block.get("height"):
-                raise ValueError(f"{location}.src, alt, width, and height are required")
-        if block["type"] == "link" and not block.get("href"):
-            raise ValueError(f"{location}.href is required")
-        if block["type"] == "list" and not isinstance(block.get("items"), list):
-            raise ValueError(f"{location}.items is required")
-        if block["type"] == "listItem" and not isinstance(block.get("blocks"), list):
-            raise ValueError(f"{location}.blocks is required")
-        if block["type"] == "expandable" and (not isinstance(block.get("summary"), list) or not isinstance(block.get("blocks"), list)):
-            raise ValueError(f"{location}.summary and blocks are required")
+def _validate_semantic_object(value: object, field: str, required: tuple[str, ...]) -> dict[str, object]:
+    if not isinstance(value, dict):
+        raise ValueError(f"{field} must be an object")
+    for key in required:
+        if not isinstance(value.get(key), str) or not value[key].strip():
+            raise ValueError(f"{field}.{key} is required")
+    return value
 
 
-def _validate_runs(runs: list[object], field: str) -> None:
-    allowed = {"text", "link", "strong", "b", "em", "i", "small", "code", "sup", "sub", "break"}
-    for index, run in enumerate(runs):
-        location = f"{field}[{index}]"
-        if not isinstance(run, dict) or run.get("type") not in allowed:
-            raise ValueError(f"{location}.type must be an inline content type")
-        if run["type"] == "text" and not isinstance(run.get("text"), str):
-            raise ValueError(f"{location}.text must be a string")
-        if run["type"] == "link":
-            if not isinstance(run.get("href"), str) or not run["href"]:
-                raise ValueError(f"{location}.href is required")
-            if not isinstance(run.get("runs"), list):
-                raise ValueError(f"{location}.runs must be an array")
-            _validate_runs(run["runs"], f"{location}.runs")
-        elif run["type"] in {"strong", "b", "em", "i", "small", "code", "sup", "sub"}:
-            if not isinstance(run.get("runs"), list):
-                raise ValueError(f"{location}.runs must be an array")
-            _validate_runs(run["runs"], f"{location}.runs")
+def _validate_case_details(value: object, field: str) -> None:
+    if not isinstance(value, dict):
+        raise ValueError(f"{field} must be a semantic object, not presentation blocks")
+    for key in ("hero", "context", "problem", "role", "approach", "outcome", "diagram", "navigation"):
+        if not isinstance(value.get(key), dict):
+            raise ValueError(f"{field}.{key} must be a named semantic object")
+    for key in ("context", "problem", "role", "outcome"):
+        _validate_semantic_object(value[key], f"{field}.{key}", ("kicker", "heading", "body"))
+    _validate_semantic_object(value["hero"], f"{field}.hero", ("eyebrow", "title", "summary"))
+    _validate_semantic_object(value["approach"], f"{field}.approach", ("heading",))
+    if not isinstance(value["approach"].get("decisions"), list) or not value["approach"]["decisions"]:
+        raise ValueError(f"{field}.approach.decisions must be a non-empty array of prose")
+    if not isinstance(value["approach"].get("kicker"), str) or not value["approach"]["kicker"].strip():
+        raise ValueError(f"{field}.approach.kicker is required")
+    if not isinstance(value.get("metrics"), list) or not value["metrics"]:
+        raise ValueError(f"{field}.metrics must be an array of value/label facts")
+    if not isinstance(value["diagram"].get("steps"), list) or not isinstance(value["navigation"].get("breadcrumbTitle"), str):
+        raise ValueError(f"{field}.diagram.steps and navigation.breadcrumbTitle are required")
 
 
-def _render_runs(runs: list[dict[str, object]], site_url: str) -> str:
-    output = []
-    for run in runs:
-        kind = run.get("type")
-        if kind == "text":
-            value = str(run.get("text", "")).replace(DEFAULT_SITE_URL, site_url)
-            if not value.strip() and ("\n" in value or "\r" in value):
-                continue
-            output.append(html.escape(value, quote=False))
-        elif kind == "break":
-            output.append("<br>")
-        elif kind == "link":
-            href = str(run.get("href", ""))
-            output.append(f'<a href="{html.escape(href, quote=True)}">{_render_runs(run.get("runs", []), site_url)}</a>')
-        elif kind in {"strong", "b", "em", "i", "small", "code", "sup", "sub"}:
-            output.append(f"<{kind}>{_render_runs(run.get('runs', []), site_url)}</{kind}>")
-    return "".join(output)
+def _validate_home(value: object, project_ids: set[str]) -> None:
+    if not isinstance(value, dict):
+        raise ValueError("content/site.json: home must be a named object")
+    for section in ("hero", "signature", "selectedWork", "careerStory", "contact", "footer"):
+        if not isinstance(value.get(section), dict):
+            raise ValueError(f"content/site.json: home.{section} must be a named object")
+    _validate_semantic_object(value["hero"], "content/site.json: home.hero", ("name", "thesis", "introduction", "positioning"))
+    _validate_semantic_object(value["signature"], "content/site.json: home.signature", ("kicker", "title", "introduction"))
+    signature_stages = value["signature"].get("stages")
+    if not isinstance(signature_stages, list) or not signature_stages:
+        raise ValueError("content/site.json: home.signature.stages must be a non-empty array")
+    for index, stage in enumerate(signature_stages):
+        field = f"content/site.json: home.signature.stages[{index}]"
+        _validate_semantic_object(stage, field, ("id", "number", "title", "description", "evidenceLabel", "evidence"))
+    selected = value["selectedWork"]
+    _validate_semantic_object(selected, "content/site.json: home.selectedWork", ("kicker", "title"))
+    if not isinstance(selected.get("projectIds"), list) or not set(selected["projectIds"]).issubset(project_ids):
+        raise ValueError("content/site.json: home.selectedWork.projectIds must reference known project IDs")
+    story = value["careerStory"]
+    _validate_semantic_object(story, "content/site.json: home.careerStory", ("heading", "introduction"))
+    if not isinstance(story.get("milestones"), list) or not story["milestones"] or not isinstance(story.get("notes"), list):
+        raise ValueError("content/site.json: home.careerStory.milestones and notes must be arrays")
+    for index, milestone in enumerate(story["milestones"]):
+        _validate_semantic_object(milestone, f"content/site.json: home.careerStory.milestones[{index}]", ("phase", "employer", "description"))
+    for index, note in enumerate(story["notes"]):
+        _validate_semantic_object(note, f"content/site.json: home.careerStory.notes[{index}]", ("title", "body"))
 
 
-def _render_blocks(blocks: list[dict[str, object]], site_url: str) -> str:
-    output = []
-    for block in blocks:
-        kind = block["type"]
-        if kind == "copyText" and not str(block.get("text", "")).strip():
-            continue
-        anchor = f' id="{html.escape(block["anchor"], quote=True)}"' if block.get("anchor") else ""
-        if kind == "heading":
-            level = int(block["level"])
-            output.append(f'<h{level}{anchor} class="content-heading content-heading--{level}">{_render_runs(block.get("runs", []), site_url)}</h{level}>')
-        elif kind in {"copy", "copyText"}:
-            body = _render_runs(block.get("runs", []), site_url) if "runs" in block else html.escape(str(block.get("text", "")), quote=False)
-            output.append(f'<p{anchor} class="content-copy">{body}</p>' if kind == "copy" else body)
-        elif kind == "link":
-            download = " download" if block.get("download") else ""
-            output.append(f'<a{anchor} href="{html.escape(str(block.get("href", "")), quote=True)}" class="content-link"{download}>{_render_runs(block.get("runs", []), site_url)}</a>')
-        elif kind == "image":
-            alt = "" if block.get("decorative") else str(block.get("alt", ""))
-            hidden = ' aria-hidden="true"' if block.get("decorative") else ""
-            dimensions = "".join(f' {name}="{html.escape(str(block[name]), quote=True)}"' for name in ("width", "height") if block.get(name))
-            image = f'<img src="{html.escape(str(block.get("src", "")), quote=True)}" alt="{html.escape(alt, quote=True)}"{dimensions}{hidden}>'
-            sources = block.get("sources", [])
-            source_markup = "".join(
-                f'<source srcset="{html.escape(str(source["srcset"]), quote=True)}" media="{html.escape(str(source["media"]), quote=True)}">'
-                for source in sources
-            )
-            output.append(f"<picture>{source_markup}{image}</picture>" if sources else image)
-        elif kind == "list":
-            tag = "ol" if block.get("ordered") else "ul"
-            output.append(f"<{tag}>{_render_blocks(block.get('items', []), site_url)}</{tag}>")
-        elif kind == "listItem":
-            output.append(f"<li{anchor}>{_render_blocks(block.get('blocks', []), site_url)}</li>")
-        elif kind == "expandable":
-            opened = " open" if block.get("open") else ""
-            title = _render_runs(block.get("summary", []), site_url)
-            output.append(f"<details{anchor}{opened}><summary>{title}</summary>{_render_blocks(block.get('blocks', []), site_url)}</details>")
-        else:
-            tag = {
-                "contentSection": "section", "contentItem": "article", "media": "figure", "callout": "blockquote",
-                "linkGroup": "nav", "contentGroup": "div", "factGroup": "dl", "factLabel": "dt",
-                "factValue": "dd", "measureGrid": "table", "measureGroup": "tbody", "measureRow": "tr",
-                "measureCell": "td", "formControls": "form", "controlLabel": "label", "rule": "hr",
-                "actionButton": "button", "textControl": "input", "expandableTitle": "span",
-            }[kind]
-            attrs = anchor
-            if kind == "linkGroup" and block.get("label"):
-                attrs += f' aria-label="{html.escape(str(block["label"]), quote=True)}"'
-            if kind == "contentSection" and block.get("labelledBy"):
-                attrs += f' aria-labelledby="{html.escape(str(block["labelledBy"]), quote=True)}"'
-            if kind == "actionButton":
-                attrs += ' type="button"'
-                if block.get("action"): attrs += f' data-action="{html.escape(str(block["action"]), quote=True)}"'
-            content = html.escape(str(block.get("label", "")), quote=False) if kind == "actionButton" else _render_blocks(block.get("blocks", []), site_url)
-            if kind == "textControl":
-                input_type = html.escape(str(block.get("inputType", "text")), quote=True)
-                name = html.escape(str(block.get("name", "")), quote=True)
-                value = html.escape(str(block.get("value", "")), quote=True)
-                labelled = html.escape(str(block.get("labelledBy", "")), quote=True)
-                output.append(f'<input{anchor} type="{input_type}" name="{name}" value="{value}" aria-labelledby="{labelled}">')
-            elif kind == "rule":
-                output.append(f"<{tag}{attrs}>")
-            else:
-                output.append(f'<{tag}{attrs} class="content-block content-block--{kind}">{content}</{tag}>')
-    return "".join(output)
+def _copy(value: str) -> str:
+    return html.escape(str(value), quote=False)
+
+
+def _attr(value: str) -> str:
+    return html.escape(str(value), quote=True)
+
+
+def _copy_p(value: str, class_name: str = "content-copy") -> str:
+    return f'<p class="{_attr(class_name)}">{_copy(value)}</p>'
+
+
+def _heading(value: str, level: int, anchor: str | None = None) -> str:
+    ident = f' id="{_attr(anchor)}"' if anchor else ""
+    return f'<h{level}{ident} class="content-heading content-heading--{level}">{_copy(value)}</h{level}>'
+
+
+def _semantic_link(link: dict[str, str], class_name: str = "content-link") -> str:
+    return f'<a class="{_attr(class_name)}" href="{_attr(link["href"])}">{_copy(link["label"])}</a>'
+
+
+def _semantic_image(image: dict[str, object] | None) -> str:
+    if not image:
+        return ""
+    src = _attr(image["src"])
+    alt = _attr(image.get("alt", ""))
+    dimensions = "".join(f' {key}="{_attr(image[key])}"' for key in ("width", "height") if image.get(key))
+    img = f'<img src="{src}" alt="{alt}"{dimensions}>'
+    mobile = image.get("mobileSrc")
+    return f'<picture><source srcset="{_attr(mobile)}" media="(max-width: 42rem)">{img}</picture>' if mobile else img
+
+
+def _semantic_section(content: str, anchor: str | None = None, labelled_by: str | None = None) -> str:
+    attrs = f' id="{_attr(anchor)}"' if anchor else ""
+    attrs += f' aria-labelledby="{_attr(labelled_by)}"' if labelled_by else ""
+    return f'<section{attrs} class="content-block content-block--contentSection">{content}</section>'
+
+
+def _render_home(data: dict[str, object]) -> str:
+    home = data["home"]
+    hero = home["hero"]
+    hero_copy = _copy_p(hero["thesis"]) + _copy_p(hero["introduction"]) + _copy_p(hero["positioning"])
+    hero_actions = "".join(_semantic_link(link) for link in hero["actions"])
+    hero_main = f'<div class="content-block content-block--contentGroup">{_heading(hero["name"], 1, "hero-title")}{hero_copy}<div class="content-block content-block--contentGroup">{hero_actions}</div></div>'
+    hero_markup = _semantic_section(hero_main + f'<figure class="content-block content-block--media">{_semantic_image(hero["image"])}</figure>', labelled_by="hero-title")
+
+    signature = home["signature"]
+    stage_markup = "".join(
+        f'<details id="{_attr(stage["id"])}" class="content-block content-block--expandable"{" open" if index == 0 else ""}>'
+        f'<summary>{_copy(stage["number"])} {_copy(stage["title"])}</summary>'
+        f'{_copy_p(stage["description"])}{_copy_p(stage["evidenceLabel"] + ": " + stage["evidence"])}'
+        f'</details>' for index, stage in enumerate(signature["stages"])
+    )
+    signature_body = f'<div class="content-block content-block--contentGroup">{_copy_p(signature["kicker"])}{_heading(signature["title"],2,"signature-title")}{_copy_p(signature["introduction"])}</div>'
+    signature_body += f'<div class="content-block content-block--contentGroup"><div class="content-block content-block--contentGroup">{_semantic_image(signature["image"])}</div>{stage_markup}</div>'
+    signature_markup = _semantic_section(signature_body, "como-trabajo", "signature-title")
+
+    selected = home["selectedWork"]
+    projects_by_id = {item["id"]: item for item in data["projects"]}
+    cards=[]
+    for project_id in selected["projectIds"]:
+        project=projects_by_id[project_id]; card=project["homeCard"]
+        labels=(("Situación","situation"),("Tarea","task"),("Acción","contribution"),("Resultado","result"))
+        facts="".join(f'<div class="content-block content-block--contentGroup"><dt class="content-block content-block--factLabel">{label}</dt><dd class="content-block content-block--factValue">{_copy(card[field])}</dd></div>' for label,field in labels)
+        cards.append(f'<article class="content-block content-block--contentItem"><a class="content-link" href="{_attr(project["route"])}">{_copy(card["title"])}↗</a><dl class="content-block content-block--factGroup">{facts}</dl></article>')
+    selected_body=f'<div class="content-block content-block--contentGroup"><div class="content-block content-block--contentGroup">{_copy_p(selected["kicker"])}{_heading(selected["title"],2,"transformations-title")}</div>{_semantic_link(selected["moreLink"])}</div><div class="content-block content-block--contentGroup">{"".join(cards)}</div>'
+    selected_markup=_semantic_section(selected_body,labelled_by="transformations-title")
+
+    story=home["careerStory"]
+    milestones="".join(f'<li class="content-block content-block--contentItem"><span class="content-copy">{_copy(item["phase"])}</span>{_heading(item["employer"],3)}{_copy_p(item["description"])}</li>' for item in story["milestones"])
+    notes="".join(f'<article class="content-block content-block--contentItem">{_heading(item["title"],3)}<blockquote class="content-block content-block--callout">{_copy_p(item["body"])}</blockquote></article>' for item in story["notes"])
+    explore=story["exploration"]
+    story_body=f'<div class="content-block content-block--contentGroup">{_heading(story["heading"],2,"career-title")}{_copy_p(story["introduction"])}</div><ol class="content-block content-block--contentGroup">{milestones}</ol><div class="content-block content-block--contentGroup">{notes}</div><div class="content-block content-block--contentGroup">{_copy_p(explore["kicker"])}{_heading(explore["title"],3)}{_copy_p(explore["description"])}</div>'
+    story_markup=_semantic_section(story_body,"trayectoria","career-title")
+
+    contact=home["contact"]
+    contact_markup=_semantic_section(f'<div class="content-block content-block--contentGroup">{_copy_p(contact["eyebrow"])}{_heading(contact["title"],2,"contact-title")}{_copy_p(contact["introduction"])}</div><nav aria-label="Más información y contacto" class="content-block content-block--linkGroup">{"".join(_semantic_link(link) for link in contact["links"])}</nav>',"contacto","contact-title")
+    footer=home["footer"]
+    footer_markup=f'<div class="content-block content-block--contentGroup"><div class="content-block content-block--contentGroup">{_copy(footer["name"])}</div><div class="content-block content-block--contentGroup">{_copy(footer["tagline"])}</div>{_semantic_link(footer["backToTop"])}</div>'
+    return hero_markup+signature_markup+selected_markup+story_markup+contact_markup+footer_markup
+
+
+def _render_case(project: dict[str, object], all_projects: list[dict[str, object]]) -> str:
+    case=project["caseDetails"]; nav=case["navigation"]
+    breadcrumb=f'<nav aria-label="Ruta de navegación" class="content-block content-block--linkGroup"><a class="content-link" href="/">Inicio</a><div class="content-block content-block--contentGroup">/</div><a class="content-link" href="/projects/">Proyectos</a><div class="content-block content-block--contentGroup">/</div><div class="content-block content-block--contentGroup">{_copy(nav["breadcrumbTitle"])}</div></nav>'
+    hero=case["hero"]
+    hero_markup=f'<div class="content-block content-block--contentGroup">{_copy_p(hero["eyebrow"])}{_heading(hero["title"],1)}{_copy_p(hero["summary"])}</div>'
+    metric_items="".join(f'<div class="content-block content-block--contentGroup"><div class="content-block content-block--contentGroup">{_copy(item["value"])}</div><div class="content-block content-block--contentGroup">{_copy(item["label"])}</div></div>' for item in case["metrics"])
+    metrics=f'<div class="content-block content-block--contentGroup">{metric_items}</div>'
+    diagram=case["diagram"]; image=diagram["image"]
+    diagram_markup=f'<figure class="content-block content-block--media"><div class="content-block content-block--contentGroup"><div class="content-block content-block--contentGroup"></div>{_semantic_image(image)}</div><div class="content-block content-block--contentGroup">{_copy_p(diagram["kicker"])}{_heading(diagram["title"],2)}{_copy_p(diagram["description"])}<ol>{"".join(f"<li>{_copy(step)}</li>" for step in diagram["steps"])}</ol></div></figure>'
+    sections=[]
+    for item in (case["context"],case["problem"],case["role"]):
+        sections.append(_semantic_section(f'{_copy_p(item["kicker"])}{_heading(item["heading"],2)}{_copy_p(item["body"])}'))
+    approach=case["approach"]
+    sections.append(_semantic_section(f'{_copy_p(approach["kicker"])}{_heading(approach["heading"],2)}<ul>{"".join(f"<li>{_copy(decision)}</li>" for decision in approach["decisions"])}</ul>'))
+    outcome=case["outcome"]
+    sections.append(_semantic_section(f'{_copy_p(outcome["kicker"])}{_heading(outcome["heading"],2)}{_copy_p(outcome["body"])}'))
+    sections_markup=f'<div class="content-block content-block--contentGroup">{"".join(sections)}</div>'
+    projects_by_id = {item["id"]: item for item in all_projects}
+    bottom=[]
+    if nav.get("previousProjectId"):
+        previous = projects_by_id[nav["previousProjectId"]]
+        label = previous["caseDetails"]["navigation"]["navTitle"]
+        bottom.append({'label':f'← Caso anterior: {label}', 'href':previous["route"]})
+    else:
+        bottom.append({'label':'← Todos los proyectos','href':'/projects/'})
+    if nav.get("nextProjectId"):
+        following = projects_by_id[nav["nextProjectId"]]
+        label = following["caseDetails"]["navigation"]["navTitle"]
+        bottom.append({'label':f'Siguiente caso: {label} →','href':following["route"]})
+    else:
+        bottom.append({'label':'Todos los proyectos →','href':'/projects/'})
+    bottom_markup=f'<nav aria-label="Navegación de proyectos" class="content-block content-block--linkGroup">{"".join(_semantic_link(item) for item in bottom)}</nav>'
+    return breadcrumb+hero_markup+metrics+diagram_markup+sections_markup+bottom_markup
+
+
+def _render_projects_page(data: dict[str, object]) -> str:
+    page=data["projectsPage"]
+    content=f'<div class="content-block content-block--contentGroup">{_heading(page["title"],1)}{_copy_p(page["introduction"])}{_copy_p(page["context"])}</div>'
+    return _semantic_section(content)
+
+
+def _render_not_found(data: dict[str, object]) -> str:
+    page=data["notFound"]
+    return f'<div class="content-block content-block--contentGroup">{_copy_p(page["eyebrow"])}{_heading(page["title"],1)}{_copy_p(page["description"])}{"".join(_semantic_link(link) for link in page["actions"])}</div>'
 
 
 def _seo_markup(page: dict[str, object], site_url: str) -> str:
@@ -485,7 +526,8 @@ def _render_cv(data: dict[str, object], site_url: str) -> str:
     opening = f'{_cv_group(intro)}{_cv_group(actions)}'
     lead = _render_cv_career(data["career"])
     return (
-        _render_blocks(data["cvPage"], site_url) + opening + _render_cv_value_areas(data["skills"], profile) + lead
+        '<nav aria-label="Ruta de navegación" class="content-block content-block--linkGroup"><a href="/">Inicio</a><span aria-hidden="true"> / </span><span>CV</span></nav>'
+        + opening + _render_cv_value_areas(data["skills"], profile) + lead
         + _render_cv_skills(data["skills"], profile)
         + _render_cv_education(data)
     )
@@ -521,7 +563,7 @@ def _render_project_portfolio(data: dict[str, object], site_url: str) -> str:
     featured = [project for project in projects if project["featured"]]
     secondary = [project for project in projects if not project["featured"]]
     parts = [
-        _render_blocks(data["projectPortfolio"], site_url),
+        _render_projects_page(data),
         '<form class="project-filters" data-project-filters hidden>',
         '<label class="project-search-label" for="project-search">Buscar por proyecto, descripción o tema</label>',
         '<input id="project-search" type="search" name="q" autocomplete="off" data-project-search>',
@@ -554,17 +596,19 @@ def _generate_source_pages(data: dict[str, object], site_url: str) -> list[Path]
         if not destination.is_relative_to(ROOT.resolve()):
             raise ValueError(f"content/site.json: unsafe output route {page['route']!r}")
         destination.parent.mkdir(parents=True, exist_ok=True)
-        copy_key = {"not-found": "notFound", "projects": "projectPortfolio", "cv": "cvPage"}.get(page["id"], page["id"])
+        copy_key = page["id"]
         if copy_key == "projectPortfolio":
             main = _render_project_portfolio(data, site_url)
         elif copy_key == "cvPage":
             main = _render_cv(data, site_url)
-        elif copy_key in {"home", "notFound"}:
-            main = _render_blocks(data[copy_key], site_url)
+        elif copy_key == "home":
+            main = _render_home(data)
+        elif copy_key == "notFound":
+            main = _render_not_found(data)
         else:
             target = "/projects/" + page["route"].removeprefix("projects/").removesuffix("/index.html") + "/"
             project = next(project for project in data["projects"] if project.get("route") == target)
-            main = _render_blocks(project["caseDetails"], site_url)
+            main = _render_case(project, data["projects"])
         canonical_route = "/" if page["route"] == "index.html" else "/" + page["route"].removesuffix("index.html")
         head = (
             '<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
