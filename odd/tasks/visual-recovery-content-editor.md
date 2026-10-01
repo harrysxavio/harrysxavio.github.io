@@ -24,6 +24,7 @@ The semantic v3 renderer dropped component hooks required by the client interact
 - [x] T1 — Restore and refine modern semantic portfolio compositions and client component contracts across home, projects, CV, and case pages. Visual follow-up fixed Projects copy/layout and ensured responsive tabs are hidden outside desktop mode while preserving focus across resizes.
 - [x] T2 — Add a loopback-only Spanish form editor that validates canonical content and transactionally restores generated output on build failure; reject unsafe rendered URLs and preserve initial-page editing context.
 - [x] T3 — Add regression coverage, strengthen generated-site verification, run functional/browser/visual QA, and record evidence, including the latest parent-reported regressions.
+- [x] T4 — Remove fixed project-count and two-tag guidance/validation constraints; support adding/removing secondary records and one-or-more valid existing tags while preserving four routed cases, current facts/IDs, and four featured priorities. Add regressions for tenth project, one-tag project, secondary removal, protected routes, and unknown-tag rejection.
 
 ## Acceptance criteria
 - Five signature steps/tabs are restored with accessible desktop tabs and mobile/no-JS disclosure.
@@ -31,6 +32,7 @@ The semantic v3 renderer dropped component hooks required by the client interact
 - Local editor forms cover site/home/projects/CV and project metadata; unsafe or invalid writes are rejected and a failed build preserves source.
 - Editor binds only to `127.0.0.1`; it is not emitted in the Pages allowlist.
 - The Home page renders exactly one visible global footer, driven by editable `home.footer` name, tagline, and back-to-top label/href; other routes retain the global footer.
+- Project record count may vary; each record must use at least one valid existing taxonomy tag. Four current case routes and the four-featured priority limit remain protected.
 - Existing routes/content facts remain intact; generated pages pass strengthened contract checks.
 
 ## Verification
@@ -41,6 +43,7 @@ The semantic v3 renderer dropped component hooks required by the client interact
 - `python -m unittest discover -s tests -v`
 - `git diff --check`
 - Browser: Home/Projects/CV at 1440x900, 1280x800, 1024x768, 768x1024, 430x932, 390x844, 360x800, light/dark; tabs, keyboard, mobile disclosure, filters, theme, reduced motion, overflow/errors/links/print. Use installed shell Playwright for exact viewport sizing if the in-app browser ignores requested dimensions.
+- T4 checks: `python -m unittest discover -s tests -v`, `python tools/build_site.py`, `python tools/verify_site.py`, `python -m py_compile tools/build_site.py tools/verify_site.py tools/content_editor.py`, `git diff --check`.
 
 ## Progress and evidence
 - T1: original commit `001c3b9` (`fix(site): restore modern semantic portfolio compositions`); visual follow-up `68e16e9` (`fix(site): polish featured project portfolio`). Restored system-sans/blue composition, real-portrait hero and CTA hierarchy, semantic five-stage tab/disclosure hooks, featured project cards, career timeline/notes, case narratives and footer de-duplication. Follow-up corrected Projects content/layout and project-specific marks.
@@ -53,6 +56,7 @@ The semantic v3 renderer dropped component hooks required by the client interact
 - Commits: `001c3b9` initial visual restoration; `68e16e9` visual follow-up; `461b1a8` follow-up evidence; `7a5fae0` editor/docs; `6a15ce6` verifier and QA; `1841e80` refreshed A4 CV PDF; `e203c72` transactional save and URL validation; `be03db1` responsive tabs and editor context.
 - Screenshot evidence: `output/qa-visual-recovery/` (created for this task; refreshed final 1440x900 Projects image is `projects-1440-light.png`). Follow-up PDF refresh: `cv/harrys-yusti-cv.pdf`, generated from the final `/cv/` print rendering via Playwright on A4 (3 pages); checked title, page dimensions, extracted text, file validity, and raster-rendered every page.
 - Final structural readback found Home's global footer was hidden by CSS while `home.footer` was loaded but not rendered. Commit `4ed8ab7` (`fix(home): restore source-driven footer`) removes the hide rule, renders the single global Home footer from its canonical editable fields, and strengthens `verify_site.py` to assert those fields and footer uniqueness. `python tools/build_site.py`, `python tools/verify_site.py`, `python -m py_compile tools/build_site.py tools/verify_site.py`, and `git diff --check` passed. Browser checks at 1440x900 and 390x844 confirmed one visible footer, canonical copy and `#top` link, no page errors; inspected screenshots saved outside the repository under the system temp directory.
+- T4 diagnosis confirmed the builder and verifier each enforced exactly nine project records, and the editor confirmation/callout plus Spanish guide repeated that restriction. The builder already accepted one tag; the verifier and guide incorrectly required two. Commit `1ca88ad` (`fix(editor): support variable secondary projects`) now permits variable counts while requiring the four existing case routes, requires each project to have at least one valid existing taxonomy tag, and keeps exactly four featured priorities. The guide/editor now describe adding/removing secondary projects accurately. Regressions cover adding a tenth one-tag secondary project, removing a secondary project, retaining the four routes and featured priorities, and rejecting unknown tags. `python -m unittest discover -s tests -v` PASS (9 tests); `python tools/build_site.py` PASS (8 pages); `python tools/verify_site.py` PASS; `python -m py_compile tools/build_site.py tools/verify_site.py tools/content_editor.py` PASS; `node --check tools/content-editor/app.js` PASS; `git diff --check` PASS. Build changed tracked generated pages only by EOL normalization; confirmed no semantic diff and restored those generated files.
 
 ## Next step
 Independent targeted verification is complete. Parent publishes via the already authorized local Git session, then verifies the public deployment; publication is not yet claimed.
