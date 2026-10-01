@@ -30,6 +30,7 @@ The semantic v3 renderer dropped component hooks required by the client interact
 - Home/projects/CV/cases use deliberate system-sans typography, coherent layout, responsive behavior, theme and reduced-motion support.
 - Local editor forms cover site/home/projects/CV and project metadata; unsafe or invalid writes are rejected and a failed build preserves source.
 - Editor binds only to `127.0.0.1`; it is not emitted in the Pages allowlist.
+- The Home page renders exactly one visible global footer, driven by editable `home.footer` name, tagline, and back-to-top label/href; other routes retain the global footer.
 - Existing routes/content facts remain intact; generated pages pass strengthened contract checks.
 
 ## Verification
@@ -51,6 +52,7 @@ The semantic v3 renderer dropped component hooks required by the client interact
 - Latest regression checks: five editor tests pass, including failed-build mutations to source HTML and `dist/`, partial-file cleanup, plus `javascript:`, `data:`, protocol-relative, nested Home/project-link, and control-character rejection before writes. Playwright verified desktop tablist visible with five tabs; mobile tablist hidden with five accessible summaries; resize back preserves selected step/focus; focus outside the component remains unchanged. Initial editor load has `scrollY=0`; explicit section navigation scrolls to the form.
 - Commits: `001c3b9` initial visual restoration; `68e16e9` visual follow-up; `461b1a8` follow-up evidence; `7a5fae0` editor/docs; `6a15ce6` verifier and QA; `1841e80` refreshed A4 CV PDF; `e203c72` transactional save and URL validation; `be03db1` responsive tabs and editor context.
 - Screenshot evidence: `output/qa-visual-recovery/` (created for this task; refreshed final 1440x900 Projects image is `projects-1440-light.png`). Follow-up PDF refresh: `cv/harrys-yusti-cv.pdf`, generated from the final `/cv/` print rendering via Playwright on A4 (3 pages); checked title, page dimensions, extracted text, file validity, and raster-rendered every page.
+- Final structural readback found Home's global footer was hidden by CSS while `home.footer` was loaded but not rendered. Commit `4ed8ab7` (`fix(home): restore source-driven footer`) removes the hide rule, renders the single global Home footer from its canonical editable fields, and strengthens `verify_site.py` to assert those fields and footer uniqueness. `python tools/build_site.py`, `python tools/verify_site.py`, `python -m py_compile tools/build_site.py tools/verify_site.py`, and `git diff --check` passed. Browser checks at 1440x900 and 390x844 confirmed one visible footer, canonical copy and `#top` link, no page errors; inspected screenshots saved outside the repository under the system temp directory.
 
 ## Next step
 Parent performs independent verification and handles publication; refresh the mirror if task evidence changes.
