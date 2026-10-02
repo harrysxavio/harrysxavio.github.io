@@ -125,6 +125,7 @@ function renderHome() {
   field(hero, "Subtítulo", ["home", "hero", "thesis"], { lines: true, rows: 2, help: "Una idea breve y propia. No agregues cifras que no puedas respaldar." });
   field(hero, "Párrafo de presentación", ["home", "hero", "introduction"], { lines: true, rows: 4 });
   field(hero, "Áreas de enfoque", ["home", "hero", "positioning"]);
+  field(hero, "Áreas alrededor del retrato (una por línea)", ["home", "hero", "profileAreas"], { lines: true, rows: 3, help: "Mantén exactamente tres áreas profesionales." });
   const actions = card("Acciones de la presentación", "Mantén cada destino como una ruta relativa o un enlace HTTPS.");
   content.home.hero.actions.forEach((item, index) => {
     field(actions, `Acción ${index + 1}: texto`, ["home", "hero", "actions", index, "label"]);

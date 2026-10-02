@@ -336,6 +336,9 @@ def _validate_home(value: object, project_ids: set[str]) -> None:
         if not isinstance(value.get(section), dict):
             raise ValueError(f"content/site.json: home.{section} must be a named object")
     _validate_semantic_object(value["hero"], "content/site.json: home.hero", ("name", "thesis", "introduction", "positioning"))
+    profile_areas = value["hero"].get("profileAreas")
+    if not isinstance(profile_areas, list) or len(profile_areas) != 3 or not all(isinstance(label, str) and label.strip() for label in profile_areas):
+        raise ValueError("content/site.json: home.hero.profileAreas must contain exactly three non-empty labels")
     _validate_semantic_object(value["signature"], "content/site.json: home.signature", ("kicker", "title", "introduction"))
     signature_stages = value["signature"].get("stages")
     if not isinstance(signature_stages, list) or not signature_stages:
@@ -401,7 +404,8 @@ def _render_home(data: dict[str, object]) -> str:
     hero_copy = _copy_p(hero["thesis"]) + _copy_p(hero["introduction"]) + _copy_p(hero["positioning"])
     hero_actions = "".join(_semantic_link(link, "button" if index == 0 else "text-link text-link--secondary") for index, link in enumerate(hero["actions"]))
     hero_main = f'<div class="hero-copy"><h1 id="hero-title">{_copy(hero["name"])}</h1><p class="hero-thesis">{_copy(hero["thesis"])}</p>{_copy_p(hero["introduction"], "hero-introduction")}{_copy_p(hero["positioning"], "hero-positioning")}<div class="hero-actions">{hero_actions}</div></div>'
-    hero_markup = f'<section class="hero" aria-labelledby="hero-title"><div class="hero-art"><div class="hero-art__shape"></div><figure class="hero-portrait">{_semantic_image(hero["image"])}</figure><span class="hero-art__spark" aria-hidden="true">✳</span></div>{hero_main}</section>'
+    profile_areas = "".join(f'<li class="hero-profile-area">{_copy(label)}</li>' for label in hero["profileAreas"])
+    hero_markup = f'<section class="hero" aria-labelledby="hero-title"><div class="hero-art"><div class="hero-art__shape"></div><figure class="hero-portrait">{_semantic_image(hero["image"])}</figure><ul class="hero-profile-areas" aria-label="Áreas profesionales">{profile_areas}</ul></div>{hero_main}</section>'
 
     signature = home["signature"]
     stage_markup = "".join(

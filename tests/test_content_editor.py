@@ -126,6 +126,25 @@ class ContentEditorSaveTests(unittest.TestCase):
         self.assertEqual(json.loads(self.content_path.read_text(encoding="utf-8")), self.source)
         rebuild.assert_called_once_with()
 
+    def test_hero_profile_areas_require_exactly_three_non_empty_labels(self):
+        for labels in (["Proyectos y transformación", "Supply Chain"],
+                       ["Proyectos y transformación", "Supply Chain", " "],
+                       ["Proyectos y transformación", "Supply Chain", "Operaciones", "Extra"]):
+            with self.subTest(labels=labels):
+                payload = copy.deepcopy(self.source)
+                payload["home"]["hero"]["profileAreas"] = labels
+                with self.assertRaisesRegex(ValueError, "profileAreas must contain exactly three non-empty labels"):
+                    content_editor.save_content(payload, build_fn=unittest.mock.Mock())
+
+    def test_home_render_includes_editable_profile_areas_as_accessible_text(self):
+        data = build_site._load_content()
+        rendered = build_site._render_home(data)
+
+        self.assertIn('aria-label="Áreas profesionales"', rendered)
+        for label in ("Proyectos y transformación", "Supply Chain", "Operaciones"):
+            self.assertIn(f'<li class="hero-profile-area">{label}</li>', rendered)
+        self.assertNotIn("hero-art__spark", rendered)
+
     def test_schema_failure_restores_original_source(self):
         self.source["site"]["language"] = ""
 
