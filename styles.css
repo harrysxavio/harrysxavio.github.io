@@ -84,7 +84,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .hero-copy { grid-column: 1; grid-row: 1; max-width: 44rem; position: relative; z-index: 1; }
 .hero-copy h1 { margin: 0 0 1.4rem; font-weight: 760; }
 .hero-thesis { max-width: 26ch; margin: 0 0 .9rem; color: var(--blue); font-size: clamp(1.3rem, 2vw, 1.7rem); line-height: 1.35; font-weight: 680; letter-spacing: .005em; }
-.hero-introduction { max-width: 50ch; margin: 0; color: var(--ink-soft); font-size: clamp(1.05rem, 1.3vw, 1.2rem); }
+.hero-introduction { max-width: 50ch; margin: 0; color: var(--ink-soft); font-size: clamp(1.05rem, 1.3vw, 1.2rem); text-align: justify; text-align-last: start; }
 .hero-positioning { margin: 1.3rem 0 0; color: var(--ink-soft); font-size: .88rem; font-weight: 650; letter-spacing: .025em; }
 .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem; margin-top: 2rem; }
 .hero-actions .button, .button { display: inline-flex; justify-content: center; align-items: center; min-height: 3.2rem; padding: .75rem 1.25rem; border: 1px solid var(--blue); border-radius: 999px; background: var(--blue); color: #fff; font-size: .94rem; font-weight: 700; text-decoration: none; box-shadow: 0 .6rem 1.3rem color-mix(in srgb, var(--blue) 24%, transparent); transition: transform .22s ease, box-shadow .22s ease; }
