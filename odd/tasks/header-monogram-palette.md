@@ -29,4 +29,4 @@ Make one restrained, coherent refinement to the shared site header: reduce its c
 - Published baseline and active branch confirmed before edits: `b5c23aa` and `codex/header-monogram-palette`.
 
 ## Next step
-- T1 is locally complete in commit `4b5a90d`; provide the local preview for user feedback. No remote write authorized in this incremental step.
+- T1 is locally complete in commit `6f5067f`; provide the local preview for user feedback. No remote write authorized in this incremental step.
