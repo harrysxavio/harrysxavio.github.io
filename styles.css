@@ -309,9 +309,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .case-navigation .button--quiet { border-color: var(--rule); background: var(--surface); color: var(--ink); box-shadow: none; }
 .simple-footer a:hover, .text-link:hover { text-decoration: underline; text-underline-offset: .2em; }
 @media (max-width: 850px) {
-  .hero { min-height: auto; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 1.4rem; }
-  .hero-art { min-height: 26rem; }
+  .hero { min-height: auto; grid-template-columns: minmax(0, 1fr); gap: 1.4rem; }
+  .hero-copy { grid-column: 1; grid-row: 1; max-width: 48rem; }
+  .hero-art { grid-column: 1; grid-row: 2; justify-self: center; width: min(100%, 42rem); min-height: 26rem; }
   .hero-portrait { min-height: 20rem; height: 24rem; }
+  .signature-layout { grid-template-columns: minmax(0, 1fr); max-width: 58rem; margin-inline: auto; gap: 1.4rem; }
   .selected-projects { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .project-card--featured .project-card__inner { grid-template-columns: 1fr; }
   .project-card--featured .project-card__evidence { grid-column: 1; grid-row: auto; }
@@ -336,6 +338,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .hero-copy { max-width: none; }
   .hero-copy h1 { font-size: clamp(3rem, 13vw, 4.3rem); }
   .hero-thesis { font-size: 1.24rem; }
+  .hero-introduction, .signature-section .section-heading > p:not(.section-kicker) { font-size: 1rem; }
   .hero-actions { gap: .25rem; margin-top: 1.2rem; }
   .hero-actions .button { min-height: 2.9rem; }
   .hero-art { min-height: 18rem; margin: 0 -0.35rem .9rem; }
