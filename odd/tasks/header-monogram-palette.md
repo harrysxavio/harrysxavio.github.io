@@ -12,7 +12,7 @@ Make one restrained, coherent refinement to the shared site header: reduce its c
 - TDD off; existing project checks from the content-editor task remain the functional baseline.
 
 ## Task
-- [x] T1 — Refine the shared header and its blue tokens, update generated pages, and verify the desktop/mobile light/dark appearance and navigation accessibility.
+- [x] T1 — Refine the shared header and its blue tokens, align the public theme-color metadata, update generated pages, and verify the desktop/mobile light/dark appearance and navigation accessibility.
 
 ## Checks
 - `python tools/build_site.py`
@@ -27,6 +27,9 @@ Make one restrained, coherent refinement to the shared site header: reduce its c
 - Checks passed: `python tools/build_site.py`; `python tools/verify_site.py`; `python -m unittest discover -s tests -v` (10 passed); `python -m py_compile tools/build_site.py tools/verify_site.py`; `node --check script.js`; `git diff --check`; deterministic regeneration (identical SHA-256 file inventory).
 - Browser QA passed in Chrome at 1440x900 and 390x844, light/dark: the HY mark and nav fit, both layouts have 12px corners, no horizontal overflow was observed, and keyboard Tab focused the home link with its coral focus ring and unchanged accessible name. Screenshots: `.playwright-mcp/hy-header-desktop-light.png`, `.playwright-mcp/hy-header-mobile-light.png`, `.playwright-mcp/hy-header-desktop-dark.png`, `.playwright-mcp/hy-header-mobile-dark.png`.
 - Published baseline and active branch confirmed before edits: `b5c23aa` and `codex/header-monogram-palette`.
+- Reopened T1 after finding that only three route SEO records advertised the superseded `#135EEF` and the other five used the pale `#f4f0e7`; neither aligned browser theme-color chrome with the approved light primary. All eight route records now use `#22396F`; the dark CSS token remains `#526BA5` and is unchanged by metadata.
+- Metadata-correction checks passed: `python tools/build_site.py`; `python tools/verify_site.py`; `python -m unittest discover -s tests -v` (10 passed); `git diff --check`.
+- Prior implementation commit: `6f5067f` (`feat(site): refine shared header monogram and palette`); tracker evidence commit: `0af691a` (`docs(task): record header refinement evidence`).
 
 ## Next step
-- T1 is locally complete in commit `6f5067f`; provide the local preview for user feedback. No remote write authorized in this incremental step.
+- T1 is locally complete, including route theme-color metadata alignment. No remote write authorized in this incremental step.
