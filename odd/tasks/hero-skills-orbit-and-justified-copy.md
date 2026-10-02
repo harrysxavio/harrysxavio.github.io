@@ -22,10 +22,10 @@ The orange spark has no professional meaning, while prose alignment differs acro
 - Not authorized: remote publication or changes to unrelated user files.
 
 ## Execution Mode and Route
-- Route: delegated direct; mapping completed read-only, one writer for coordinated multi-file implementation.
+- Route: T1/T2 delegated direct for the coordinated multi-file implementation; T3 direct inline as a bounded one-file CSS correction after visual QA.
 - TDD: Standard Mode, `strict_tdd=false`, based on the existing project tracker’s explicit project choice. Focused structural check: `python tools/verify_site.py`; relevant test suite: `python -m unittest tests.test_content_editor`.
 - Forecast: below 400 authored changed lines, excluding generated output.
-- Work units: T1 and T2 each close with a Conventional Commit on this feature branch.
+- Work units: each task closes with a Conventional Commit on this feature branch.
 
 ## Acceptance Criteria
 - No orange spark remains in the hero.
