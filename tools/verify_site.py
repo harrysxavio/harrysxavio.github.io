@@ -137,6 +137,8 @@ def check_page(page: Path, base: Path, site_url: str) -> None:
     require(p.doctype and not p.errors, f"{relative}: HTML structure: {p.errors}")
     require(p.lang == "es", f"{relative}: lang must be es")
     require(bool(p.title.strip()) and "Harrys Yusti" in p.title, f"{relative}: title missing or not professional")
+    require(re.search(r'<a\b(?=[^>]*class="wordmark")(?=[^>]*href="/")(?=[^>]*aria-label="Harrys Yusti, inicio")[^>]*>HY</a>', source) is not None,
+            f"{relative}: the visible HY home mark must retain its accessible name")
     if relative == "index.html":
         home_title = "Harrys Yusti | Transformación, Proyectos y Supply Chain"
         og_title = next((m.get("content", "") for m in p.meta if m.get("property", "").casefold() == "og:title"), "")
@@ -315,6 +317,12 @@ def check_output(base: Path, site_url: str) -> None:
     home = (base / "index.html").read_text(encoding="utf-8")
     stylesheet = (base / "styles.css").read_text(encoding="utf-8")
     controller = (base / "script.js").read_text(encoding="utf-8")
+    require(re.search(r":root\s*\{[^}]*--blue:\s*#22396f\b", stylesheet, flags=re.I) is not None
+            and re.search(r':root\[data-theme="dark"\]\s*\{[^}]*--blue:\s*#526ba5\b', stylesheet, flags=re.I) is not None,
+            "styles.css: light and dark blue tokens must retain the approved navy palette")
+    require(re.search(r"\.site-header\s*\{[^}]*border-radius:\s*12px", stylesheet) is not None
+            and re.search(r"@media\s*\(max-width:\s*600px\)[\s\S]*?\.site-header\s*\{[^}]*border-radius:\s*12px", stylesheet) is not None,
+            "styles.css: desktop and mobile header corners must remain lightly rounded")
     require('data-signature' in home and len(re.findall(r'class="signature-step"', home)) == 5,
             "index.html: the semantic five-step signature contract is missing")
     require('class="selected-project"' in home and home.count('class="selected-project"') == 3,

@@ -729,7 +729,7 @@ def _generate_source_pages(data: dict[str, object], site_url: str) -> list[Path]
         markup = (
             f'<!doctype html><html lang="{html.escape(data["site"]["language"], quote=True)}"><head>{head}</head><body>'
             '<a class="skip-link" href="#main">Saltar al contenido</a><div class="page-shell">'
-            f'<header class="site-header" id="top"><a class="wordmark" href="/" aria-label="{html.escape(data["site"]["name"], quote=True)}, inicio">{html.escape(data["site"]["name"])}</a>'
+            f'<header class="site-header" id="top"><a class="wordmark" href="/" aria-label="{html.escape(data["site"]["name"], quote=True)}, inicio">HY</a>'
             '<nav class="top-nav" aria-label="Navegación principal"><a href="/projects/">Proyectos</a><a href="/cv/">CV</a></nav></header>'
             f'<main id="main" class="page-main page-main--{html.escape(page["id"], quote=True)}">{main}</main>'
             f'{footer_markup}'
