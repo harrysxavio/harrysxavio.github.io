@@ -52,7 +52,7 @@ p { hyphens: none; }
 .case-summary, .case-flow figcaption > .content-copy {
   text-align: justify;
   text-align-last: left;
-  hyphens: auto;
+  hyphens: none;
 }
 a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 3px solid var(--red); outline-offset: 4px; }
 ::selection { background: color-mix(in srgb, var(--blue) 24%, transparent); color: var(--ink); }
