@@ -40,7 +40,7 @@ The orange spark has no professional meaning, while prose alignment differs acro
 - [x] T1 — Add the three source-driven hero areas, expose them in the content editor, validate them, render accessible orbit markup, and add focused regression tests. Commit: `7c8f2f33323704c6695eaad4c9ee722100c7b101` (`feat(hero): render editable profile areas`).
 - [x] T2 — Replace spark styling with responsive, reduced-motion-safe orbit circles; apply readable global prose justification and verify desktop/mobile. Commit: `86f2903a276fcadd7ca012aa27e418b76ea7e316` (`style(hero): add responsive orbit and prose rhythm`).
 - [x] T3 — Correct narrow-tablet paragraph measure without removing justified alignment; recheck the hero and working-method introduction at 754px and 390px, then rerun the focused checks. Commit: `75479442d68827cf44b97bd001c7e26c67dff807` (`fix(styles): improve justified copy at tablet widths`).
-- [x] T4 — Disable automatic hyphenation while retaining justified paragraph alignment; verify method, hero, and career prose at 390px. Commit ID will be recorded in the tracker follow-up commit.
+- [x] T4 — Disable automatic hyphenation while retaining justified paragraph alignment; verify method, hero, and career prose at 390px. Commit: `f58435bff16ae7cc6d776f90f55f4304e1962e34` (`fix(styles): prevent prose hyphenation`).
 
 ## Verification Plan and Results
 - `python -m unittest tests.test_content_editor`
@@ -65,6 +65,7 @@ The orange spark has no professional meaning, while prose alignment differs acro
 - T3 complete: responsive hero and working-method layouts now stack at tablet widths, and their intro copy reduces to 1rem on small mobile screens to improve justified line spacing without changing alignment.
 - T3 commit: `75479442d68827cf44b97bd001c7e26c67dff807`.
 - T4 complete: automatic hyphenation is disabled for long-form prose; justified alignment and natural word wrapping remain.
+- T4 commit: `f58435bff16ae7cc6d776f90f55f4304e1962e34`.
 - No remote operations performed.
 
 ## Relevant Files
